@@ -1,0 +1,52 @@
+
+@import "fontAwesome/font-awesome";
+
+.cuarto {
+    /*background-color: #F7F7F9;
+    text-align: center;
+    vertical-align: bottom;
+    border: 3px solid #D0D0D0;
+    padding: 10px;
+    margin: 2px;
+    float: left;
+    display: inherit;
+    overflow: hidden;
+    font-size:12px;
+    height: 100px;
+    width: 280px;
+    text-align: left;*/
+
+    background-color: #F7F7F9;
+    text-align: center;
+    vertical-align: bottom;
+    border: 2px solid #D0D0D0;
+    padding: 3px;
+    margin: 2px;
+    float: left;
+    display: inherit;
+    overflow: hidden;
+    font-size:9px;
+    height: 70px;
+    width: 175px;
+    text-align: left;
+
+}
+
+.productoprecio{
+  background-color: #03A991;
+  font-size: 20px;
+  width:  150px;
+  color: #FFFFFF;
+  font-weight: bold;
+}
+.productonombre{
+  font-size: 12px;
+  width:  150px;
+  //font-weight: bold;
+  font-family: "courier", Georgia, Serif;
+  text-align: center;
+}
+
+.cuarto:hover{
+   border:3px solid #607D8B;
+}

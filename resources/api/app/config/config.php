@@ -1,0 +1,28 @@
+<?php
+
+defined('APP_PATH') || define('APP_PATH', realpath('.'));
+
+return new \Phalcon\Config(array(
+    'database' => array(
+        'adapter'     => 'PostgreSQL',
+        'host'        => '45.55.0.249',
+        'username'    => 'postgres',
+        'password'    => '64y4.634##',
+        'dbname'      => 'calediversiones',
+        'schema'      => 'public',
+	    'port'          => 5432
+    ),
+    'application' => array(
+        'controllersDir' => APP_PATH . '/app/controllers/',
+        'modelsDir'      => APP_PATH . '/app/models/',
+        'migrationsDir'  => APP_PATH . '/app/migrations/',
+        'viewsDir'       => APP_PATH . '/app/views/',
+        'pluginsDir'     => APP_PATH . '/app/plugins/',
+        'libraryDir'     => APP_PATH . '/app/library/',
+        'cacheDir'       => APP_PATH . '/app/cache/',
+        'helpersDir'     => APP_PATH . '/app/helpers/',
+        'baseUri'        => '/api/',
+
+
+    )
+));

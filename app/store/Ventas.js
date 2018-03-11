@@ -14,7 +14,7 @@ Ext.define('juegosmecanicos.store.Pedidos', {
     remoteSort: true,
     autoSync  : true,
     autoDestroy: true,
-    extraParams : {desde : null , hasta: null},
+    extraParams : {desde : null , hasta: null,idlocal:0},
     proxy: {
         type: 'ajax',
         api: {read: 'resources/api/pedidos_listado'},

@@ -59,9 +59,6 @@ Ext.define('juegosmecanicos.store.NinosTodos', {
         }
     }
 });
-
-
-
 Ext.define('juegosmecanicos.store.Apoderados', {
     extend: 'Ext.data.Store',
     requiere: ['juegosmecanicos.model.DataModels'],

@@ -36,9 +36,10 @@ Ext.define('juegosmecanicos.model.Producto', {
         { name: 'precioventa', type: 'float' },
         { name: 'stock', type: 'int' },
         { name: 'imagen', type: 'boolean' },
-        { name: 'manejastock', type: 'boolean' },
+        { name: 'llevacontrol', type: 'boolean' },
         { name: 'minutos', type: 'int' },
         { name: 'orden', type: 'int' },
+        { name: 'codigobarra', type: 'string' }
       ]
 });
 

@@ -55,8 +55,9 @@ Ext.define('juegosmecanicos.view.admin.ListadoPagos',{
         var _date = Ext.Date.format(new Date(), 'd/m/Y')
         storePedidos.load({
           params : {
-              desde  : _date,
-              hasta  : _date
+              desde   : _date,
+              hasta   : _date,
+              idlocal : Ext.util.Cookies.get('idlocal')
           }
         });
 
@@ -148,7 +149,7 @@ Ext.define('juegosmecanicos.view.admin.ListadoPagos',{
                             width: 100,
                             height: 25,
                             style: {
-                                background: '#775c80',
+                                background: '#6A4B5A',
                                 color: 'white',
                                 textAlign: 'center',
                                 fontWeight: 'bold',
@@ -169,7 +170,7 @@ Ext.define('juegosmecanicos.view.admin.ListadoPagos',{
                             width: 100,
                             height: 25,
                             style: {
-                                background: '#775c80',
+                                background: '#6A4B5A',
                                 color: 'white',
                                 textAlign: 'center',
                                 fontWeight: 'bold',
@@ -272,7 +273,11 @@ Ext.define('juegosmecanicos.view.admin.ListadoPagos',{
         var _date = Ext.Date.format(new Date(), 'd/m/Y')
         Ext.Ajax.request({
             url :juegosmecanicos.util.Rutas.totalVentaSumatoria,
-            params:{desde  : _date,hasta  : _date},
+            params:{
+                desde  : _date,
+                hasta  : _date,
+                idlocal :   Ext.util.Cookies.get('idlocal')
+            },
             success:function(response){
                var data = juegosmecanicos.util.Json.decodeJSON(response.responseText);
                Ext.each(data,function(row,i){

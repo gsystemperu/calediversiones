@@ -21,6 +21,7 @@ Ext.define('juegosmecanicos.util.Rutas',
             membresiaBaja  : 'resources/api/membresia_baja',
             gastoGuardar  : 'resources/api/gasto_guardar',
             gastoAnular   : 'resources/api/gastos_eliminar',
+            productoEliminar   : 'resources/api/producto_eliminar'
 
             //@ Acciones => Listados
         }

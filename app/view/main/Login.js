@@ -1,26 +1,37 @@
 
 Ext.define('juegosmecanicos.view.main.Login',{
-  //  extend: 'Ext.panel.Panel',
-    extend: 'Ext.container.Viewport',
-    alias : 'main-login',
+    extend: 'Ext.window.Window',
+    alias : 'wlogin',
     requires: [
         'juegosmecanicos.view.main.LoginController',
-        'juegosmecanicos.view.main.LoginModel'
+        'Ext.data.StoreManager'
     ],
-    controller: 'main-login',
-    viewModel: {
-        type: 'main-login'
-    },
+    controller: 'login',
     layout: {
       type: 'vbox',
       align: 'center',
       pack: 'center'
     },
-    items: [{
-        xtype: 'fieldset',
-        fieldStyle:'background-color :red;',
+    autoShow:true,
+    width:425,
+    height:400,
+    items: [
+        {
+        xtype: 'form',
+        padding : 10,
+        frame:false,
+        height:350,
+        width : 400,
         layout: 'anchor',
-        items: [{
+        items: [
+            {
+                xtype:'image',
+                src: 'resources/images/empresa.jpeg',
+                width: 184,
+                height: 150,
+                anchor: '100%'
+            },
+        {
             xtype: 'component',
             anchor: '100%',
             html: [
@@ -30,17 +41,26 @@ Ext.define('juegosmecanicos.view.main.Login',{
         },
         {
             xtype: 'combobox',
-            reference: 'states',
-            publishes: 'value',
-            fieldLabel: 'Local',
-            displayField: 'state',
+            reference: 'cboLocales',
+            fieldLabel: '<b>Locales</b>',
             anchor: '-15',
-            /*store: {
-                type: 'states'
-            },*/
             minChars: 0,
             queryMode: 'local',
-            typeAhead: true
-        }]
+            displayField : 'direccion',
+            valueField : 'idlocal',
+            editable : false,
+            store : Ext.create('juegosmecanicos.store.Locales')
+        }
+    ],
+    bbar:[
+        '->',
+        {
+            xtype:'button',
+            text : 'Seleccionar',
+            width : 150,
+            handler : 'onClickSeleccionarSede'
+        }
+    ]
+    
     }]
 });

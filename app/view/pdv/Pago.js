@@ -3,8 +3,8 @@ Ext.define('juegosmecanicos.view.pdv.Pago', {
     alias: 'wPdvCobrarPago',
     title: 'Ingresar Pago',
     modal: true,
-    width: 350,
-    height: 280,
+    width: 450,
+    height: 380,
     iconCls: 'fa fa-money',
     layout: {
         type: 'anchor'
@@ -20,7 +20,7 @@ Ext.define('juegosmecanicos.view.pdv.Pago', {
     controller: 'accionespago',
     initComponent: function () {
         me = this;
-        var _storeFormaPago = Ext.create('juegosmecanicos.store.FormaPagos');
+         _storeFormaPago = Ext.create('juegosmecanicos.store.FormaPagos');
 
         Ext.apply(me, {
             bodyPadding: 5,
@@ -33,9 +33,9 @@ Ext.define('juegosmecanicos.view.pdv.Pago', {
     },
     getItems: function (_storeformapago,_numeromesa,_persona,_local,_detalle,_empleado) {
         Ext.util.Format.decimalSeparator = '.';
-        var _totalventamesa = Ext.ComponentQuery.query('#txtTotalVenta'+_numeromesa.toString())[0].getValue();
-
-        var _obj = [{
+         _totalventamesa = Ext.ComponentQuery.query('#txtTotalVenta'+_numeromesa.toString())[0].getValue();
+        _totalventamesa = _totalventamesa.toFixed(2);
+         _obj = [{
                 xtype: 'form',
                 itemId : 'frmGuardarPago',
                 url: juegosmecanicos.util.Rutas.ventaGuardar,
@@ -106,23 +106,23 @@ Ext.define('juegosmecanicos.view.pdv.Pago', {
                     },
                     {
                         xtype: 'numberfield',
-                        fieldLabel: '<b>Total Venta</b>',
                         anchor: '100%',
                         value : _totalventamesa,
+                        labelWidth:200,
                         readOnly: true,
-                        fieldStyle: 'text-align: right;',
+                        fieldLabel: '<b><div style="font-size:20px;margin-top:16px;">Total Venta </div></b>',
+                        fieldStyle: 'text-align: right;font-size:35px;font-weight:bold; ',
                         itemId : 'txtTotalVenta',
                         name : 'totalventa',
-                        decimalSeparator: '.',
-                        decimalPrecision:2,
-                        step:'0.1'
+                        
 
                     },
                     {
                         xtype: 'numberfield',
-                        fieldLabel: '<b>Recibido</b>',
+                        fieldLabel: '<b><div style="font-size:20px;margin-top:16px;">Recibido </div></b>',
+                        fieldStyle: 'text-align: right;font-size:35px;font-weight:bold; ',
+                        labelWidth:200,
                         anchor: '100%',
-                        fieldStyle: 'text-align: right;',
                         allowDecimals: true,
                         decimalSeparator: '.',
                         decimalPrecision:2,
@@ -138,24 +138,28 @@ Ext.define('juegosmecanicos.view.pdv.Pago', {
                     },
                     {
                         xtype: 'numberfield',
-                        fieldLabel: '<b>Devolver</b>',
+                        fieldLabel: '<b><div style="font-size:20px;margin-top:16px;">Devolver </div></b>',
+                        fieldStyle: 'text-align: right;font-size:35px;font-weight:bold; ',
                         anchor: '100%',
-                        fieldStyle: 'text-align: right;',
+                        
                         readOnly:true,
                         itemId : 'txtTotalDevolver',
                         name : 'dinerodevuelto',
                         allowBlank:false,
                         decimalSeparator: '.',
                         decimalPrecision:2,
-                        step:'0.1'
+                        step:'0.1',
+                        labelWidth:200,
                     },
                     {
                         xtype: 'datefield',
-                        fieldLabel: '<b>Fecha</b>',
+                        fieldLabel: '<b><div style="font-size:20px;margin-top:16px;">Fecha </div></b>',
+                        fieldStyle: 'text-align: right;font-size:35px;font-weight:bold; ',
                         anchor : '100%',
                         value : new Date(),
                         name : 'fechaventa',
-                        editable :false
+                        editable :false,
+                        labelWidth:200,
                     }
                 ],
                 buttons: [{

@@ -2,6 +2,9 @@
 Ext.define('juegosmecanicos.Application', {
     extend: 'Ext.app.Application',
     name: 'juegosmecanicos',
+    controllers:[
+        'DataStatica'
+    ],
     stores: [
         'juegosmecanicos.store.Productos',
         'juegosmecanicos.store.DataTemp',
@@ -24,7 +27,10 @@ Ext.define('juegosmecanicos.Application', {
         'pdv.NinoMenbresia',
         'pdv.Apoderado',
         'producto.RegistroGastos',
-        'main.Login'
+        'main.Login',
+        'pdv.ContenedorVenta',
+        'pdv.MainVenta',
+        'producto.MantenimientoVenta'
 
     ],
      models: [
@@ -33,7 +39,7 @@ Ext.define('juegosmecanicos.Application', {
     launch: function () {
         Ext.util.Format.decimalSeparator = '.';
         Ext.util.Format.thousandSeparator = ' ';
-         //Ext.create('wMain');
-         Ext.create('main-login');
+        //Ext.create('wMain');
+        Ext.create('juegosmecanicos.view.main.Login');
     }
 });

@@ -21,9 +21,11 @@ Ext.define('juegosmecanicos.view.producto.Mantenimiento', {
     },
     controller:'productos',
     initComponent: function () {
-        var storeProducto  = Ext.create('juegosmecanicos.store.Productos');
-
-                var storeCategoria = Ext.create('juegosmecanicos.store.Categorias');
+        storeProducto  = Ext.create('juegosmecanicos.store.Productos');
+        storeProducto.load({
+            params : {idlocal  : Ext.util.Cookies.get('idlocal')}
+       });
+        storeCategoria = Ext.create('juegosmecanicos.store.Categorias');
          Ext.apply(this, {
             items: [{
                     ///title: 'Registros',
@@ -84,50 +86,7 @@ Ext.define('juegosmecanicos.view.producto.Mantenimiento', {
 
                             }
                         ],
-                      /*  tbar: [{
-                                xtype: 'fieldset',
-                                title: '<b>Buscar Por</b>',
-                                layout: 'hbox',
-                                flex: 1,
-                                padding: '0 5 10 5',
-                                items: [{
-                                        xtype: 'textfield',
-                                        reference: 'txtBuscarCodigoProd',
-                                        fieldLabel: 'Buscar Codigo',
-                                        flex: 1,
-                                        enableKeyEvents:true,
-                                        listeners:{
-                                         // focus:'onFocusTextoDeBusquedaProducto',
-                                          keypress:'onKeyPressTextoDeBusquedaProducto'
-                                        }
-                                    },
-                                    {
-                                        xtype: 'button',
-                                        glyph: juegosmecanicos.util.Glyphs.getGlyph('buscar'),
-                                        handler: 'onClickBuscarProductoCodigo'
-                                    },
-                                   {
-                                        xtype: 'textfield',
-                                        reference: 'txtBuscarDescripcionProd',
-                                        fieldLabel: 'Buscar Descripcion',
-                                        flex: 1,
-                                        labelWidth: 150,
-                                        labelAlign: 'right',
-                                        //listeners:{
-                                         // focus:'onFocusTextoDeBusquedaProducto'
-                                        }
-                                    },
-                                    {
-                                        xtype: 'button',
-                                        glyph: juegosmecanicos.util.Glyphs.getGlyph('buscar'),
-                                      //  handler: 'onClickBuscarProductoDescripcion'
-                                    }
-                                ]
-
-
-                        },
-
-                    ],*/
+                    
                         listeners: {
                              cellclick: 'onClickItemProducto'
                         }
@@ -154,6 +113,11 @@ Ext.define('juegosmecanicos.view.producto.Mantenimiento', {
                                 name: 'idprod',
                                 itemId:'idprod'
 
+                            },
+                            {
+                                xtype :'hiddenfield',
+                                name  : 'idlocal',
+                                value :   Ext.util.Cookies.get('idlocal')
                             },
                             {
                                 xtype: 'label',
@@ -239,8 +203,8 @@ Ext.define('juegosmecanicos.view.producto.Mantenimiento', {
                                   {
                                     xtype:'checkbox',
                                     boxLabel : 'LLEVAR CONTROL DE SERVICIO',
-                                    name : 'llevarcontrol',
-                                    reference :'chkllevarcontrol',
+                                    name : 'llevacontrol',
+                                    reference :'llevacontrol',
                                   },
                                   {
                                     xtype:'checkbox',

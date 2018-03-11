@@ -41,11 +41,12 @@ class ProductoController extends Controller
          if($request->isGet() ==true)
          {
               $categoria = $request->get('idcategoria');
-              $data      = array($categoria,0);
-              if($categoria!='')
+              $ilocal    = $request->get('idlocal');
+              $data      = array($ilocal,$categoria);
+              if($categoria!=0 )
                 $jsonData  = Producto::listarPorCategoria($data);
               else
-                $jsonData  = Producto::listar();
+                $jsonData  = Producto::listar(array($ilocal));
 
               $response->setContentType('application/json', 'UTF-8');
               $response->setContent($jsonData);
@@ -94,9 +95,11 @@ class ProductoController extends Controller
            $preciocompra  = $request->getPost('preciocompra');
            $precioventa   = $request->getPost('precioventa');
            $stockactual   = $request->getPost('stock');
-           $manejastock   = ($request->getPost('manejastock')=='on'?1:0);
+           $llevacontrol  = ($request->getPost('llevacontrol')=='on'?1:0);
            $minutos       = $request->getPost('minutos');
            $orden         = $request->getPost('orden');
+           $codigobarra   = $request->getPost('codigobarra');
+           $idlocal       = $request->getPost('idlocal');
 
            $format       = new FuncionesHelpers();
            $data = array(
@@ -106,11 +109,12 @@ class ProductoController extends Controller
               $format->esNumeroCero($idsubcate),
               $format->esNumeroCero($preciocompra),
               $format->esNumeroCero($precioventa),
-              $format->esNumeroCero($manejastock),
+              $format->esNumeroCero($llevacontrol),
               $format->esNumeroCero($stockactual),
               $subioImg,
-              $minutos,$orden
+              $minutos,$orden,$codigobarra,$idlocal
             );
+          // print_r($data);die();
            $jsonData = Producto::actualizar($data);
            $idproducto = $jsonData[0]["error"];
            if($subioImg == 1){
@@ -138,6 +142,23 @@ class ProductoController extends Controller
        }
 
     }
-
+    public function eliminarproductoAction()
+    {
+      $request        = new Phalcon\Http\Request();
+      $response       = new \Phalcon\Http\Response();
+        
+       if($request->isPost()==true)
+       {
+         $format       = new FuncionesHelpers();
+         $data = array(
+            $format->esNumeroCero($request->getPost('idprod'))
+         );
+         $jsonData = Producto::eliminar($data);
+         $response->setContentType('application/json', 'UTF-8');
+         $response->setContent($jsonData);
+         return $response;
+         
+       }
+    }
 
 }

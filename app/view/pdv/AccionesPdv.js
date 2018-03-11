@@ -9,8 +9,8 @@ Ext.define('juegosmecanicos.view.pdv.AccionesPdv', {
     ],
     alias: 'controller.accionespdv',
     /*init:function(){
-         var _panel = Ext.ComponentQuery.query('#dvContenedorMesas')[0];
-         var mesas = 8;
+          _panel = Ext.ComponentQuery.query('#dvContenedorMesas')[0];
+          mesas = 8;
 
         _panel.add({
                 title: 'Caja : ',
@@ -25,23 +25,23 @@ Ext.define('juegosmecanicos.view.pdv.AccionesPdv', {
     },*/
     //@ Accion boton Cliente
     accionClienteMesa:function(btn){
-        /*var win = Ext.create('Ext.window.Window',{
+        /* win = Ext.create('Ext.window.Window',{
             width : 300,
             height : 300,
             title : 'Registrar Cliente',
             autoShow:true
         });*/
-        var _win = Ext.create('juegosmecanicos.view.pdv.IngresarCliente');
+         _win = Ext.create('juegosmecanicos.view.pdv.IngresarCliente');
         _win.show();
     },
     accionPagoMesa :function(btn){
-        var _btn = btn.itemId.toString();
-        var numeromesa = _btn.substr(_btn.length - 1 , _btn.length + 2);
-        var _idper     = Ext.ComponentQuery.query('#txtCodigoPersona')[0].getValue();;
-        var _idlocal   = 1;
-        var _idemp     = 0; //Ext.ComponentQuery.query('#cboEmpleado'+numeromesa.toString())[0].getValue();
-        var _store     = Ext.ComponentQuery.query('#dgvDetallePedidoMesa'+numeromesa.toString())[0].getStore();
-        var _dataDetalle = [];
+         _btn = btn.itemId.toString();
+         numeromesa = _btn.substr(_btn.length - 1 , _btn.length + 2);
+         _idper     = Ext.ComponentQuery.query('#txtCodigoPersona')[0].getValue();
+         _idlocal   = Ext.util.Cookies.get('idlocal');
+         _idemp     = 0; //Ext.ComponentQuery.query('#cboEmpleado'+numeromesa.toString())[0].getValue();
+         _store     = Ext.ComponentQuery.query('#dgvDetallePedidoMesa'+numeromesa.toString())[0].getStore();
+         _dataDetalle = [];
         _store.each(function (record) {
                 
                 if(record.get("hmenbresiadesde")){
@@ -68,24 +68,23 @@ Ext.define('juegosmecanicos.view.pdv.AccionesPdv', {
 
             });
 
-        //_txt1[0].setValue(JSON.stringify(_dataDetalle));
-        var _jsonTexto = JSON.stringify(_dataDetalle);
-        var win = Ext.create('juegosmecanicos.view.pdv.Pago',{ mesa : numeromesa,persona:_idper,local:_idlocal, detalle : _jsonTexto, empleado : _idemp });
-        win.show();
+         _jsonTexto = JSON.stringify(_dataDetalle);
+         win = Ext.create('juegosmecanicos.view.pdv.Pago',{ mesa : numeromesa,persona:_idper,local:_idlocal, detalle : _jsonTexto, empleado : _idemp });
+         win.show();
     },
     onClickEliminarItem:function(btn){
-      var _btn = btn.itemId.toString();
-      var numeromesa = _btn.substr(_btn.length - 1 , _btn.length + 2);
-      var rec = btn.getWidgetRecord();
-      var store = Ext.ComponentQuery.query('#dgvDetallePedidoMesa'+numeromesa.toString())[0].getStore();
+       _btn = btn.itemId.toString();
+       numeromesa = _btn.substr(_btn.length - 1 , _btn.length + 2);
+       rec = btn.getWidgetRecord();
+       store = Ext.ComponentQuery.query('#dgvDetallePedidoMesa'+numeromesa.toString())[0].getStore();
       store.remove(rec);
       this.onCalcularTotalVenta(numeromesa);
     },
     onCalcularTotalVenta: function (_numeromesa)
     {
         me = this;
-        var store = Ext.ComponentQuery.query('#dgvDetallePedidoMesa'+_numeromesa.toString())[0].getStore();
-        var _tot = 0;
+         store = Ext.ComponentQuery.query('#dgvDetallePedidoMesa'+_numeromesa.toString())[0].getStore();
+         _tot = 0;
         store.each(function (record) {
             _tot = _tot + record.get('total');
         });
@@ -95,8 +94,8 @@ Ext.define('juegosmecanicos.view.pdv.AccionesPdv', {
         );
     },
     onSelectEmpleado: function(cbo){
-        var _btn = cbo.itemId.toString();
-        var numeromesa = _btn.substr(_btn.length - 1 , _btn.length + 2);
+         _btn = cbo.itemId.toString();
+         numeromesa = _btn.substr(_btn.length - 1 , _btn.length + 2);
        /* Ext.Ajax.request({
             url :juegosmecanicos.util.Rutas.mesaValidarReserva,
             params:{
@@ -104,7 +103,7 @@ Ext.define('juegosmecanicos.view.pdv.AccionesPdv', {
               idemp  : parseInt(cbo.getValue())
             },
             success:function(response){
-               var obj = juegosmecanicos.util.Json.decodeJSON(response.responseText);
+                obj = juegosmecanicos.util.Json.decodeJSON(response.responseText);
                Ext.each(obj,function(row,i){
                     if(row.error == 1){
                       Ext.Msg.alert("Aviso","La mesa esta pendiente de pago, mesero encargado : "+ row.empleado);
@@ -119,12 +118,12 @@ Ext.define('juegosmecanicos.view.pdv.AccionesPdv', {
 
     },
     onClickBotonCalculadora:function(btn){
-        var _btn = btn.itemId.toString();
-        var numeromesa = _btn.substr(_btn.length - 1 , _btn.length + 2);
-        var valorBoton = btn.value;
-        var _grid      = Ext.ComponentQuery.query("#dgvDetallePedidoMesa"+numeromesa.toString())[0];
-        var _posicion  = _grid.getSelectionModel().getSelection()[0].get('id');
-        var _record    = _grid.getStore().findRecord("id",_posicion);
+         _btn = btn.itemId.toString();
+         numeromesa = _btn.substr(_btn.length - 1 , _btn.length + 2);
+         valorBoton = btn.value;
+         _grid      = Ext.ComponentQuery.query("#dgvDetallePedidoMesa"+numeromesa.toString())[0];
+         _posicion  = _grid.getSelectionModel().getSelection()[0].get('id');
+         _record    = _grid.getStore().findRecord("id",_posicion);
         me = this;
         if(_record)
         {
@@ -141,7 +140,7 @@ Ext.define('juegosmecanicos.view.pdv.AccionesPdv', {
     },
     accionSelectApoderado :function(btn){
 
-        var win = Ext.create('juegosmecanicos.view.pdv.PopupApoderado',{});
+         win = Ext.create('juegosmecanicos.view.pdv.PopupApoderado',{});
         win.show();
     },
     onEditorCalcularTotal:function(editor,e){
@@ -153,11 +152,11 @@ Ext.define('juegosmecanicos.view.pdv.AccionesPdv', {
     },
 
     onClickVerNinosMembresia:function(){
-          var win = Ext.create('juegosmecanicos.view.pdv.NinoMenbresia',{});
+           win = Ext.create('juegosmecanicos.view.pdv.NinoMenbresia',{});
         win.show();
     },
     onClickVerApoderados:function(){
-          var win = Ext.create('juegosmecanicos.view.pdv.Apoderado',{});
+           win = Ext.create('juegosmecanicos.view.pdv.Apoderado',{});
         win.show();
     },
 
@@ -166,9 +165,9 @@ Ext.define('juegosmecanicos.view.pdv.AccionesPdv', {
      */
       onClickAgregarNino:function(btn)
       {
-      var _btn = btn.itemId.toString();
-      var numeromesa = _btn.substr(_btn.length - 1 , _btn.length + 2);
-      var rec = btn.getWidgetRecord();
+       _btn = btn.itemId.toString();
+       numeromesa = _btn.substr(_btn.length - 1 , _btn.length + 2);
+       rec = btn.getWidgetRecord();
       Ext.create('juegosmecanicos.view.pdv.Nino',{
           idapo :Ext.ComponentQuery.query('#txtCodigoPersona')[0].getValue(),
           idprod : rec.get('idprod'),

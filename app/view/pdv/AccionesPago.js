@@ -47,7 +47,9 @@ Ext.define('juegosmecanicos.view.pdv.AccionesPago', {
                 success: function (form, action) {
                      Ext.ComponentQuery.query('#dgvDetallePedidoMesa'+numeromesa.toString())[0].getStore().removeAll();
                      Ext.ComponentQuery.query('#txtTotalVenta'+numeromesa.toString())[0].setValue('');
-                     Ext.ComponentQuery.query('#txtNombrePersona')[0].setText('');
+                     if(Ext.ComponentQuery.query('#txtNombrePersona')[0])
+                        Ext.ComponentQuery.query('#txtNombrePersona')[0].setText('');
+                        
                      var ojson = juegosmecanicos.util.Json.decodeJSON(action.response.responseText);
                      if (parseInt(ojson.error)!=0) {
                        var _view = me.getView();

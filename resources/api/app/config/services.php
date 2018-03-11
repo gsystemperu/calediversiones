@@ -114,8 +114,11 @@ $di->set('router',function() {
     $router->add('/categoria_lista'     , array('controller'=>'producto','action'=>'categorias'));
     $router->add('/subcategoria_lista'  , array('controller'=>'producto','action'=>'subcategorias'));
     $router->add('/formapago_lista'     , array('controller'=>'producto','action'=>'formapago'));
-    $router->add('/producto_lista'      , array('controller'=>'producto','action'=>'listar'));
+    // @Lista solo servicios
+    $router->add('/producto_lista'      , array('controller'=>'producto','action'=>'listar')); 
     $router->add('/personal_lista'      , array('controller'=>'persona','action'=>'listar'));
+    $router->add('/producto_eliminar'      , array('controller'=>'producto','action'=>'eliminarproducto'));
+    
 
     /*
     |  @@ Controlador de Procedos

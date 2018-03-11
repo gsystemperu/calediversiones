@@ -1,6 +1,5 @@
 Ext.define('juegosmecanicos.view.main.Main', {
-    //extend: 'Ext.container.Viewport',
-    extend: 'Ext.panel.Panel',
+    extend: 'Ext.container.Viewport',
     layout: 'border',
     alias: 'wMain',
     requires: [
@@ -8,28 +7,24 @@ Ext.define('juegosmecanicos.view.main.Main', {
         'juegosmecanicos.view.menu.Tree'
     ],
     controller: 'main',
-    items: [
-    {
+    items:[
+        {
         region: 'west',
         title: '.: Cale Diversiones :.',
         iconCls :'fa fa-cogs',
         titleCollapse: false,
         width: 200,
-           collapsed :true,
-           collapsible :true,
-
-            //animate: true,
-            //activeOnTop: false,
-            //fill: false,
-            //collapsed :true,
+        collapsed :true,
+        collapsible :true,
         layout: {
-            type: 'accordion',
-            titleCollapse: false,
-              collapsed :false,
-              fill: false,
-               animate: true,
+           type: 'accordion',
+           titleCollapse: false,
+           collapsed :false,
+           fill: false,
+           animate: true,
         },
-        items: [
+        items: 
+        [
             {
                 title: 'Menu Principal',
                 itemId: 'panGestionjuegosmecanicos', //'panGestionCliente',
@@ -41,7 +36,7 @@ Ext.define('juegosmecanicos.view.main.Main', {
                   iconAling:'left'
                 },
                 items: [
-                  /*{xtype:'menutree',reference: 'treejuegosmecanicos', //'treeGestionClientes',layout: 'fit',listeners: {itemClick: 'onClickOpcionMenu'}}*/
+                  //{xtype:'menutree',reference: 'treejuegosmecanicos', //'treeGestionClientes',layout: 'fit',listeners: {itemClick: 'onClickOpcionMenu'}}
                   {
                     flex : 1,
                     text: 'Ingresar Servicio',
@@ -54,10 +49,10 @@ Ext.define('juegosmecanicos.view.main.Main', {
                   {
                     flex : 1,
                     text: 'Ingresar Venta',
-                    itemId: "wRegVenta",
+                    itemId: "wPdvContenedorVenta",
                     titulo: "..: Venta :.." ,
                     margin: '3 3 1 3',
-                    //handler:'onClickOpcionBotonMenu'
+                    handler:'onClickOpcionBotonMenu'
                   },
                   {
                     flex : 1,
@@ -94,7 +89,7 @@ Ext.define('juegosmecanicos.view.main.Main', {
                   {
                     flex : 1,
                     text: 'Productos',
-                    itemId: "wRegProductoNoServicio",
+                    itemId: "wRegProductoVenta",
                     titulo: "..: Productos :..",
                     margin: '3 3 1 3',
                     handler: 'onClickOpcionBotonMenu'
@@ -115,26 +110,34 @@ Ext.define('juegosmecanicos.view.main.Main', {
                     margin: '3 3 1 3',
                     //handler: 'onClickOpcionBotonMenu'
                   }
+                  
                 ]
             }
+          ]
+       },//fin west
+       {
+        region: 'center',
+        padding: 5,
+        reference: 'tabPrincipal',
+        defaults: {bodyPadding: 0},
+        scrollable: true,
+        layout:'fit',
+          items: [
+            {
+              title: 'Nosotros',
+              bodyPadding:'200 0 0 300',
+              //html: '<div style="text-aling:center;"><img src="resources/images/lgsis.png" width="300" height="150" >  </div>'
+  
+          }]  
+      },
+      {
+        region:'south',
+        padding : 0,
+        layout:'hbox',
+        items:[
+          {xtype:'panel',title :'  TIENDA    CODIGO : '+ Ext.util.Cookies.get('idlocal').toString() + ' - DIRECCION : '+  Ext.util.Cookies.get('local').toString(),flex:3 },
+          {xtype:'button',text :'CERRAR SESSION',flex:1,height:36.5},
         ]
-
-    }, 
-    {
-      region: 'center',
-      padding: 5,
-      reference: 'tabPrincipal',
-      defaults: {bodyPadding: 0},
-      scrollable: true,
-      layout:'fit',
-        items: [
-          {
-            title: 'Nosotros',
-            bodyPadding:'200 0 0 300',
-            html: '<div style="text-aling:center;"><img src="resources/images/lgsis.png" width="300" height="150" >  </div>'
-
-        }]
-       
       }
-  ]
+    ]   
 });

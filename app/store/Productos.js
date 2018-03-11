@@ -10,20 +10,24 @@ Ext.define('juegosmecanicos.store.Productos', {
     storeId : 'storeProductos',
     requiere:['juegosmecanicos.model.DataModels'],
     model   :'juegosmecanicos.model.Producto',
-    autoLoad: true,
-    remoteSort: true,
-    autoSync  : true,
-    autoDestroy: true,
-    extraParams : {idcategoria : 0 , idsubcategoria : 0},
+    autoLoad: false,
+    extraParams : {
+        idlocal : 0 ,
+        idcategoria : 0 , 
+        idsubcategoria : 0
+    },
     proxy: {
         type: 'ajax',
-        api: {read: 'resources/api/producto_lista'},
+        api: {
+            read: 'resources/api/producto_lista'
+        },
         reader: {
             type: 'json',
             rootProperty: 'data',
         }
     }
 });
+
 
 Ext.define('juegosmecanicos.store.Categorias', {
     extend: 'Ext.data.Store',

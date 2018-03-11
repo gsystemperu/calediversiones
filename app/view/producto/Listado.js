@@ -13,29 +13,25 @@ Ext.define("juegosmecanicos.view.producto.Listado",{
     bodyPadding:3,
     layout:'fit',
     numeromesa : 0,
+    tiposervicio: 0,
+    codigobarra:false,
     initComponent:function(){
          me = this;
-         var _storeCategoria    = Ext.create('juegosmecanicos.store.Categorias');
-        _storeCategoria.load();
-        //var _storeSubCategoria = Ext.create('juegosmecanicos.store.SubCategorias');
-        var _storeProducto     = Ext.create('juegosmecanicos.store.Productos');
-
-         //var _store = Ext.create('juegosmecanicos.store.tmpProductos');
+         _storeProducto     = Ext.create('juegosmecanicos.store.Productos');
+         _storeProducto.load({
+                 params : {idlocal  : Ext.util.Cookies.get('idlocal'),idcategoria: me.tiposervicio }
+         });
          Ext.apply(this,{
              items:[{
                    xtype: 'dataview',
                    layout:'fit',
+                   reference : 'dgvProducto',
                     autoScroll :true,
                     itemId:'dvListaMesa'+ me.numeromesa.toString(),
                     tpl: [
                         '<tpl for=".">',
                             '<div class="cuarto">',
                                     '<table style="width:100%;" border="0" ><tr>',
-                                       /*'<tpl if="imagen &gt;= true">',
-                                            '<td><img src="resources/images/productos/{idprod}.jpg" width=80 height=80 /></td>',
-                                       '<tpl else >',
-                                            '<td><img src="resources/images/no-img.jpg" width=80 height=80 /></td>',
-                                       '</tpl>',*/
                                         '<td><table style="width:100%;" border="0">',
                                             '<tr>',
                                                 '<td  align="right"><label class="productoprecio">S./ {precioventa}</label></strong></td>',
@@ -62,8 +58,20 @@ Ext.define("juegosmecanicos.view.producto.Listado",{
                     listeners:{ itemclick :'accionClickItem'}
                 }
              ],
-            /* tbar:[
+             tbar:[
                  {
+                     xtype:'textfield',
+                     reference : 'codigobarra',
+                     fieldLabel : 'Codigo Barra',
+                     flex: 1,
+                     hidden: me.codigobarra,
+                     enableKeyEvents: true,
+                     fieldStyle: 'text-align: center;font-size:20px;font-weight:bold;',
+                     listeners: {
+                         change: 'onChangeBuscarCodigoBarrasUnidad'
+                     }
+                 }
+                 /*{
                      xtype:'combo',
                      fieldLabel:'Categoria',
                      flex: 1,
@@ -77,15 +85,11 @@ Ext.define("juegosmecanicos.view.producto.Listado",{
                      listeners : {
                         select : 'onSelectCategoria'
                      }
-                 }
-             ]*/
+                 }*/
+             ]
          });
-
-
-
-
         this.callParent(arguments);
-
+        
     },
 
 });

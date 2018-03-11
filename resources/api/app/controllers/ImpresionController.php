@@ -23,37 +23,34 @@ class ImpresionController extends Controller
       $borde = 0;
       $pdf->SetMargins(0, 0 , 0);
       $pdf->AddPage();
-      $pdf->setXY(6, 5);
+      //$pdf->setXY(6, 5);
       $pdf->setFont("Arial", "B", 12);
-      $pdf->Cell(85, 5,$DatosImpresora['_nombreimpresion'], $borde, 2, "C");
+      $pdf->Cell(85, 4,$DatosImpresora['_nombreimpresion'], $borde, 2, "C");
       $pdf->setFont("Arial", "", 7);
-      $pdf->MultiCell(85, 5, $DatosImpresora["_direccion"], $borde, "C");
+      $pdf->MultiCell(85, 3, $DatosImpresora["_direccion"], $borde, "C");
       $pdf->setFont("Arial", "", 7);
-      $pdf->setX(6);
-      $pdf->Cell(10, 5,"R.U.C : ", $borde, 0, "C");
+      $pdf->setX(6.5);
+      $pdf->Cell(10, 4,"R.U.C : ", $borde, 0, "C");
       $pdf->setFont("Arial", "", 8);
-      $pdf->Cell(65, 5, $DatosImpresora['_ruc'], $borde, 2, "L");
-      $pdf->setX(8);
-        $pdf->Cell(10,5,"Telefonos :",$borde,0,"C");
+      $pdf->Cell(65, 4, $DatosImpresora['_ruc'], $borde, 2, "L");
+      $pdf->setX(8.5);
+      $pdf->Cell(10,3.5,"Telefonos :",$borde,0,"C");
       $pdf->setX(6);
-        $pdf->Cell(80,5,"310 5569 - 950 621 806 ",0,1,"C");
-
-        $pdf->setX(6);
+      $pdf->Cell(80,3.5,"310 5569 - 950 621 806 ",0,1,"C");
+    $pdf->setX(7);
     $pdf->setFont("Arial","",7);
-    $pdf->Cell(35, 5, "AUTORIZACION #MAQ. REG. : ", $borde, 0, "C");
+    $pdf->Cell(35, 3.5, "AUTORIZACION #MAQ. REG. : ", $borde, 0, "C");
     $pdf->setFont("Arial", "", 8);
-    $pdf->Cell(65, 5, $DatosImpresora["_codigoimpresora"], $borde, 2, "L");
-    $pdf->Ln(5);
+    $pdf->Cell(65, 3.5, $DatosImpresora["_codigoimpresora"], $borde, 2, "L");
+    $pdf->ln(1);
     $pdf->setX(6);
-
     $pdf->setFont("Arial", "", 7);
-    $pdf->Cell(38, 5, "DESCRIPCION", $borde, 0, "L");
-    $pdf->Cell(7, 5, "CANT", $borde, 0, "L");
-    $pdf->Cell(10, 5, "P.UNI.", $borde, 0, "R");
-
-    $pdf->Cell(10, 5, "IMP.", $borde, 2, "R");
+    $pdf->Cell(38,4, "DESCRIPCION", $borde, 0, "L");
+    $pdf->Cell(7, 4, "CANT", $borde, 0, "L");
+    $pdf->Cell(10,4, "P.UNI.", $borde, 0, "R");
+    $pdf->Cell(10,4, "IMP.", $borde, 2, "R");
     $pdf->setX(6);
-    $pdf->Cell(80, 5, "-------------------------------------------------------------------------------------------------", $borde, 2, "L");
+    $pdf->Cell(80, 1, "-------------------------------------------------------------------------------------------------", $borde, 2, "L");
     //$pdf->Ln(5);
     $totalventa = 0;
     foreach ($DetalleVenta as $row) {

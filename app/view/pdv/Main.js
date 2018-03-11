@@ -64,6 +64,7 @@ Ext.define('juegosmecanicos.view.pdv.Main', {
                                     text: 'Horas.',
                                     flex: 1,
                                     align: 'center',
+                                    hidden:true,
                                     editor: {
                                         xtype: 'numberfield',
                                         value: 0,
@@ -223,6 +224,8 @@ Ext.define('juegosmecanicos.view.pdv.Main', {
                 items: [{
                     xtype: 'wListadoProducto',
                     numeromesa: _numeromesa.toString(),
+                    idlocal : 0 ,
+                    codigobarra:true
                 }]
 
             }

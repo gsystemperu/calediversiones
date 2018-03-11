@@ -95,8 +95,9 @@ class VentaController extends Controller
          {
               $desde     = $request->get('desde');
               $hasta     = $request->get('hasta');
+              $idlocal   = $request->get('idlocal');
               $format    = new FuncionesHelpers();
-              $data      = array($desde,$hasta);
+              $data      = array($desde,$hasta,$idlocal);
 
               $jsonData  = Venta::listadopedidoscaja($data);
               $response->setContentType('application/json', 'UTF-8');
@@ -156,8 +157,9 @@ class VentaController extends Controller
           {
               $desde     = $request->get('desde');
               $hasta     = $request->get('hasta');
+              $idlocal   = $request->get('idlocal');
               $format    = new FuncionesHelpers();
-              $data      = array($desde,$hasta);
+              $data      = array($desde,$hasta,$idlocal);
                $jsonData = Venta::totalventacaja($data);
                $response->setContentType('application/json', 'UTF-8');
                $response->setContent(json_encode($jsonData[0], JSON_NUMERIC_CHECK));

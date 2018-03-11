@@ -11,19 +11,13 @@ class LocalController extends Controller
          $response       = new \Phalcon\Http\Response();
          if($request->isGet() ==true)
          {
-           
              if($request->get('nombre')){
                 //$parametros = array($request->get('nombre'));
                 //$jsonData = Local::listarpornombre($parametros);
              }else{
-                $pagestart = $request->get('start');
-                $pagelimit =  $request->get('limit');
-                $format       = new FuncionesHelpers(); 
-                $parametros = array(
-                                $format->esNumeroCero($pagestart),
-                                $format->esNumeroCero($pagelimit)  
-                                );    
-                $jsonData = Local::listar($parametros);
+                $format     = new FuncionesHelpers(); 
+                $parametros = array();    
+                $jsonData   = Local::listar($parametros);
              }
               
              $response->setContentType('application/json', 'UTF-8');

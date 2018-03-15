@@ -126,7 +126,7 @@ Ext.define('juegosmecanicos.view.main.Main', {
             {
               title: 'Nosotros',
               bodyPadding:'200 0 0 300',
-              //html: '<div style="text-aling:center;"><img src="resources/images/lgsis.png" width="300" height="150" >  </div>'
+              html: '<div style="text-aling:center;"><img src="resources/images/lgsis.png" width="300" height="150" >  </div>'
   
           }]  
       },

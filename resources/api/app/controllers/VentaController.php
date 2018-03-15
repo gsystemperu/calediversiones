@@ -129,7 +129,8 @@ class VentaController extends Controller
          if($request->isGet() == true)
          {
               $format    = new FuncionesHelpers();
-              $data      = array();
+              $idlocal   = $request->get('idlocal');
+              $data      = array($idlocal);
               $jsonData  = Venta::controlninos($data);
               $response->setContentType('application/json', 'UTF-8');
               $response->setContent($jsonData);

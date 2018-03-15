@@ -36,10 +36,11 @@ Ext.define('juegosmecanicos.Application', {
      models: [
         'juegosmecanicos.model.DataModels'
      ],
-    launch: function () {
+    init: function () {
         Ext.util.Format.decimalSeparator = '.';
         Ext.util.Format.thousandSeparator = ' ';
-        //Ext.create('wMain');
         Ext.create('juegosmecanicos.view.main.Login');
+        //Ext.create('wMain');
+       
     }
 });

@@ -21,7 +21,6 @@ Ext.define('juegosmecanicos.store.Locales', {
         api: {read: 'resources/api/locales_listado'},
         reader: {
             type: 'json',
-
             rootProperty: 'data',
             totalProperty: 'total'
         }

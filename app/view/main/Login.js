@@ -4,7 +4,6 @@ Ext.define('juegosmecanicos.view.main.Login',{
     alias : 'wlogin',
     requires: [
         'juegosmecanicos.view.main.LoginController',
-        'Ext.data.StoreManager'
     ],
     controller: 'login',
     layout: {

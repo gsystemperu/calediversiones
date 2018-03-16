@@ -20,15 +20,10 @@ Ext.define('juegosmecanicos.view.admin.ListadoConfig', {
     ,
     controller: 'admin-listadoconfig',
     initComponent: function () {
-        /*var storeClientes = Ext.create('juegosmecanicos.store.Clientes');*/
-        /*var storeUM = Ext.create('LabClinica.store.UnidadMedida');
-        var storePR = Ext.create('LabClinica.store.Presentacion');
-        var storeCA = Ext.create('LabClinica.store.Categoria');*/
-        // storeProductos.load();
         Ext.apply(this, {
             items: [
                 this.getConfigGeneral(),
-               // this.getPanelLocales()
+                this.getPanelLocales()
             ]
         });
         this.callParent();

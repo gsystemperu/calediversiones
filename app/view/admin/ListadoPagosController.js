@@ -8,8 +8,9 @@ Ext.define('juegosmecanicos.view.admin.ListadoPagosController', {
       _store = this.lookupReference('dgvVentas').getStore();
       _store.load({
         params : {
-            desde  : Ext.ComponentQuery.query("#dfDesdeCaja")[0].getRawValue(),
-            hasta  : Ext.ComponentQuery.query("#dfHastaCaja")[0].getRawValue(),
+            desde   : Ext.ComponentQuery.query("#dfDesdeCaja")[0].getRawValue(),
+            hasta   : Ext.ComponentQuery.query("#dfHastaCaja")[0].getRawValue(),
+            idlocal : Ext.util.Cookies.get('idlocal')
         },
         callback : function(records, operation, success){
             if(success == true){
@@ -36,8 +37,9 @@ Ext.define('juegosmecanicos.view.admin.ListadoPagosController', {
       my.moveTo(xpos, ypos);
       Ext.ComponentQuery.query('#dgvVentas')[0].getStore().load({
         params : {
-            desde  : Ext.ComponentQuery.query("#dfDesdeCaja")[0].getRawValue(),
-            hasta  : Ext.ComponentQuery.query("#dfHastaCaja")[0].getRawValue(),
+            desde   : Ext.ComponentQuery.query("#dfDesdeCaja")[0].getRawValue(),
+            hasta   : Ext.ComponentQuery.query("#dfHastaCaja")[0].getRawValue(),
+            idlocal : Ext.util.Cookies.get('idlocal')
         }
       });
     },
@@ -69,8 +71,9 @@ Ext.define('juegosmecanicos.view.admin.ListadoPagosController', {
                       _totalVenta = 0;
                       _store.reload({
                         params : {
-                            desde  : Ext.ComponentQuery.query("#dfDesdeCaja")[0].getRawValue(),
-                            hasta  : Ext.ComponentQuery.query("#dfHastaCaja")[0].getRawValue(),
+                            desde   : Ext.ComponentQuery.query("#dfDesdeCaja")[0].getRawValue(),
+                            hasta   : Ext.ComponentQuery.query("#dfHastaCaja")[0].getRawValue(),
+                            idlocal : Ext.util.Cookies.get('idlocal')
                         },
                         callback : function(records, operation, success){
                             if(success == true){
@@ -93,22 +96,26 @@ Ext.define('juegosmecanicos.view.admin.ListadoPagosController', {
     },
     onClickImprimirPDFVentasDiarias:function()
     {
+        //eddy error
+      desde   = Ext.ComponentQuery.query("#dfDesdeCaja")[0].getRawValue();
+      hasta   = Ext.ComponentQuery.query("#dfHastaCaja")[0].getRawValue();
+      idlocal = Ext.util.Cookies.get('idlocal');
+      _url = 'resources/api/imprimirventasdiarias?desde=' + desde+"&hasta="+ hasta+"&idlocal="+idlocal.toString();
 
-      desde  = Ext.ComponentQuery.query("#dfDesdeCaja")[0].getRawValue();
-      hasta  = Ext.ComponentQuery.query("#dfHastaCaja")[0].getRawValue();
-      var _url = 'resources/api/imprimirventasdiarias?desde=' + desde+"&hasta="+ hasta;
-
-     _panel = Ext.ComponentQuery.query("#tabPrincipal")[0];
-     if (_panel.getChildByElement('pdfventasdiarias')) {
+      //_panel = Ext.ComponentQuery.query('#tabPrincipal')[0];
+    
+     /*if (_panel.getChildByElement('pdfventasdiarias')) {
          _panel.remove('pdfventasdiarias');
-     }
-     if (!_panel.getChildByElement('pdfventasdiarias')) {
-         _panel.add({
-             xtype: 'panel',
-             closable: true,
-             id: 'pdfventasdiarias',
+     }*/
+     //_panel.removeAll();
+     //if (!_panel.getChildByElement('pdfventasdiarias')) {
+         //_panel.add({
+             w=Ext.create('Ext.window.Window',{
              title: 'PDF: Ventas Diarias',
              layout: 'fit',
+             width: 500,
+             height:680,
+             autoShow:true,
              bodyPadding: '5px 5px 5px 5px',
              items: [{
                  xtype: 'component',
@@ -120,15 +127,17 @@ Ext.define('juegosmecanicos.view.admin.ListadoPagosController', {
                      src: _url
                  }
              }]
-         });
-     }
-     _panel.setActiveTab('pdfventasdiarias');
+            });
+         //});
+     //}
+    // _panel.setActiveTab('pdfventasdiarias');
 
    },
    onClickImprimirExcelVentasDiarias:function(){
     desde    = Ext.ComponentQuery.query("#dfDesdeCaja")[0].getRawValue();
     hasta    = Ext.ComponentQuery.query("#dfHastaCaja")[0].getRawValue();
-    var _url = 'resources/api/exportarventasdiarias?desde=' + desde+"&hasta="+ hasta;
+    idlocal  = Ext.util.Cookies.get('idlocal');
+    var _url = 'resources/api/exportarventasdiarias?desde=' + desde+"&hasta="+ hasta+"&idlocal="+idlocal.toString();
     var obj  = window.open(_url);
 
    },

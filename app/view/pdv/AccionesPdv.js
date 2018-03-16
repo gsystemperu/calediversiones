@@ -153,7 +153,7 @@ Ext.define('juegosmecanicos.view.pdv.AccionesPdv', {
 
     onClickVerNinosMembresia:function(){
            win = Ext.create('juegosmecanicos.view.pdv.NinoMenbresia',{});
-        win.show();
+           win.show();
     },
     onClickVerApoderados:function(){
            win = Ext.create('juegosmecanicos.view.pdv.Apoderado',{});

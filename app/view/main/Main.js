@@ -101,14 +101,6 @@ Ext.define('juegosmecanicos.view.main.Main', {
                     titulo: "Gastos",
                     margin: '3 3 1 3',
                     handler: 'onClickOpcionBotonMenu'
-                  },
-                  {
-                    flex : 1,
-                    text: 'Locales',
-                    itemId: "wRegLocales",
-                    titulo: "..: Locales :..",
-                    margin: '3 3 1 3',
-                    //handler: 'onClickOpcionBotonMenu'
                   }
                   
                 ]
@@ -119,6 +111,7 @@ Ext.define('juegosmecanicos.view.main.Main', {
         region: 'center',
         padding: 5,
         reference: 'tabPrincipal',
+        itemId : 'tabPrincipal',
         defaults: {bodyPadding: 0},
         scrollable: true,
         layout:'fit',
@@ -135,8 +128,8 @@ Ext.define('juegosmecanicos.view.main.Main', {
         padding : 0,
         layout:'hbox',
         items:[
-          {xtype:'panel',title :'  TIENDA    CODIGO : '+ Ext.util.Cookies.get('idlocal').toString() + ' - DIRECCION : '+  Ext.util.Cookies.get('local').toString(),flex:3 },
-          {xtype:'button',text :'CERRAR SESSION',flex:1,height:36.5},
+          {xtype:'panel', itemId:'panDetalleLocal',flex:3 },
+          {xtype:'button',text :'CERRAR SESSION',flex:1,height:36.5,handler:'onclickSalirApp'},
         ]
       }
     ]   

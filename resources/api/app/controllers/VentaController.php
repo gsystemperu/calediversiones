@@ -98,7 +98,6 @@ class VentaController extends Controller
               $idlocal   = $request->get('idlocal');
               $format    = new FuncionesHelpers();
               $data      = array($desde,$hasta,$idlocal);
-
               $jsonData  = Venta::listadopedidoscaja($data);
               $response->setContentType('application/json', 'UTF-8');
               $response->setContent($jsonData);

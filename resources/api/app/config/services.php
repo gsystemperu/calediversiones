@@ -169,6 +169,7 @@ $di->set('router',function() {
     |  @@ Controlador de Locales
     */
     $router->add('/locales_listado'         , array('controller'=>'local','action'=>'listar'));
+    $router->add('/local_actualizar'         , array('controller'=>'local','action'=>'guardar'));
 
     /*
     |  @@ Controlador de Apoderados

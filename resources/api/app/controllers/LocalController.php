@@ -11,36 +11,35 @@ class LocalController extends Controller
          $response       = new \Phalcon\Http\Response();
          if($request->isGet() ==true)
          {
-             if($request->get('nombre')){
-                //$parametros = array($request->get('nombre'));
-                //$jsonData = Local::listarpornombre($parametros);
-             }else{
-                $format     = new FuncionesHelpers(); 
-                $parametros = array();    
-                $jsonData   = Local::listar($parametros);
-             }
-              
+             
+             $format     = new FuncionesHelpers(); 
+             $parametros = array();    
+             $jsonData   = Local::listar($parametros);
+           
              $response->setContentType('application/json', 'UTF-8');
              $response->setContent($jsonData);
              return $response;
          }
     }
 
-    public function guardarLocalAction(){
+    public function guardarAction(){
         $request        = new Phalcon\Http\Request();
         $response       = new \Phalcon\Http\Response();
 
          if($request->isPost()==true)
          {
-           $idclie        = $request->getPost('idclie');
-           $nombres        = $request->getPost('nombres');
-           $dni        = $request->getPost('dni');
-
+           $idlocal      = $request->getPost('idlocal');
+           $direccion     = $request->getPost('direccion');
+           $telefono         = $request->getPost('telefono');
+           $celular         = $request->getPost('celular');
+           $descripcion         = $request->getPost('descripcion');
            $format       = new FuncionesHelpers();
            $data = array(
-              $format->esNumeroCero( $idclie),
-              $nombres  ,
-              $format->esNumeroCero($dni)
+            $idlocal,    
+            $direccion,  
+            $telefono, 
+            $celular, 
+            $descripcion
             );
            $jsonData = Local::actualizar($data);
            $idproducto = $jsonData[0]["error"]; 

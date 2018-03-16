@@ -35,8 +35,10 @@ Ext.define('juegosmecanicos.view.main.MainController', {
         var storeU  = Ext.create('juegosmecanicos.store.tree.Usuarios');
         _ref.treejuegosmecanicos.setStore(store);
         _ref.treeUsuarios.setStore(storeU);*/
-
-
+        Ext.ComponentQuery.query('#panDetalleLocal')[0].setTitle(
+                '  TIENDA    CODIGO : '+ Ext.util.Cookies.get('idlocal').toString() + ' - DIRECCION : '+  Ext.util.Cookies.get('local').toString()
+        );
+      
 
     },
     onClickOpcionMenu: function(obj, record, item, index, e, eOpts) {
@@ -88,10 +90,10 @@ Ext.define('juegosmecanicos.view.main.MainController', {
                       if (e == 'yes') {
                         /*Ext.Ajax.request({
                           url : 'index.php/usuarios/logout',
-                          success : function() {
-                            Ext.util.Cookies.clear();*/
-                            window.location = '/juegosmecanicos';
-                         /* }
+                          success : function() {*/
+                            Ext.util.Cookies.clear();
+                            window.location = 'calediver/juegosmecanicos';
+                        /* }
                         });*/
                       }
                     });

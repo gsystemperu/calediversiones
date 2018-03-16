@@ -3,10 +3,7 @@ Ext.define('juegosmecanicos.view.admin.PanelLocales', {
     xtype: 'wRegLocales',
     alias: 'widget.wRegLocales',
     requires: [
-        'Ext.layout.container.HBox',
-        /*'juegosmecanicos.view.admin.ListadoLocalesController',
-        'Ext.grid.*',
-        'Ext.form.field.Number'*/
+        'Ext.layout.container.HBox','juegosmecanicos.view.admin.PanelLocalesController'
     ],
     layout: {
         type: 'hbox',
@@ -14,10 +11,9 @@ Ext.define('juegosmecanicos.view.admin.PanelLocales', {
         align: 'stretch'
     },
     defaults: {},
-    //controller: 'admin-listadoLocales',
+    controller: 'admin-localescontroller',
     initComponent: function () {
         var storeLocales = Ext.create('juegosmecanicos.store.Locales');
-
         Ext.apply(this, {
             items: [{
                 flex: 3,
@@ -30,37 +26,17 @@ Ext.define('juegosmecanicos.view.admin.PanelLocales', {
                     reference: 'dgvLocales',
                     sortableColumns: false,
                     emptyText: 'No se han registro locales',
-                    columns: [{
-                        text: 'Codigo',
-                        dataIndex: 'idlocal',
-                        flex: 1,
-                        align: 'center'
-                    },
+                    columns: [
                     {
                         text: 'Dirección',
                         dataIndex: 'direccion',
-                        flex: 5
-                    },
-                    {
-                        text: 'Teléfono',
-                        dataIndex: 'telefono',
-                        flex: 5
-                    },
-                    {
-                        text: 'Celular',
-                        dataIndex: 'celular',
-                        flex: 5
-                    },
-                    {
-                        text: 'Estado',
-                        dataIndex: 'estado',
-                        flex: 5
-                    },
-                    {
-                        text: 'Descripción',
+                        flex: 2
+                    }, {
+                        text: 'Encargado',
                         dataIndex: 'descripcion',
-                        flex: 5
+                        flex: 1
                     },
+                
                     {
                         xtype: 'widgetcolumn',
                         flex: 0.5,
@@ -68,20 +44,15 @@ Ext.define('juegosmecanicos.view.admin.PanelLocales', {
                             xtype: 'button',
                             flex: 1,
                             glyph: 0xf014,
-                            handler: 'onClickEliminarCliente'
+                            handler: 'onClickEliminarLocal'
 
                         }
 
                     }
                     ],
-                    dockedItems: [{
-                        xtype: 'pagingtoolbar',
-                        //store: storeLocales, // same store GridPanel is using
-                        dock: 'bottom',
-                        displayInfo: true
-                    }],
+                
                     listeners: {
-                        rowclick: 'seleccionarRegistroCliente'
+                        rowclick: 'seleccionarRegistroLocal'
                     }
 
                 }]
@@ -92,9 +63,8 @@ Ext.define('juegosmecanicos.view.admin.PanelLocales', {
                 autoScroll: true,
                 items: [{
                     xtype: 'form',
-                    reference: 'myFrmCliente',
-                    itemId: 'myFrmCliente',
-                    url : juegosmecanicos.util.Rutas.clienteGuardar,
+                    reference: 'myFrmLocales',
+                    url : juegosmecanicos.util.Rutas.localActualizar,
                     layout: {
                         type: 'vbox',
                         pack: 'start',
@@ -102,31 +72,48 @@ Ext.define('juegosmecanicos.view.admin.PanelLocales', {
                     },
                     items: [{
                         xtype: 'hiddenfield',
-                        name: 'idclie',
-                        itemId: 'idclie'
+                        name: 'idlocal'
 
                     },
                     
                     {
                         xtype: 'label',
-                        text: 'Nombre del Producto'
+                        text: 'Direccion'
 
                     },
                     {
                         xtype: 'textfield',
-                        name: 'nombres',
+                        name: 'direccion',
                         allowBlank: false,
                     },
                     {
                         xtype: 'label',
-                        text: 'DNI'
+                        text: 'Telefono'
                     },
                     {
                         xtype: 'textfield',
-                        name: 'dni',
+                        name: 'telefono',
+                        allowBlank: true,
+                    },
+                    {
+                        xtype: 'label',
+                        text: 'Celular'
+                    },
+                    {
+                        xtype: 'textfield',
+                        name: 'celular',
                         allowBlank: true,
                     },
 
+                    {
+                        xtype: 'label',
+                        text: 'Encargdo'
+                    },
+                    {
+                        xtype: 'textfield',
+                        name: 'descripcion',
+                        allowBlank: true,
+                    },
 
                     ],
                     bbar: [
@@ -136,14 +123,14 @@ Ext.define('juegosmecanicos.view.admin.PanelLocales', {
                             text: 'Nuevo',
                             iconCls: 'fa fa-file fa-2x',
                             scale: 'medium',
-                            handler: 'onClickNuevoCliente'
+                            handler: 'onClickNuevoLocal'
                         },
                         {
                             xtype: 'button',
                             text: 'Grabar',
                             iconCls: 'fa fa-thumbs-o-up fa-2x',
                             scale: 'medium',
-                            handler: 'onClickGuardarCliente'
+                            handler: 'onClickGuardarLocal'
                         }
 
                     ]

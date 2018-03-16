@@ -13,21 +13,11 @@ class Local extends \Phalcon\Mvc\Model
         $sql     =  $obj->executarJson('public','sp_locales_listar',$param);
         return $sql;
     }
-
-
-    public static function listarpornombre($parametros)
-    {
-        $obj     = new SQLHelpers();
-        $param   = $parametros;
-        $sql     =  $obj->executarJson('public','sp_cliente_listar',$param);
-        return $sql;
-    }
-
     public static function actualizar($data)
     {   
         $obj     = new SQLHelpers();
         $param   = $data;
-        $sql     = $obj->executar('public','sp_cliente_actualizar',$param);
+        $sql     = $obj->executar('public','sp_local_actualizar',$param);
         return $sql;
     }
 
@@ -35,7 +25,7 @@ class Local extends \Phalcon\Mvc\Model
     {   
         $obj     = new SQLHelpers();
         $param   = $data;
-        $sql     = $obj->executar('public','sp_cliente_anular',$param);
+        $sql     = $obj->executar('public','sp_local_anular',$param);
         return $sql;
     }
 

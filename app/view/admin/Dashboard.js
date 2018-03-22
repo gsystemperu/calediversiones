@@ -20,7 +20,11 @@ Ext.define('juegosmecanicos.view.admin.Dashboard', {
     // controller:'productos',
     initComponent: function () {
         var storeControl = Ext.create('juegosmecanicos.store.Control');
-
+        /*storeControl.load({
+            params:{
+                idlocal :Ext.util.Cookies.get('idlocal')
+            }
+        });*/
 
         Ext.apply(this, {
             items: [{
@@ -85,6 +89,9 @@ Ext.define('juegosmecanicos.view.admin.Dashboard', {
         var autoLoadControl = {
             run: function () {
                 storeControl.load({
+                    params:{
+                        idlocal :Ext.util.Cookies.get('idlocal')
+                    },
                      scope: this,
                      callback: function(records, operation, success) {
 

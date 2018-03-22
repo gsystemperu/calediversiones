@@ -63,10 +63,11 @@ Ext.define('juegosmecanicos.store.Control', {
     storeId : 'storePedidoDetalle',
     requiere:['juegosmecanicos.model.DataModels'],
     model   :'juegosmecanicos.model.Control',
-    autoLoad: true,
+    autoLoad: false,
     remoteSort: true,
     autoSync  : true,
     autoDestroy: true,
+    extraParams : {idlocal: 0 },
     proxy: {
         type: 'ajax',
         api: {read: 'resources/api/control_ninos'},

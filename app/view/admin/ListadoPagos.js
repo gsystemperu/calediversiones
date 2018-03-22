@@ -14,7 +14,7 @@ Ext.define('juegosmecanicos.view.admin.ListadoPagos',{
 
     ],
     layout: {
-        type: 'border',
+        type: 'hbox',
         pack: 'start',
         align: 'stretch'
     },
@@ -68,7 +68,7 @@ Ext.define('juegosmecanicos.view.admin.ListadoPagos',{
 
         Ext.apply(this, {
             items: [{
-                region:'west',
+                xtype:'panel',
                 title: 'Registro de Ventas',
                 flex: 1.5,
                 margin: '0 3 0 0',
@@ -204,13 +204,9 @@ Ext.define('juegosmecanicos.view.admin.ListadoPagos',{
                     }
                 ],
             }, {
-                region: 'center',
+                xtype:'panel',
                 layout: 'fit',
-                split: true,
-                floatable: false,
-                //collapsible: false,
-               // collapseDirection: 'right',
-               // border: true,
+             hidden:true,
                 title: 'Detalle del Ticket',
                 flex: 1,
                 items: [{

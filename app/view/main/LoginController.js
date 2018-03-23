@@ -5,14 +5,16 @@ Ext.define('juegosmecanicos.view.main.LoginController', {
         document.getElementById('splashscreen').style.display = 'none';
     },
     onClickSeleccionarSede:function(btn){
-        if(this.lookupReference('cboLocales').getValue()){
+         f = this.lookupReference('frmlogin');
+         if(f.isValid()){
             Ext.util.Cookies.set('idlocal',this.lookupReference('cboLocales').getValue())
             Ext.util.Cookies.set('local',this.lookupReference('cboLocales').getRawValue())
             this.getView().destroy();
             Ext.create('wMain');
-        }else{
-            Ext.Msg.alert("Aviso","Seleccionar el local para cargar la información");
-        }
+         }else{
+            Ext.Msg.alert("Aviso","Ingrese los datos para cargar la información"); 
+         }
+
         
     }
 });

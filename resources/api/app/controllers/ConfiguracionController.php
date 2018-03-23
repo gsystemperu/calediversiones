@@ -18,9 +18,10 @@ class ConfiguracionController extends Controller
                 $serie = $request->getPost('serieimpresora');
                 $direccion = $request->getPost('direccion');
                 $ruc = $request->getPost('ruc');
+                $clave = $request->getPost('claveadmin');
                 
                 $format       = new FuncionesHelpers(); 
-                $parametros = array($nombre,$codigo,$serie,$direccion,$ruc);    
+                $parametros = array($nombre,$codigo,$serie,$direccion,$ruc,$clave);    
                 $jsonData = Config::guardar($parametros);
              }
              $response->setContentType('application/json', 'UTF-8');
@@ -32,14 +33,28 @@ class ConfiguracionController extends Controller
     public function mostrarconfigAction(){
         $request        = new Phalcon\Http\Request();
         $response       = new \Phalcon\Http\Response();
-        if($request->isGet() ==true)
-        {   
+            if($request->isGet() ==true)
+            {   
                $jsonData = Config::mostrar();
             }
-            $response->setContentType('application/json', 'UTF-8');
-            $response->setContent($jsonData);
-            return $response;
-        }
+           $response->setContentType('application/json', 'UTF-8');
+           $response->setContent($jsonData);
+           return $response;
+    }
+    public function validarclaveadminAction(){
+        $request        = new Phalcon\Http\Request();
+        $response       = new \Phalcon\Http\Response();
+            if($request->isPost() ==true)
+            {   
+               $c = $request->getPost('c');
+               $jsonData = Config::validarAdminClave(array($c));
+            }
+           $response->setContentType('application/json', 'UTF-8');
+           $response->setContent($jsonData);
+           return $response;
+    }
+
+    
 }
 
 

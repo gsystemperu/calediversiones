@@ -5,20 +5,9 @@ Ext.define('juegosmecanicos.view.admin.PanelConfigGeneral', {
     alias: 'widget.wRegConfigGeneral',
     requires: [
         'Ext.layout.container.HBox',
-        /*'juegosmecanicos.view.admin.ListadoLocalesController',
-        'Ext.grid.*',
-        'Ext.form.field.Number'*/
     ],
-    /*layout: {
-        type: 'vbox',
-        pack: 'start',
-        align: 'stretch'
-    },*/
     defaults: {},
-    //controller: 'admin-listadoLocales',
     initComponent: function () {
-        //var storeLocales = Ext.create('juegosmecanicos.store.Locales');
-
         Ext.apply(this, {
                 items: [
                         {

@@ -13,15 +13,16 @@ Ext.define('juegosmecanicos.view.main.Login',{
     },
     autoShow:true,
     width:425,
-    height:400,
+    height:430,
     items: [
         {
         xtype: 'form',
-        padding : 10,
+        padding : 5,
         frame:false,
-        height:350,
+        height:380,
         width : 400,
         layout: 'anchor',
+        reference : 'frmlogin',
         items: [
             {
                 xtype:'image',
@@ -34,20 +35,23 @@ Ext.define('juegosmecanicos.view.main.Login',{
             xtype: 'component',
             anchor: '100%',
             html: [
-                '<h3>Seleccionar la sede</h3>',
-                '<p>Para cargar la información.</p>'
+                '<h3>Seleccionar la sede para cargar la información.</h3>'
             ]
         },
+        { xtype:'textfield',fieldLabel :'Usuario', name :'usuario',anchpr:'100%',allowBlank:false,labelAlign:'right',},
+        { xtype:'textfield',fieldLabel: 'Clave' ,name :'clave',anchpr:'100%', inputType: 'password',allowBlank:false ,labelAlign:'right'},
         {
             xtype: 'combobox',
             reference: 'cboLocales',
-            fieldLabel: '<b>Locales</b>',
+            fieldLabel: 'Local',
+            labelAlign:'right',
             anchor: '-15',
             minChars: 0,
             queryMode: 'local',
             displayField : 'direccion',
             valueField : 'idlocal',
             editable : false,
+            allowBlank :false,
             store : Ext.create('juegosmecanicos.store.Locales')
         }
     ],

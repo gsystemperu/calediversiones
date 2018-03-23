@@ -191,7 +191,8 @@ $di->set('router',function() {
     */
     $router->add('/config_guardar'         , array('controller'=>'configuracion','action'=>'guardar'));
     $router->add('/mostrar_config'         , array('controller'=>'configuracion','action'=>'mostrarconfig'));
-
+    $router->add('/valid_admin'         , array('controller'=>'configuracion','action'=>'validarclaveadmin'));
+    
 
 
     return $router;

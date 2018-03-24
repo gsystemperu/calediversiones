@@ -62,6 +62,7 @@ Ext.define("juegosmecanicos.view.producto.Listado",{
                  {
                      xtype:'textfield',
                      reference : 'codigobarra',
+                     itemId : 'codigobarra',
                      fieldLabel : 'Codigo Barra',
                      flex: 1,
                      hidden: me.codigobarra,

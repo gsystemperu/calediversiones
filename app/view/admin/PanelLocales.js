@@ -36,7 +36,11 @@ Ext.define('juegosmecanicos.view.admin.PanelLocales', {
                         dataIndex: 'descripcion',
                         flex: 1
                     },
-                
+                    {
+                        text: 'Usuario',
+                        dataIndex: 'usuario',
+                        flex: 1
+                    },
                     {
                         xtype: 'widgetcolumn',
                         flex: 0.5,
@@ -114,6 +118,27 @@ Ext.define('juegosmecanicos.view.admin.PanelLocales', {
                         name: 'descripcion',
                         allowBlank: true,
                     },
+
+                    {
+                        xtype: 'label',
+                        text: 'Usuario'
+                    },
+                    {
+                        xtype: 'textfield',
+                        name: 'usuario',
+                        allowBlank: false,
+                    },
+                    {
+                        xtype: 'label',
+                        text: 'Clave Accesso'
+                    },
+                    {
+                        xtype: 'textfield',
+                        name: 'clave',
+                        inputType: 'password',
+                        allowBlank: false,
+                    },
+
 
                     ],
                     bbar: [

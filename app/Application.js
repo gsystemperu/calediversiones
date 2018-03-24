@@ -11,7 +11,7 @@ Ext.define('juegosmecanicos.Application', {
         'juegosmecanicos.store.Empleados',
         'juegosmecanicos.store.Ventas',
         'juegosmecanicos.store.Clientes',
-        'juegosmecanicos.store.Locales'
+        
     ],
     views:[
         'pdv.Contenedor',
@@ -39,6 +39,14 @@ Ext.define('juegosmecanicos.Application', {
     init: function () {
         Ext.util.Format.decimalSeparator = '.';
         Ext.util.Format.thousandSeparator = ' ';
+
+        Ext.getBody().on('keydown', function(ev){
+            if(ev.getKey() === ev.self.F2){
+                Ext.ComponentQuery.query('#codigobarra')[0].focus(1);
+                // megafilmperu.util.Util.crearWindowOpenMantenimiento('Tipo de Cambio','wfrmTipoCambio',450,130,null,'wTipoCambio');
+              }
+        });
+
         Ext.create('juegosmecanicos.view.main.Login');
         //Ext.create('wMain');
        

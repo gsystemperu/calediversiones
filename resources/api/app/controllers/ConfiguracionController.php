@@ -52,7 +52,25 @@ class ConfiguracionController extends Controller
            $response->setContentType('application/json', 'UTF-8');
            $response->setContent($jsonData);
            return $response;
-    }
+    }   
+    public function accesoalsistemaAction(){
+        $request        = new Phalcon\Http\Request();
+        $response       = new \Phalcon\Http\Response();
+            if($request->isPost() ==true)
+            {   
+               $u = $request->getPost('u');
+               $c = $request->getPost('c');
+               $l = $request->getPost('l');
+               
+               $jsonData = Config::accesoAlSistema(array($u,$c,$l));
+            }
+           $response->setContentType('application/json', 'UTF-8');
+           $response->setContent($jsonData);
+           return $response;
+    }   
+
+
+    
 
     
 }

@@ -23,7 +23,8 @@ Ext.define('juegosmecanicos.util.Rutas',
             gastoAnular   : 'resources/api/gastos_eliminar',
             productoEliminar   : 'resources/api/producto_eliminar',
             localActualizar   : 'resources/api/local_actualizar',
-            validAdmin : 'resources/api/valid_admin'
+            validAdmin : 'resources/api/valid_admin',
+            accesoSistema : 'resources/api/accesoalsistema'
             //@ Acciones => Listados
         }
 

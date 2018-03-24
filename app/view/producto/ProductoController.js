@@ -107,19 +107,24 @@ Ext.define('juegosmecanicos.view.producto.ProductoController', {
           c   = this.lookupReference('codigobarra').getValue().trim();    
           if(c){
             r = st.findRecord('codigobarra', c);
-            numeromesa = 1;
-            _data = {
-                    idprod : r.get('idprod'),
-                    descripcion :  r.get('nombre'),
-                    cantidad : 1,
-                    precio :  r.get('precioventa'),
-                    total :    r.get('precioventa') * 1,
-                    minutos : r.get('minutos')
-            };
-            _grid = Ext.ComponentQuery.query('#dgvDetallePedidoMesa1')[0];
-            _grid.getStore().insert(0,_data);
-            this.onCalcularTotalVenta(numeromesa);
-            this.lookupReference('codigobarra').setValue('');
+            if(r){
+                numeromesa = 1;
+                _data = {
+                        idprod : r.get('idprod'),
+                        descripcion :  r.get('nombre'),
+                        cantidad : 1,
+                        precio :  r.get('precioventa'),
+                        total :    r.get('precioventa') * 1,
+                        minutos : r.get('minutos')
+                };
+                _grid = Ext.ComponentQuery.query('#dgvDetallePedidoMesa1')[0];
+                _grid.getStore().insert(0,_data);
+                this.onCalcularTotalVenta(numeromesa);
+                this.lookupReference('codigobarra').setValue('');
+            }else{
+                this.lookupReference('codigobarra').setValue('');
+                Ext.Msg.alert("Aviso","El codigo seleccionado no existe"); return false;
+            }
         }
     }
 });

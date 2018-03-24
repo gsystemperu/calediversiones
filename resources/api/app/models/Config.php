@@ -35,6 +35,15 @@ class Config extends \Phalcon\Mvc\Model
         $sql     = $obj->executarJSON('public','sp_config_validar_clave_admin',$param);
         return $sql;
     }
+    public static function accesoAlSistema($data){
+        $obj     = new SQLHelpers();
+        $param   = $data;
+        $sql     = $obj->executarJSON('public','sp_login_sistema',$param);
+        return $sql;
+    }
+
+
+    
     
 
 }

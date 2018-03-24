@@ -7,6 +7,7 @@ Stores para los mantenimientos de las tablas maestras
 */
 Ext.define('juegosmecanicos.store.Locales', {
     extend: 'Ext.data.Store',
+    alias  : 'widget.storelocales',
     storeId : 'storeLocales',
     requiere: ['juegosmecanicos.model.DataModels'],
     model   :'juegosmecanicos.model.Local',

@@ -78,7 +78,9 @@ Ext.define('juegosmecanicos.model.Local', {
         { name: 'telefono', type: 'string' },
         { name: 'celular', type: 'string' },
         { name: 'estado', type: 'string' },
-        { name: 'descripcion', type: 'string' }
+        { name: 'descripcion', type: 'string' },
+        { name: 'usuario', type: 'string' }
+        
       ]
 });
 

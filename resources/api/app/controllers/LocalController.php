@@ -33,13 +33,17 @@ class LocalController extends Controller
            $telefono         = $request->getPost('telefono');
            $celular         = $request->getPost('celular');
            $descripcion         = $request->getPost('descripcion');
+           $usuario        = $request->getPost('usuario');
+           $clave         = $request->getPost('clave');
            $format       = new FuncionesHelpers();
            $data = array(
             $idlocal,    
             $direccion,  
             $telefono, 
             $celular, 
-            $descripcion
+            $descripcion,
+            $usuario,
+            $clave
             );
            $jsonData = Local::actualizar($data);
            $idproducto = $jsonData[0]["error"]; 

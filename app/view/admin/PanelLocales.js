@@ -54,7 +54,7 @@ Ext.define('juegosmecanicos.view.admin.PanelLocales', {
 
                     }
                     ],
-                
+
                     listeners: {
                         rowclick: 'seleccionarRegistroLocal'
                     }
@@ -76,10 +76,11 @@ Ext.define('juegosmecanicos.view.admin.PanelLocales', {
                     },
                     items: [{
                         xtype: 'hiddenfield',
-                        name: 'idlocal'
+                        name: 'idlocal',
+                        value : 0
 
                     },
-                    
+
                     {
                         xtype: 'label',
                         text: 'Direccion'

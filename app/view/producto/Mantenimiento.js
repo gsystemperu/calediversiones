@@ -14,10 +14,8 @@ Ext.define('juegosmecanicos.view.producto.Mantenimiento', {
         pack: 'start',
         align: 'stretch'
     },
-   // bodyPadding: 5,
-    defaults: {
+     defaults: {
         frame: false,
-      //  bodyPadding: 5
     },
     controller:'productos',
     initComponent: function () {
@@ -86,7 +84,7 @@ Ext.define('juegosmecanicos.view.producto.Mantenimiento', {
 
                             }
                         ],
-                    
+
                         listeners: {
                              cellclick: 'onClickItemProducto'
                         }
@@ -202,10 +200,11 @@ Ext.define('juegosmecanicos.view.producto.Mantenimiento', {
                                 items:[
                                   {
                                     xtype:'checkbox',
-                                    boxLabel : 'LLEVAR CONTROL DE SERVICIO',
+                                    boxLabel : '* LLEVAR CONTROL DE SERVICIO',
                                     name : 'llevacontrol',
                                     reference :'llevacontrol',
                                   },
+
                                   {
                                     xtype:'checkbox',
                                     boxLabel : 'Maneja Stock',
@@ -228,6 +227,16 @@ Ext.define('juegosmecanicos.view.producto.Mantenimiento', {
                                  },
 
                                 ]
+                            },
+                            {
+                              xtype:'checkbox',
+                              boxLabel : '* ES UNA PROMOCIÓN DE MEMBRESIA',
+                              name : 'esmembresia',
+                            },
+                            {
+                              xtype:'checkbox',
+                              boxLabel : '* CONTARDOR DE VISITAS',
+                              name : 'contarvisita'
                             },
                             {
 
@@ -278,7 +287,8 @@ Ext.define('juegosmecanicos.view.producto.Mantenimiento', {
                                  xtype      :'filefield',
                                  name       :'fotoproducto',
                                  buttonText :'Seleccionar Imagen...',
-                                 flex       : 1
+                                 flex       : 1,
+                                 hidden     :true
                              },
                              {
                                   xtype: 'image',

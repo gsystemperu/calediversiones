@@ -5,7 +5,7 @@ Ext.define('juegosmecanicos.profile.Desktop', {
         return Ext.os.is.Desktop;
     },
     controllers:[
-        'juegosmecanicos.controller.DataStatica'
+        'DataStatica'
     ],
     stores: [
         'juegosmecanicos.store.Productos',
@@ -13,26 +13,26 @@ Ext.define('juegosmecanicos.profile.Desktop', {
         'juegosmecanicos.store.Empleados',
         'juegosmecanicos.store.Ventas',
         'juegosmecanicos.store.Clientes',
-        'juegosmecanicos.store.Locales'
+
     ],
     views:[
-        'juegosmecanicos.view.pdv.Contenedor',
-        'juegosmecanicos.view.main.Main',
-        'juegosmecanicos.view.producto.Listado',
-        'juegosmecanicos.view.producto.Mantenimiento',
-        'juegosmecanicos.view.admin.ListadoClientes',
-        'juegosmecanicos.view.admin.Dashboard',
-        'juegosmecanicos.view.admin.ListadoProveedores',
-        'juegosmecanicos.view.admin.ListadoPagos',
-        'juegosmecanicos.view.admin.ListadoConfig',
-        'juegosmecanicos.view.pdv.Nino',
-        'juegosmecanicos.view.pdv.NinoMenbresia',
-        'juegosmecanicos.view.pdv.Apoderado',
-        'juegosmecanicos.view.producto.RegistroGastos',
-        'juegosmecanicos.view.main.Login',
-        'juegosmecanicos.view.pdv.ContenedorVenta',
-        'juegosmecanicos.view.pdv.MainVenta',
-        'juegosmecanicos.view.producto.MantenimientoVenta'
+        'pdv.Contenedor',
+        'main.Main',
+        'producto.Listado',
+        'producto.Mantenimiento',
+        'admin.ListadoClientes',
+        'admin.Dashboard',
+        'admin.ListadoProveedores',
+        'admin.ListadoPagos',
+        'admin.ListadoConfig',
+        'pdv.Nino',
+        'pdv.NinoMenbresia',
+        'pdv.Apoderado',
+        'producto.RegistroGastos',
+        'main.Login',
+        'pdv.ContenedorVenta',
+        'pdv.MainVenta',
+        'producto.MantenimientoVenta'
 
     ],
      models: [
@@ -41,7 +41,16 @@ Ext.define('juegosmecanicos.profile.Desktop', {
     launch: function () {
         Ext.util.Format.decimalSeparator = '.';
         Ext.util.Format.thousandSeparator = ' ';
-        //Ext.create('wMain');
+
+        Ext.getBody().on('keydown', function(ev){
+            if(ev.getKey() === ev.self.F2){
+                Ext.ComponentQuery.query('#codigobarra')[0].focus(1);
+                // megafilmperu.util.Util.crearWindowOpenMantenimiento('Tipo de Cambio','wfrmTipoCambio',450,130,null,'wTipoCambio');
+              }
+        });
+
         Ext.create('juegosmecanicos.view.main.Login');
+        //Ext.create('wMain');
+
     }
 });

@@ -14,7 +14,7 @@ class Local extends \Phalcon\Mvc\Model
         return $sql;
     }
     public static function actualizar($data)
-    {   
+    {
         $obj     = new SQLHelpers();
         $param   = $data;
         $sql     = $obj->executar('public','sp_local_actualizar',$param);
@@ -22,7 +22,7 @@ class Local extends \Phalcon\Mvc\Model
     }
 
     public static function anular($data)
-    {   
+    {
         $obj     = new SQLHelpers();
         $param   = $data;
         $sql     = $obj->executar('public','sp_local_anular',$param);

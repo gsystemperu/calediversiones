@@ -149,7 +149,7 @@ Ext.define('juegosmecanicos.view.admin.ListadoPagos',{
                             width: 100,
                             height: 25,
                             style: {
-                                background: '#6A4B5A',
+                                background: '#00AB92',
                                 color: 'white',
                                 textAlign: 'center',
                                 fontWeight: 'bold',
@@ -170,7 +170,7 @@ Ext.define('juegosmecanicos.view.admin.ListadoPagos',{
                             width: 100,
                             height: 25,
                             style: {
-                                background: '#6A4B5A',
+                                background: '#00AB92',
                                 color: 'white',
                                 textAlign: 'center',
                                 fontWeight: 'bold',

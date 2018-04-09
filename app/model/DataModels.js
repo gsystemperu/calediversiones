@@ -39,7 +39,10 @@ Ext.define('juegosmecanicos.model.Producto', {
         { name: 'llevacontrol', type: 'boolean' },
         { name: 'minutos', type: 'int' },
         { name: 'orden', type: 'int' },
-        { name: 'codigobarra', type: 'string' }
+        { name: 'codigobarra', type: 'string' },
+        { name: 'esmembresia', type: 'boolean' },
+        { name: 'contarvisita', type: 'boolean' }
+
       ]
 });
 
@@ -80,7 +83,7 @@ Ext.define('juegosmecanicos.model.Local', {
         { name: 'estado', type: 'string' },
         { name: 'descripcion', type: 'string' },
         { name: 'usuario', type: 'string' }
-        
+
       ]
 });
 

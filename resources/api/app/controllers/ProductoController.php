@@ -100,6 +100,8 @@ class ProductoController extends Controller
            $orden         = $request->getPost('orden');
            $codigobarra   = $request->getPost('codigobarra');
            $idlocal       = $request->getPost('idlocal');
+           $esmembresia   = ($request->getPost('esmembresia')=='on'?1:0);
+           $contarvisita  = ($request->getPost('contarvisita')=='on'?1:0);
 
            $format       = new FuncionesHelpers();
            $data = array(
@@ -112,7 +114,7 @@ class ProductoController extends Controller
               $format->esNumeroCero($llevacontrol),
               $format->esNumeroCero($stockactual),
               $subioImg,
-              $minutos,$orden,$codigobarra,$idlocal
+              $minutos,$orden,$codigobarra,$idlocal,$esmembresia,$contarvisita
             );
           // print_r($data);die();
            $jsonData = Producto::actualizar($data);
@@ -146,7 +148,7 @@ class ProductoController extends Controller
     {
       $request        = new Phalcon\Http\Request();
       $response       = new \Phalcon\Http\Response();
-        
+
        if($request->isPost()==true)
        {
          $format       = new FuncionesHelpers();
@@ -157,7 +159,7 @@ class ProductoController extends Controller
          $response->setContentType('application/json', 'UTF-8');
          $response->setContent($jsonData);
          return $response;
-         
+
        }
     }
 

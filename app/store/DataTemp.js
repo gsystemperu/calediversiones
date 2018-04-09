@@ -25,7 +25,8 @@ Ext.define('juegosmecanicos.store.tmpRegistroVenta', {
         { name: "hdesde", type: 'string' },
         { name: "hhasta", type: 'string' },
         { name: "hmenbresiadesde", type: 'string' },
-        { name: "hmenbresiahasta", type: 'string' }
+        { name: "hmenbresiahasta", type: 'string' },
+        { name: "membresia" , type: 'int'}
     ],
     proxy: { type: 'memory' }
 });
@@ -83,10 +84,10 @@ Ext.define('juegosmecanicos.store.tmpProductos', {
         { src:'resources/images/cuarto.png', nombre:'16',categoria:'Normal',estado:'Libre'  },
         { src:'resources/images/cuarto.png', nombre:'16',categoria:'Normal',estado:'Libre'  }
 
-        
-            
 
-        
+
+
+
     ],
     proxy: { type: 'memory' }
 

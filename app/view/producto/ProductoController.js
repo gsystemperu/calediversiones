@@ -5,14 +5,19 @@ Ext.define('juegosmecanicos.view.producto.ProductoController', {
       console.log(record);
         lista      = listview.itemId.toString();
         numeromesa = lista.substr(lista.length - 1,lista.length);
-        
+        mem = 0;
+        if(record.get('esmembresia')){
+          mem = 1;
+        }
         _data = {
               idprod : record.get('idprod'),
               descripcion :  record.get('nombre'),
               cantidad : 1,
               precio :  record.get('precioventa'),
               total :    record.get('precioventa') * 1,
-              minutos : record.get('minutos')
+              minutos : record.get('minutos'),
+              membresia : mem
+
        };
         _grid = Ext.ComponentQuery.query('#dgvDetallePedidoMesa'+numeromesa.toString())[0];
        //*******************************
@@ -44,7 +49,7 @@ Ext.define('juegosmecanicos.view.producto.ProductoController', {
                     }
                 });
             }
-        }); 
+        });
     },
     onCalcularTotalVenta: function (_numeromesa)
     {
@@ -104,7 +109,7 @@ Ext.define('juegosmecanicos.view.producto.ProductoController', {
     },
     onChangeBuscarCodigoBarrasUnidad:function( obj, newValue, oldValue, eOpts){
           st  = this.lookupReference('dgvProducto').getStore();
-          c   = this.lookupReference('codigobarra').getValue().trim();    
+          c   = this.lookupReference('codigobarra').getValue().trim();
           if(c){
             r = st.findRecord('codigobarra', c);
             if(r){

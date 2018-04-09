@@ -13,7 +13,7 @@ Ext.define('juegosmecanicos.view.main.Main', {
         title: '.: Cale Diversiones :.',
         iconCls :'fa fa-cogs',
         titleCollapse: false,
-        width: 200,
+        width: 210,
         collapsed :true,
         collapsible :true,
         layout: {
@@ -23,7 +23,7 @@ Ext.define('juegosmecanicos.view.main.Main', {
            fill: false,
            animate: true,
         },
-        items: 
+        items:
         [
             {
                 title: 'Menu Principal',
@@ -39,20 +39,24 @@ Ext.define('juegosmecanicos.view.main.Main', {
                   //{xtype:'menutree',reference: 'treejuegosmecanicos', //'treeGestionClientes',layout: 'fit',listeners: {itemClick: 'onClickOpcionMenu'}}
                   {
                     flex : 1,
-                    text: 'Ingresar Servicio',
+                    text: 'Nuevo Servicio',
                     itemId: "wPdvContenedor",
                     titulo: "..: Servicio :.." ,
-                    iconAling : 'center',
+                    textAlign : 'left',
                     margin: '3 3 1 3',
+                    iconCls : 'fa fa-ticket fa-2x',
                     handler:'onClickOpcionBotonMenu'
                   },
                   {
                     flex : 1,
-                    text: 'Ingresar Venta',
+                    text: 'Nueva Venta',
                     itemId: "wPdvContenedorVenta",
                     titulo: "..: Venta :.." ,
                     margin: '3 3 1 3',
-                    handler:'onClickOpcionBotonMenu'
+                    handler:'onClickOpcionBotonMenu',
+                    textAlign : 'left',
+                    iconCls : 'fa fa-gift fa-2x',
+
                   },
                   {
                     flex : 1,
@@ -60,7 +64,9 @@ Ext.define('juegosmecanicos.view.main.Main', {
                     itemId: "wAdminDashBoard",
                     margin: '3 3 1 3',
                      titulo: "..: Control de Niños :.." ,
-                    handler:'onClickOpcionBotonMenu'
+                    handler:'onClickOpcionBotonMenu',
+                    iconCls : 'fa fa-eye fa-2x',
+                    textAlign : 'left',
                   },
                   {
                     flex : 1,
@@ -68,7 +74,10 @@ Ext.define('juegosmecanicos.view.main.Main', {
                     itemId: "wRegConfig",
                     titulo: "..: Configuraciones :..",
                     margin: '3 3 1 3',
-                    handler: 'onClickOpcionBotonMenu'
+                    handler: 'onClickOpcionBotonMenu',
+                    iconCls : 'fa fa-codepen fa-2x',
+                    textAlign : 'left',
+
                   },
                   {
                     flex : 1,
@@ -76,7 +85,10 @@ Ext.define('juegosmecanicos.view.main.Main', {
                     itemId: "wListadoPagos",
                     titulo: "..: Caja :.." ,
                     margin: '3 3 1 3',
-                    handler: 'onClickOpcionBotonMenu'
+                    handler: 'onClickOpcionBotonMenu',
+                    iconCls : 'fa fa-line-chart fa-2x',
+                    textAlign : 'left',
+
                   },
                   {
                     flex : 1,
@@ -84,7 +96,9 @@ Ext.define('juegosmecanicos.view.main.Main', {
                     itemId: "wRegProducto",
                     titulo: "..: Servicios :..",
                     margin: '3 3 1 3',
-                    handler: 'onClickOpcionBotonMenu'
+                    handler: 'onClickOpcionBotonMenu',
+                    iconCls : 'fa fa-lightbulb-o fa-2x',
+                    textAlign : 'left',
                   },
                   {
                     flex : 1,
@@ -92,7 +106,10 @@ Ext.define('juegosmecanicos.view.main.Main', {
                     itemId: "wRegProductoVenta",
                     titulo: "..: Productos :..",
                     margin: '3 3 1 3',
-                    handler: 'onClickOpcionBotonMenu'
+                    handler: 'onClickOpcionBotonMenu',
+                    textAlign : 'left',
+                    iconCls : 'fa fa-shopping-cart fa-2x',
+
                   },
                   {
                     flex : 1,
@@ -100,9 +117,12 @@ Ext.define('juegosmecanicos.view.main.Main', {
                     itemId: "wRegGastos",
                     titulo: "Gastos",
                     margin: '3 3 1 3',
-                    handler: 'onClickOpcionBotonMenu'
+                    handler: 'onClickOpcionBotonMenu',
+                    textAlign : 'left',
+                    iconCls : 'fa fa-cc fa-2x',
+
                   }
-                  
+
                 ]
             }
           ]
@@ -120,8 +140,8 @@ Ext.define('juegosmecanicos.view.main.Main', {
               title: 'Nosotros',
               bodyPadding:'200 0 0 300',
               html: '<div style="text-aling:center;"><img src="resources/images/lgsis.png" width="300" height="150" >  </div>'
-  
-          }]  
+
+          }]
       },
       {
         region:'south',
@@ -132,5 +152,5 @@ Ext.define('juegosmecanicos.view.main.Main', {
           {xtype:'button',text :'CERRAR SESSION',flex:1,height:36.5,handler:'onclickSalirApp'},
         ]
       }
-    ]   
+    ]
 });

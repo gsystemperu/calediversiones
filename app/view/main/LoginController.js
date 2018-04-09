@@ -41,11 +41,11 @@ Ext.define('juegosmecanicos.view.main.LoginController', {
                         Ext.Msg.alert("Seguridad","el usuario o clave son incorrectas para el local seleccionado!");return false;
                     }
                 }
-            });           
+            });
          }else{
-            Ext.Msg.alert("Aviso","Ingrese los datos para cargar la información"); 
+            Ext.Msg.alert("Aviso","Ingrese los datos para cargar la información");
          }
 
-        
+
     }
 });

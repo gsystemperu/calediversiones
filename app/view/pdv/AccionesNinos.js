@@ -30,8 +30,9 @@ Ext.define('juegosmecanicos.view.pdv.AccionesNinos', {
         var _posicion = _grid.getSelectionModel().getSelection()[0].get('id');
         var _record = _grid.getStore().findRecord("id", _posicion);
         //eddy
-
-        if (_idprod == 41) {
+        _esm = Ext.ComponentQuery.query('#txtEsMembresia')[0].getValue();
+        //if (_idprod == 41) {
+        if(_esm==1){
             _obj = Ext.create('Ext.window.Window', {
                 width: 300,
                 height: 150,

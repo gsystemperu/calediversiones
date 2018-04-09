@@ -43,7 +43,7 @@ Ext.define('juegosmecanicos.view.pdv.AccionesPdvVenta', {
          _store     = Ext.ComponentQuery.query('#dgvDetallePedidoMesa'+numeromesa.toString())[0].getStore();
          _dataDetalle = [];
         _store.each(function (record) {
-                
+
                 if(record.get("hmenbresiadesde")){
                   _memdesde = record.get("hmenbresiadesde");
                   _memhasta =  record.get("hmenbresiahasta");
@@ -169,9 +169,10 @@ Ext.define('juegosmecanicos.view.pdv.AccionesPdvVenta', {
        numeromesa = _btn.substr(_btn.length - 1 , _btn.length + 2);
        rec = btn.getWidgetRecord();
       Ext.create('juegosmecanicos.view.pdv.Nino',{
-          idapo :Ext.ComponentQuery.query('#txtCodigoPersona')[0].getValue(),
-          idprod : rec.get('idprod'),
-          minutos : rec.get('minutos')
+          idapo   :Ext.ComponentQuery.query('#txtCodigoPersona')[0].getValue(),
+          idprod  : rec.get('idprod'),
+          minutos : rec.get('minutos'),
+          membre  : (rec.get('esmembresia')==true?1:0)
       });
 
 

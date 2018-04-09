@@ -11,7 +11,7 @@ Ext.define('juegosmecanicos.Application', {
         'juegosmecanicos.store.Empleados',
         'juegosmecanicos.store.Ventas',
         'juegosmecanicos.store.Clientes',
-        
+
     ],
     views:[
         'pdv.Contenedor',
@@ -48,7 +48,7 @@ Ext.define('juegosmecanicos.Application', {
         });
 
         Ext.create('juegosmecanicos.view.main.Login');
-        //Ext.create('wMain');
-       
+        
+
     }
 });

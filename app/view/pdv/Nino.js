@@ -24,7 +24,8 @@ Ext.define('juegosmecanicos.view.pdv.Nino', {
         indice : 0,
         idapo  : 0,
         idprod : 0,
-        minutos :0
+        minutos :0,
+        membre : 0
     },
     autoShow: true,
     width: 1300,
@@ -34,6 +35,7 @@ Ext.define('juegosmecanicos.view.pdv.Nino', {
     initComponent: function () {
         me = this;
         var storeNinos = Ext.create('juegosmecanicos.store.Ninos');
+        
         Ext.apply(this, {
             items: [{
                     flex: 3,
@@ -44,6 +46,11 @@ Ext.define('juegosmecanicos.view.pdv.Nino', {
                         xtype:'hiddenfield',
                         value :me.getIdprod(),
                         itemId : 'txtIdProducto'
+                    },
+                    {
+                        xtype:'hiddenfield',
+                        value :me.getMembre(),
+                        itemId : 'txtEsMembresia'
                     },
                     {
                         xtype: 'grid',

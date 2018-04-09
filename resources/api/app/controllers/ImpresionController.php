@@ -195,7 +195,7 @@ class ImpresionController extends Controller
       // temp file name to save before output
 
       $temp_file = tempnam(sys_get_temp_dir(), 'phpexcel');
-      //$temp_file = tempnam('/var/www/html', 'phpexcel');
+      //$temp_file = tempnam('/var/www/html/tmp', 'phpexcel');
 
       $objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel);
 

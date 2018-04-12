@@ -115,7 +115,7 @@ $di->set('router',function() {
     $router->add('/subcategoria_lista'  , array('controller'=>'producto','action'=>'subcategorias'));
     $router->add('/formapago_lista'     , array('controller'=>'producto','action'=>'formapago'));
     // @Lista solo servicios
-  $router->add('/producto_lista'      , array('controller'=>'producto','action'=>'listar')); 
+  $router->add('/producto_lista'      , array('controller'=>'producto','action'=>'listar'));
     $router->add('/personal_lista'      , array('controller'=>'persona','action'=>'listar'));
     $router->add('/producto_eliminar'      , array('controller'=>'producto','action'=>'eliminarproducto'));
 
@@ -189,14 +189,12 @@ $di->set('router',function() {
     /*
     |  @@ Controlador de Configuraciones
     */
-    $router->add('/config_guardar'         , array('controller'=>'configuracion','action'=>'guardar'));
-    $router->add('/mostrar_config'         , array('controller'=>'configuracion','action'=>'mostrarconfig'));
-    $router->add('/valid_admin'         , array('controller'=>'configuracion','action'=>'validarclaveadmin'));
-    $router->add('/accesoalsistema'         , array('controller'=>'configuracion','action'=>'accesoalsistema'));
-
-
-
-
+    $router->add('/config_guardar', array('controller'=>'configuracion','action'=>'guardar'));
+    $router->add('/mostrar_config', array('controller'=>'configuracion','action'=>'mostrarconfig'));
+    $router->add('/valid_admin', array('controller'=>'configuracion','action'=>'validarclaveadmin'));
+    $router->add('/accesoalsistema', array('controller'=>'configuracion','action'=>'accesoalsistema'));
+    $router->add('/act_eliminar', array('controller'=>'configuracion','action'=>'actualizarclaveeliminar'));
+    $router->add('/act_sadmin', array('controller'=>'configuracion','action'=>'actualizarclavesuperadmin'));
 
     return $router;
 });

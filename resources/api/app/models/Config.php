@@ -41,9 +41,22 @@ class Config extends \Phalcon\Mvc\Model
         $sql     = $obj->executarJSON('public','sp_login_sistema',$param);
         return $sql;
     }
+    public static function actualizarClaveEliminar($data)
+    {
+        $obj     = new SQLHelpers();
+        $param   = $data;
+        $sql     = $obj->executar('public','sp_configuracion_actualizar_eliminar_venta',$param);
+        return $sql;
+    }
+    public static function actualizarClaveSuperAdmin($data)
+    {
+        $obj     = new SQLHelpers();
+        $param   = $data;
+        $sql     = $obj->executar('public','sp_configuracion_actualizar_super_admin',$param);
+        return $sql;
+    }
 
 
-    
-    
+
 
 }

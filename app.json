@@ -40,10 +40,10 @@
      *          "sencha-charts"
      *      ]
      */
-    "requires": [ 
+    "requires": [
         "sencha-charts",
         "ext-locale"],
-    
+
     "locale": "es",
 
     /**
@@ -137,13 +137,13 @@
      *          "update": ""      // OPTIONAL
      *      }
      */
-    "css": 
+    "css":
     [
         {
             "path": "bootstrap.css",
             "bootstrap": true
         }
-       
+
     ],
 
     /**
@@ -169,7 +169,7 @@
      */
 
     /**
-     * override objects for setting build environment specific 
+     * override objects for setting build environment specific
      * settings.
      */
     "production": {

@@ -114,10 +114,11 @@ class ImpresionController extends Controller
         $pdf->SetFont('courier','B',8);
 
         $pdf->Cell(10,7,'Nro.',1,0,'C');
-        $pdf->Cell(30,7,'FECHA HORA',1,0,'C');
-        $pdf->Cell(80,7,'CLIENTE',1,0,'C');
-        $pdf->Cell(40,7,'TOTAL',1,0,'C');
-        $pdf->Cell(35,7,'ESTADO',1,0,'C');
+        $pdf->Cell(50,7,'LOCAL',1,0,'C');
+        $pdf->Cell(25,7,'FECHA HORA',1,0,'C');
+        $pdf->Cell(70,7,'CLIENTE',1,0,'C');
+        $pdf->Cell(15,7,'TOTAL',1,0,'C');
+        $pdf->Cell(20,7,'ESTADO',1,0,'C');
         $pdf->Ln();
         $pdf->SetFont('courier','',8);
         $jsonData  = json_decode(Venta::listadopedidoscaja($data));
@@ -127,11 +128,13 @@ class ImpresionController extends Controller
         $totanulados=0;
         foreach($jsonData->data as $mydata)
         {
+          $pdf->SetFont('courier','',7);
           $pdf->Cell(10,5,$i++,1,0,'C');
-          $pdf->Cell(30,5,$mydata->fechaventa,1,0,'C');
-          $pdf->Cell(80,5, utf8_decode( $mydata->cliente),1,0,'L');
-          $pdf->Cell(40,5,number_format($mydata->totalventa, 2, '.', ' '),1,0,'R');
-          $pdf->Cell(35,5,$mydata->estadopagostr,1,1,'C');
+          $pdf->Cell(50,5,$mydata->milocal,1,0,'L');
+          $pdf->Cell(25,5,$mydata->fechaventa,1,0,'C');
+          $pdf->Cell(70,5, utf8_decode( $mydata->cliente),1,0,'L');
+          $pdf->Cell(15,5,number_format($mydata->totalventa, 2, '.', ' '),1,0,'R');
+          $pdf->Cell(20,5,$mydata->estadopagostr,1,1,'C');
           $total +=  $mydata->totalventa;
           if($mydata->estadopagostr=='ANULADO')
            {
@@ -175,20 +178,19 @@ class ImpresionController extends Controller
       $totanulado = 0;
       foreach ($jsonData->data as $item) {
           $objPHPExcel->getActiveSheet()->setCellValue('A'.$index, $i++);
-          $objPHPExcel->getActiveSheet()->setCellValue('B'.$index, $item->fechaventa);
-          $objPHPExcel->getActiveSheet()->setCellValue('C'.$index, utf8_decode( $item->cliente));
-          $objPHPExcel->getActiveSheet()->setCellValue('D'.$index, $item->totalventa);
-          $objPHPExcel->getActiveSheet()->setCellValue('E'.$index, $item->estadopagostr);
+          $objPHPExcel->getActiveSheet()->setCellValue('B'.$index, $item->milocal);
+          $objPHPExcel->getActiveSheet()->setCellValue('C'.$index, $item->fechaventa);
+          $objPHPExcel->getActiveSheet()->setCellValue('D'.$index, utf8_decode( $item->cliente));
+          $objPHPExcel->getActiveSheet()->setCellValue('E'.$index, $item->totalventa);
+          $objPHPExcel->getActiveSheet()->setCellValue('F'.$index, $item->estadopagostr);
           $index++;
           if($item->estadopagostr!='ANULADO')
               $total = $total + $item->totalventa;
            if(trim($item->estadopagostr)=='ANULADO')
               $totanulado = $totanulado + $item->totalventa;
       }
-
-
-      $objPHPExcel->getActiveSheet()->setCellValue('C'.$index, 'Total');
-      $objPHPExcel->getActiveSheet()->setCellValue('D'.$index, ($total));
+      $objPHPExcel->getActiveSheet()->setCellValue('E'.$index, 'Total');
+      $objPHPExcel->getActiveSheet()->setCellValue('F'.$index, ($total));
 
       // file name to output
       $fname = date("Ymd_his") . ".xlsx";
@@ -225,11 +227,11 @@ class ImpresionController extends Controller
       $total = 0;
       foreach ($jsonData->data as $item) {
           $objPHPExcel->getActiveSheet()->setCellValue('A'.$index, $i++);
-          $objPHPExcel->getActiveSheet()->setCellValue('B'.$index, utf8_decode( $item->padre));
+          $objPHPExcel->getActiveSheet()->setCellValue('B'.$index,  $item->padre);
           $objPHPExcel->getActiveSheet()->setCellValue('C'.$index, $item->dni);
           $objPHPExcel->getActiveSheet()->setCellValue('D'.$index, $item->telefono);
           $objPHPExcel->getActiveSheet()->setCellValue('E'.$index, $item->correo);
-          $objPHPExcel->getActiveSheet()->setCellValue('F'.$index, utf8_decode($item->nino));
+          $objPHPExcel->getActiveSheet()->setCellValue('F'.$index, $item->nino);
           $objPHPExcel->getActiveSheet()->setCellValue('G'.$index, $item->fechanaci);
           if($item->edad_calculado=='')
               $objPHPExcel->getActiveSheet()->setCellValue('H'.$index, $item->edad);
@@ -270,16 +272,16 @@ class ImpresionController extends Controller
       $objPHPExcel->setActiveSheetIndex(0);
       $data        = array();
       $jsonData    = json_decode(Apoderado::listaSoloNinosMembresia($data));
-
+      //ECHO "AAAAA";die();
       $index = 4;
       $i     = 1;
       $total = 0;
       foreach ($jsonData->data as $item) {
           $objPHPExcel->getActiveSheet()->setCellValue('A'.$index, $i++);
-          $objPHPExcel->getActiveSheet()->setCellValue('B'.$index, utf8_decode($item->padre));
+          $objPHPExcel->getActiveSheet()->setCellValue('B'.$index, $item->padre);
           $objPHPExcel->getActiveSheet()->setCellValue('C'.$index, $item->telefono);
           $objPHPExcel->getActiveSheet()->setCellValue('D'.$index, $item->correo);
-          $objPHPExcel->getActiveSheet()->setCellValue('E'.$index, utf8_decode($item->nino));
+          $objPHPExcel->getActiveSheet()->setCellValue('E'.$index, $item->nino);
           $objPHPExcel->getActiveSheet()->setCellValue('F'.$index, $item->edad);
           $objPHPExcel->getActiveSheet()->setCellValue('G'.$index, $item->membresiadesde);
           $objPHPExcel->getActiveSheet()->setCellValue('H'.$index, $item->membresiahasta);
@@ -329,7 +331,7 @@ class ImpresionController extends Controller
       foreach ($jsonData->data as $item) {
           $objPHPExcel->getActiveSheet()->setCellValue('A'.$index, $i++);
           $objPHPExcel->getActiveSheet()->setCellValue('B'.$index, $item->fecha);
-          $objPHPExcel->getActiveSheet()->setCellValue('C'.$index, utf8_decode( $item->descripcion));
+          $objPHPExcel->getActiveSheet()->setCellValue('C'.$index, $item->descripcion);
           $objPHPExcel->getActiveSheet()->setCellValue('D'.$index, $item->montogasto);
           $index++;
       }

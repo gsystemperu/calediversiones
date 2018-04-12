@@ -13,11 +13,15 @@ Ext.define('juegosmecanicos.view.admin.PanelConfigGeneral', {
                         {
                         xtype: 'form',
                         itemId: 'frmGuardarConfigGeneral',
+                        padding: 10,
                         flex: 1,
                         url: juegosmecanicos.util.Rutas.configuracionesGuardar,
                         layout: {
                             type: 'vbox',
                             align :'stretch'
+                        },
+                        defaults:{
+                          labelWidth:210
                         },
                         items: [
                             {
@@ -60,15 +64,7 @@ Ext.define('juegosmecanicos.view.admin.PanelConfigGeneral', {
                                 itemId: 'ruc',
                                 readOnly: true
                             },
-                            {
-                                xtype: 'textfield',
-                                fieldLabel: '<b>Clave de administrador</b>',
-                                inputType: 'password',
-                              flex: 1,
-                                name: 'claveadmin',
-                                itemId: 'claveadmin',
-                                readOnly: true
-                            }
+
 
                         ],
                         buttons:[
@@ -90,7 +86,59 @@ Ext.define('juegosmecanicos.view.admin.PanelConfigGeneral', {
                           }
                         ]
 
-                    }
+                    },
+                    {
+                      xtype:'container',
+                      flex :1,
+                      layout:{
+                        type: 'hbox',
+                        align :'stretch'
+                      },
+                      defaults:{
+                        labelWidth:210
+                      },
+                      padding:'10 10 10 10',
+                      items:[
+                        {
+                            xtype: 'textfield',
+                            fieldLabel: '<b>Clave para Eliminar Venta</b>',
+                            //inputType: 'password',
+                            flex: 1,
+                            name: 'claveadmin',
+                            itemId: 'claveadmin',
+                            //readOnly: true
+                        },
+                        {
+                          xtype:'button',text:'Actualizar Clave Eliminar',
+                          handler:'onClickClaveEliminarVenta'
+                        }
+                      ]
+                  },
+                  {
+                    xtype:'container',
+                    padding:'10 10 10 10',
+                    flex :1,
+                    layout:{
+                      type: 'hbox',
+                      align :'stretch'
+                    },
+                    defaults:{
+                      labelWidth:210
+                    },
+                    items:[
+                        {
+                          xtype:'textfield',
+                          //inputType: 'password',
+                          flex: 1,
+                          fieldLabel:'<b>Clave del usuario administrador !</b>',
+                          itemId : 'clavesuperadmin'
+                        },
+                        {
+                          xtype:'button',text:'Actualizar Clave Administrador',
+                          handler:'onClickClaveSuperAdmin'
+                        }
+                      ]
+                  }
                 ]
             }
 

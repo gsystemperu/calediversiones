@@ -1,17 +1,36 @@
 Ext.define('juegosmecanicos.view.admin.ListadoPagosController', {
     extend: 'Ext.app.ViewController',
     alias: 'controller.admin-listadopagos',
-
     onClickBuscarPorFechas: function () {
-
         _totalVenta = 0;
         _store = this.lookupReference('dgvVentas').getStore();
+        if(Ext.util.Cookies.get('sa')==1){
+          if(Ext.ComponentQuery.query('#cboLocal')[0].getValue()){
+              p = {
+                desde  : Ext.ComponentQuery.query("#dfDesdeCaja")[0].getRawValue(),
+                hasta  : Ext.ComponentQuery.query("#dfHastaCaja")[0].getRawValue(),
+                idlocal: Ext.ComponentQuery.query("#cboLocal")[0].getValue()
+              };
+          }else{
+             p = {
+               desde  : Ext.ComponentQuery.query("#dfDesdeCaja")[0].getRawValue(),
+               hasta  : Ext.ComponentQuery.query("#dfHastaCaja")[0].getRawValue(),
+               idlocal: 0
+             };
+          }
+        }else{
+           p = {
+            desde  : Ext.ComponentQuery.query("#dfDesdeCaja")[0].getRawValue(),
+            hasta  : Ext.ComponentQuery.query("#dfHastaCaja")[0].getRawValue(),
+            idlocal: Ext.util.Cookies.get('idlocal')
+          };
+        }
         _store.load({
-            params: {
-                desde: Ext.ComponentQuery.query("#dfDesdeCaja")[0].getRawValue(),
-                hasta: Ext.ComponentQuery.query("#dfHastaCaja")[0].getRawValue(),
-                idlocal: Ext.util.Cookies.get('idlocal')
-            },
+            params: p , /* {
+                desde  : Ext.ComponentQuery.query("#dfDesdeCaja")[0].getRawValue(),
+                hasta  : Ext.ComponentQuery.query("#dfHastaCaja")[0].getRawValue(),
+                idlocal: () Ext.util.Cookies.get('idlocal')
+            },*/
             callback: function (records, operation, success) {
                 if (success == true) {
                     _store.each(function (record) {
@@ -105,20 +124,18 @@ Ext.define('juegosmecanicos.view.admin.ListadoPagosController', {
         });
     },
     onClickImprimirPDFVentasDiarias: function () {
-        //eddy error
         desde = Ext.ComponentQuery.query("#dfDesdeCaja")[0].getRawValue();
         hasta = Ext.ComponentQuery.query("#dfHastaCaja")[0].getRawValue();
-        idlocal = Ext.util.Cookies.get('idlocal');
+        //idlocal = Ext.util.Cookies.get('idlocal');
+        idlocal = 0;
+        if(Ext.util.Cookies.get('sa')==1){
+          if(Ext.ComponentQuery.query('#cboLocal')[0].getValue()){
+              idlocal =Ext.ComponentQuery.query('#cboLocal')[0].getValue();
+          }
+        }else{
+          idlocal = Ext.util.Cookies.get('idlocal');
+        }
         _url = 'resources/api/imprimirventasdiarias?desde=' + desde + "&hasta=" + hasta + "&idlocal=" + idlocal.toString();
-
-        //_panel = Ext.ComponentQuery.query('#tabPrincipal')[0];
-
-        /*if (_panel.getChildByElement('pdfventasdiarias')) {
-            _panel.remove('pdfventasdiarias');
-        }*/
-        //_panel.removeAll();
-        //if (!_panel.getChildByElement('pdfventasdiarias')) {
-        //_panel.add({
         w = Ext.create('Ext.window.Window', {
             title: 'PDF: Ventas Diarias',
             layout: 'fit',
@@ -137,15 +154,18 @@ Ext.define('juegosmecanicos.view.admin.ListadoPagosController', {
                 }
             }]
         });
-        //});
-        //}
-        // _panel.setActiveTab('pdfventasdiarias');
-
     },
     onClickImprimirExcelVentasDiarias: function () {
         desde = Ext.ComponentQuery.query("#dfDesdeCaja")[0].getRawValue();
         hasta = Ext.ComponentQuery.query("#dfHastaCaja")[0].getRawValue();
-        idlocal = Ext.util.Cookies.get('idlocal');
+        idlocal = 0;
+        if(Ext.util.Cookies.get('sa')==1){
+          if(Ext.ComponentQuery.query('#cboLocal')[0].getValue()){
+              idlocal =Ext.ComponentQuery.query('#cboLocal')[0].getValue();
+          }
+        }else{
+          idlocal = Ext.util.Cookies.get('idlocal');
+        }
         var _url = 'resources/api/exportarventasdiarias?desde=' + desde + "&hasta=" + hasta + "&idlocal=" + idlocal.toString();
         var obj = window.open(_url);
 

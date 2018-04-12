@@ -117,6 +117,7 @@ Ext.define('juegosmecanicos.model.Pedidos', {
         { name: 'fechaventa', type: 'string' },
         { name: 'totalventa', type: 'float' },
         { name: 'cliente', type: 'string' },
+        { name: 'milocal', type: 'string' }
 
 
       ]

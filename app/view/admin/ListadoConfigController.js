@@ -1,7 +1,7 @@
 Ext.define('juegosmecanicos.view.admin.ListadoConfigController', {
     extend: 'Ext.app.ViewController',
     alias: 'controller.admin-listadoconfig',
-    
+
     accionbtnGuardarConfigGeneral: function(){
         _form = Ext.ComponentQuery.query('#frmGuardarConfigGeneral')[0];
 
@@ -29,7 +29,7 @@ Ext.define('juegosmecanicos.view.admin.ListadoConfigController', {
 
             var tipo = obj.getXType();
             if(tipo == 'textfield'){
-                obj.setReadOnly(false); 
+                obj.setReadOnly(false);
             }
 
         });
@@ -37,8 +37,35 @@ Ext.define('juegosmecanicos.view.admin.ListadoConfigController', {
         Ext.ComponentQuery.query('#btnEditarConfigGeneral')[0].setHidden(true);
 
     },
-    onClickEliminarVenta:function(){
-        
+    onClickClaveEliminarVenta:function(){
+        Ext.Ajax.request({
+            url :  juegosmecanicos.util.Rutas.actCEliminar,
+            params:{
+              claveadmin : Ext.ComponentQuery.query('#claveadmin')[0].getValue()
+            },
+            success:function(response){
+               o = Ext.JSON.decode(response.responseText);
+               //if(o[0].error==0){
+                    Ext.Msg.alert("Aviso","Actualizado");
+              //}
+
+            }
+        });
+    },
+    onClickClaveSuperAdmin:function(){
+      Ext.Ajax.request({
+          url : juegosmecanicos.util.Rutas.actCSadmin,
+          params:{
+            claveadmin : Ext.ComponentQuery.query('#clavesuperadmin')[0].getValue()
+          },
+          success:function(response){
+            o = Ext.JSON.decode(response.responseText);
+            /*if(o[0].error==0){*/
+                 Ext.Msg.alert("Aviso","Actualizado");
+            /*}*/
+
+          }
+      });
     }
-    
+
 });

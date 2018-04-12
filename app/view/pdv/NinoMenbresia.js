@@ -93,6 +93,7 @@ Ext.define('juegosmecanicos.view.pdv.NinoMenbresia', {
                                 dataIndex: 'membresiadesde',
                                 flex: 0.5,
                                 align: 'center',
+
                                 renderer:function(data){
                                     return '<strong style="color:blue">'+data.toString()+'</strong>';
                                 }
@@ -102,6 +103,7 @@ Ext.define('juegosmecanicos.view.pdv.NinoMenbresia', {
                                 dataIndex: 'membresiahasta',
                                 flex: 0.5,
                                 align: 'center',
+
                                  renderer:function(data){
                                     return '<strong style="color:blue">'+data.toString()+'</strong>';
                                 }
@@ -160,7 +162,8 @@ Ext.define('juegosmecanicos.view.pdv.NinoMenbresia', {
                                         maxValue: '10:00 PM',
                                         increment: 1,
                                         value : new Date(),
-                                        hidden:true
+                                        hidden:true,
+
 
                                     },
                                     {
@@ -289,12 +292,14 @@ Ext.define('juegosmecanicos.view.pdv.NinoMenbresia', {
                                 name: 'membresiadesde',
                                 fieldLabel :'Desde',
                                 allowBlank: true,
+                                readOnly:true
                             },
                             {
                                 xtype: 'datefield',
                                 name: 'membresiahasta',
                                 fieldLabel :'Hasta',
-                                allowBlank: true
+                                allowBlank: true,
+                                readOnly:true
                             },
 
 

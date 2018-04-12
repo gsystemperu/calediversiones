@@ -203,6 +203,7 @@ Ext.define('juegosmecanicos.view.producto.Mantenimiento', {
                                     boxLabel : '* LLEVAR CONTROL DE SERVICIO',
                                     name : 'llevacontrol',
                                     reference :'llevacontrol',
+                                    readOnly:true
                                   },
 
                                   {

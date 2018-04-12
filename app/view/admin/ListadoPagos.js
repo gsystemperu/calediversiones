@@ -51,6 +51,7 @@ Ext.define('juegosmecanicos.view.admin.ListadoPagos',{
 
         var storePedidos    = Ext.create('juegosmecanicos.store.Pedidos');
         var storePedidoDet  = Ext.create('juegosmecanicos.store.PedidoDetalle');
+        var storeLocales    = Ext.create('juegosmecanicos.store.Locales');
 
         var _date = Ext.Date.format(new Date(), 'd/m/Y')
         storePedidos.load({
@@ -81,10 +82,17 @@ Ext.define('juegosmecanicos.view.admin.ListadoPagos',{
                     columnLines: true,
                     sortableColumns: false,
                     emptyText: 'NO HAY REGISTROS PARA MOSTRAR SEGUN EL RANGO DE FECHAS',
-                    columns: [{
+                    columns: [
+                      {
+                          text : 'Local',
+                          dataIndex: 'milocal',
+                          flex : 1.5,
+                          align : 'left'
+                      },
+                      {
                             text: 'Fecha ',
                             dataIndex: 'fechaventa',
-                            flex: 1.5,
+                            flex: 1,
                             align: 'center'
                         },
                         {
@@ -97,7 +105,7 @@ Ext.define('juegosmecanicos.view.admin.ListadoPagos',{
                             xtype:'numbercolumn',
                             text: 'Total Pedido',
                             dataIndex: 'totalventa',
-                            flex: 0.5,
+                            flex: 1,
                             align: 'right'
 
 
@@ -176,12 +184,42 @@ Ext.define('juegosmecanicos.view.admin.ListadoPagos',{
                                 fontWeight: 'bold',
                                 fontSize: '13px'
                             }
-                        }, {
+                        },
+                        {
                             xtype: 'datefield',
                             value: new Date(),
                             reference: 'dfHastaCaja',
                             itemId: 'dfHastaCaja',
                             width: 100
+                        },
+                        {
+                            xtype: 'label',
+                            text: 'Local',
+                            padding: '5px 0 0 0',
+                            itemId : 'lblLocal',
+                            border: true,
+                            width: 100,
+                            height: 25,
+                            hidden : true,
+                            style: {
+                                background: '#00AB92',
+                                color: 'white',
+                                textAlign: 'center',
+                                fontWeight: 'bold',
+                                fontSize: '13px'
+                            }
+                        },
+                        {
+                          xtype:'combo',
+                          store:storeLocales,
+                          itemId : 'cboLocal',
+                          valueField :'idlocal',
+                          displayField:'direccion',
+                          queryMode :'local',
+                          hidden : true,
+                          width:250,
+                          editable :true,
+                          emptyText : '-- Seleccionar --'
                         },
                         {
                             xtype: 'button',
@@ -206,7 +244,7 @@ Ext.define('juegosmecanicos.view.admin.ListadoPagos',{
             }, {
                 xtype:'panel',
                 layout: 'fit',
-             hidden:true,
+                hidden:true,
                 title: 'Detalle del Ticket',
                 flex: 1,
                 items: [{
@@ -268,13 +306,17 @@ Ext.define('juegosmecanicos.view.admin.ListadoPagos',{
             }]
         });
         this.callParent();
-
+        if(Ext.util.Cookies.get('sa')==1){
+            Ext.ComponentQuery.query('#lblLocal')[0].setHidden(false);
+            Ext.ComponentQuery.query('#cboLocal')[0].setHidden(false);
+        }
         var _date = Ext.Date.format(new Date(), 'd/m/Y')
+
         Ext.Ajax.request({
             url :juegosmecanicos.util.Rutas.totalVentaSumatoria,
             params:{
-                desde  : _date,
-                hasta  : _date,
+                desde   : _date,
+                hasta   : _date,
                 idlocal :   Ext.util.Cookies.get('idlocal')
             },
             success:function(response){

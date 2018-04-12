@@ -38,7 +38,7 @@ Ext.define('juegosmecanicos.view.main.MainController', {
         Ext.ComponentQuery.query('#panDetalleLocal')[0].setTitle(
                 '  TIENDA    CODIGO : '+ Ext.util.Cookies.get('idlocal').toString() + ' - DIRECCION : '+  Ext.util.Cookies.get('local').toString()
         );
-      
+
 
     },
     onClickOpcionMenu: function(obj, record, item, index, e, eOpts) {
@@ -66,6 +66,10 @@ Ext.define('juegosmecanicos.view.main.MainController', {
     _tit = btn.titulo;
    _panel = this.lookupReference('tabPrincipal');  //this.getView().down('tabpanel');
    try {
+     if(_tit =='..: Configuraciones :..' && Ext.util.Cookies.get('sa')==0){
+       Ext.Msg.alert("Seguridad","Usted no tiene permisos para entrar");
+       return false;
+     }
      _panel.removeAll();
      if(_tit == ''){return 0;}
      if (!_panel.getChildByElement(_view)) {
@@ -82,7 +86,7 @@ Ext.define('juegosmecanicos.view.main.MainController', {
    } catch (err) {
      console.info(err);
    }
-      
+
     },
     onclickSalirApp:function(){
         Ext.Msg.confirm('Salir del Sistema', 'Esta seguro de cerrar la seccion?',
@@ -92,7 +96,7 @@ Ext.define('juegosmecanicos.view.main.MainController', {
                           url : 'index.php/usuarios/logout',
                           success : function() {*/
                             Ext.util.Cookies.clear();
-                            window.location = 'calediver/juegosmecanicos';
+                            window.location = '';
                         /* }
                         });*/
                       }

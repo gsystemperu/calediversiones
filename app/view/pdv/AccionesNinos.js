@@ -53,7 +53,7 @@ Ext.define('juegosmecanicos.view.pdv.AccionesNinos', {
                         fieldLabel: 'Hasta',
                         itemId: 'txtPeriodoHasta',
                         allowBlank: false,
-                        value: new Date()
+                        value: juegosmecanicos.util.Fechas.sumar30dias()   //new Date()
                     },
                     {
                         xtype: 'button',

@@ -82,7 +82,11 @@ Ext.define('juegosmecanicos.view.producto.ProductoController', {
         Ext.ComponentQuery.query('#txtNombreProd')[0].focus(this);
     },
     onClickGuardarProducto:function(){
-        frm = this.lookupReference('myFrmProducto');
+       frm = this.lookupReference('myFrmProducto');
+       if(Ext.util.Cookies.get('sa')==0 && Ext.ComponentQuery.query('#idprod')[0].getValue()!=0){
+         Ext.Msg.alert("Seguridad","Usted no tiene permiso para actualizar,llamar al administrador");
+         return false;
+       }
        if(frm.isValid()){
           frm.submit({
                waitMsg: 'Guardando información...',

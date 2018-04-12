@@ -17,6 +17,7 @@ Ext.define('juegosmecanicos.view.admin.PanelLocalesController', {
                 success: function (form, action) {
                     _dgv = Ext.ComponentQuery.query('#dgvLocales')[0];
                     _dgv.getStore().load();
+                    frm.reset();
                },
                 failure: function () {
                     Ext.Msg.alert("Aviso", action.result.msg);
@@ -31,7 +32,7 @@ Ext.define('juegosmecanicos.view.admin.PanelLocalesController', {
     onClickEliminarLocal: function(btn){
         _dgv = Ext.ComponentQuery.query('#dgvClientes')[0];
         record = btn.getWidgetRecord();
-        
+
         Ext.Ajax.request({
             url: juegosmecanicos.util.Rutas.clienteEliminar,
             params: {
@@ -45,7 +46,7 @@ Ext.define('juegosmecanicos.view.admin.PanelLocalesController', {
                     frm.reset();
                     _dgv.getStore().load();
                 }
-                
+
             }
         });
     }

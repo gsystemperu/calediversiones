@@ -17,23 +17,33 @@ Ext.define('juegosmecanicos.view.main.Main', {
         collapsed :true,
         collapsible :true,
         layout: {
-           type: 'accordion',
+          type:'vbox',
+          align:'streach'
+          /* type: 'accordion',
            titleCollapse: false,
            collapsed :false,
            fill: false,
-           animate: true,
+           animate: true,*/
         },
         items:
         [
+          {
+            xtype  :'image',
+            src    : 'resources/images/empresa.jpeg',
+            padding: 10,
+            width  : 210,
+            height : 100,
+          },
             {
-                title: 'Menu Principal',
                 itemId: 'panGestionjuegosmecanicos', //'panGestionCliente',
-                layout:'anchor',
+                //layout:'anchor',
+                layout:'vbox',
                 defaultType:'button',
                 defaults: {
                   scale : 'large',
-                  anchor :'100%',
-                  iconAling:'left'
+                 // anchor :'100%',
+                  iconAling:'left',
+                  width: 202
                 },
                 items: [
                   //{xtype:'menutree',reference: 'treejuegosmecanicos', //'treeGestionClientes',layout: 'fit',listeners: {itemClick: 'onClickOpcionMenu'}}
@@ -138,10 +148,39 @@ Ext.define('juegosmecanicos.view.main.Main', {
           items: [
             {
               title: 'Nosotros',
-              bodyPadding:'200 0 0 300',
-              html: '<div style="text-aling:center;"><img src="resources/images/lgsis.png" width="300" height="150" >  </div>'
-
-          }]
+              bodyPadding:200,
+              //layout:'fit',
+              layout:'vbox',
+              items:[
+                {
+                  xtype  :'image',
+                  src    : 'resources/images/lgsis.png',
+                  width  : 300,
+                  height : 80,
+                },
+                {
+                  xtype  :'label',
+                  text : 'Direccion : Urb. Santo Domingo Mz. D Lote 5'
+                },
+                {
+                  xtype  :'label',
+                  text : 'Ing. : Eddy Erazo'
+                },
+                {
+                  xtype  :'label',
+                  text : 'Telefono : 925 183 347'
+                },
+                {
+                  xtype  :'label',
+                  text : 'Ing. : Daniel Garibay'
+                },
+                {
+                  xtype  :'label',
+                  text : 'Telefono : 959 355 747'
+                }
+              ]
+          }  
+          ]
       },
       {
         region:'south',

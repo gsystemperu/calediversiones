@@ -122,12 +122,12 @@ Ext.define('juegosmecanicos.view.pdv.NinoMenbresia', {
 
                             }
                         ],
-                        dockedItems: [{
+                        /*dockedItems: [{
                             xtype: 'pagingtoolbar',
                             store: storeNinos, // same store GridPanel is using
                             dock: 'bottom',
                             displayInfo: true
-                        }],
+                        }],*/
                         tbar: [
                             {
                                 xtype: 'fieldset',

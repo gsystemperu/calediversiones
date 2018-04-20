@@ -86,7 +86,7 @@ Ext.define('juegosmecanicos.view.producto.RegistroGastos', {
                                         width: 100,
                                         height: 25,
                                         style: {
-                                            background: '#775c80',
+                                            background: '#6a4b5a',
                                             color: 'white',
                                             textAlign: 'center',
                                             fontWeight: 'bold',
@@ -107,7 +107,7 @@ Ext.define('juegosmecanicos.view.producto.RegistroGastos', {
                                         width: 100,
                                         height: 25,
                                         style: {
-                                            background: '#775c80',
+                                            background: '#6a4b5a',
                                             color: 'white',
                                             textAlign: 'center',
                                             fontWeight: 'bold',

@@ -1,5 +1,5 @@
 
-Ext.define('juegosmecanicos.view.admin.ListadoPagos',{
+Ext.define('juegosmecanicos.view.admin.ListadoPagos', {
     extend: 'Ext.panel.Panel',
     xtype: 'wListadoPagos',
     alias: 'widget.wListadoPagos',
@@ -25,41 +25,41 @@ Ext.define('juegosmecanicos.view.admin.ListadoPagos',{
     },
     tbar: [
         {
-          xtype:'button',
-          text: 'Imprimir Ticket',
-          handler:'onClickImprimirTicket'
+            xtype: 'button',
+            text: 'Imprimir Ticket',
+            handler: 'onClickImprimirTicket'
         },
         {
-          xtype:'button',
-          text: 'Reporte PDF',
-         handler:'onClickImprimirPDFVentasDiarias'
+            xtype: 'button',
+            text: 'Reporte PDF',
+            handler: 'onClickImprimirPDFVentasDiarias'
         },
         {
-            xtype:'button',
+            xtype: 'button',
             text: 'Exportar Excel',
-            handler:'onClickImprimirExcelVentasDiarias'
+            handler: 'onClickImprimirExcelVentasDiarias'
         },
         {
-            xtype:'button',
+            xtype: 'button',
             text: 'Listado de Niños',
-            handler:'onClickImprimirExcelListadoNinos'
+            handler: 'onClickImprimirExcelListadoNinos'
         }
 
 
     ],
     initComponent: function () {
 
-        var storePedidos    = Ext.create('juegosmecanicos.store.Pedidos');
-        var storePedidoDet  = Ext.create('juegosmecanicos.store.PedidoDetalle');
-        var storeLocales    = Ext.create('juegosmecanicos.store.Locales');
+        var storePedidos = Ext.create('juegosmecanicos.store.Pedidos');
+        var storePedidoDet = Ext.create('juegosmecanicos.store.PedidoDetalle');
+        var storeLocales = Ext.create('juegosmecanicos.store.Locales');
 
         var _date = Ext.Date.format(new Date(), 'd/m/Y')
         storePedidos.load({
-          params : {
-              desde   : _date,
-              hasta   : _date,
-              idlocal : Ext.util.Cookies.get('idlocal')
-          }
+            params: {
+                desde: _date,
+                hasta: _date,
+                idlocal: Ext.util.Cookies.get('idlocal')
+            }
         });
 
         var rowEditing = Ext.create('Ext.grid.plugin.RowEditing', {
@@ -69,7 +69,7 @@ Ext.define('juegosmecanicos.view.admin.ListadoPagos',{
 
         Ext.apply(this, {
             items: [{
-                xtype:'panel',
+                xtype: 'panel',
                 title: 'Registro de Ventas',
                 flex: 1.5,
                 margin: '0 3 0 0',
@@ -83,13 +83,13 @@ Ext.define('juegosmecanicos.view.admin.ListadoPagos',{
                     sortableColumns: false,
                     emptyText: 'NO HAY REGISTROS PARA MOSTRAR SEGUN EL RANGO DE FECHAS',
                     columns: [
-                      {
-                          text : 'Local',
-                          dataIndex: 'milocal',
-                          flex : 1.5,
-                          align : 'left'
-                      },
-                      {
+                        {
+                            text: 'Local',
+                            dataIndex: 'milocal',
+                            flex: 1.5,
+                            align: 'left'
+                        },
+                        {
                             text: 'Fecha ',
                             dataIndex: 'fechaventa',
                             flex: 1,
@@ -99,10 +99,10 @@ Ext.define('juegosmecanicos.view.admin.ListadoPagos',{
                             text: 'Cliente',
                             dataIndex: 'cliente',
                             flex: 2,
-                              align: 'left'
+                            align: 'left'
                         },
                         {
-                            xtype:'numbercolumn',
+                            xtype: 'numbercolumn',
                             text: 'Total Pedido',
                             dataIndex: 'totalventa',
                             flex: 1,
@@ -111,17 +111,17 @@ Ext.define('juegosmecanicos.view.admin.ListadoPagos',{
 
 
                         },
-                         {
+                        {
                             text: 'Estado',
                             dataIndex: 'estadopagostr',
                             flex: 1,
                             align: 'center',
-                            renderer: function(value,st){
-                              if(value=='ANULADO'){
-                                return '<span style="color:red">'+ value.toString()+'</span>';
-                              }else{
-                                return value;
-                              }
+                            renderer: function (value, st) {
+                                if (value == 'ANULADO') {
+                                    return '<span style="color:red">' + value.toString() + '</span>';
+                                } else {
+                                    return value;
+                                }
                             }
                         },
                         {
@@ -144,92 +144,114 @@ Ext.define('juegosmecanicos.view.admin.ListadoPagos',{
 
 
                 }],
-                tbar: [{
-                    xtype: 'container',
-                    bodyPadding: 0,
-                    layout: 'hbox',
-                    columnWidth: 10,
-                    items: [{
-                            xtype: 'label',
-                            text: 'Del',
-                            padding: '5px 0 0 0',
-                            border: true,
-                            width: 25,
-                            height: 25,
-                            style: {
-                                background: '#6a4b5a',
-                                color: 'white',
-                                textAlign: 'center',
-                                fontWeight: 'bold',
-                                fontSize: '13px'
+                tbar: [
+                    {
+                        xtype: 'container',
+                        bodyPadding: 0,
+                        layout: 'vbox',
+                        columnWidth: 10,
+                        items: [
+                            {
+                                xtype: 'container',
+                                bodyPadding: 0,
+                                layout: 'hbox',
+                                columnWidth: 10,
+                                flex: 1,
+                                items: [{
+                                    xtype: 'label',
+                                    text: 'Del',
+                                    padding: '5px 0 0 0',
+                                    border: true,
+                                    width: 25,
+                                    height: 25,
+                                    style: {
+                                        background: '#6a4b5a',
+                                        color: 'white',
+                                        textAlign: 'center',
+                                        fontWeight: 'bold',
+                                        fontSize: '13px'
+                                    }
+                                }, {
+                                    xtype: 'datefield',
+                                    value: new Date(),
+                                    reference: 'dfDesdeCaja',
+                                    itemId: 'dfDesdeCaja',
+                                    width: 100
+                                },
+                                {
+                                    xtype: 'label',
+                                    text: 'A',
+                                    padding: '5px 0 0 0',
+                                    border: true,
+                                    width: 15,
+                                    height: 25,
+                                    style: {
+                                        background: '#6a4b5a',
+                                        color: 'white',
+                                        textAlign: 'center',
+                                        fontWeight: 'bold',
+                                        fontSize: '13px'
+                                    }
+                                },
+                                {
+                                    xtype: 'datefield',
+                                    value: new Date(),
+                                    reference: 'dfHastaCaja',
+                                    itemId: 'dfHastaCaja',
+                                    width: 100
+                                }
+                                ]
+                            },
+                            {
+                                xtype: 'container',
+                                flex: 1,
+                                bodyPadding: 0,
+                                layout: 'hbox',
+                                columnWidth: 10,
+                                items: [
+                                    {
+                                        xtype: 'label',
+                                        text: 'Local',
+                                        padding: '5px 0 0 0',
+                                        itemId: 'lblLocal',
+                                        border: true,
+                                        width: 50,
+                                        height: 25,
+                                        hidden: true,
+                                        style: {
+                                            background: '#6a4b5a',
+                                            color: 'white',
+                                            textAlign: 'center',
+                                            fontWeight: 'bold',
+                                            fontSize: '13px'
+                                        }
+                                    },
+                                    {
+                                        xtype: 'combo',
+                                        store: storeLocales,
+                                        itemId: 'cboLocal',
+                                        valueField: 'idlocal',
+                                        displayField: 'direccion',
+                                        queryMode: 'local',
+                                        hidden: true,
+                                        width: 250,
+                                        editable: true,
+                                        emptyText: '-- Seleccionar --'
+                                    },
+                                    {
+                                        xtype: 'button',
+                                        glyph: juegosmecanicos.util.Glyphs.getGlyph('buscar'),
+                                        tooltip: 'Buscador por rangos de fechas : { Desde , Hasta }',
+                                        handler: 'onClickBuscarPorFechas'
+                                    }
+                                ]
                             }
-                        }, {
-                            xtype: 'datefield',
-                            value: new Date(),
-                            reference: 'dfDesdeCaja',
-                            itemId: 'dfDesdeCaja',
-                            width: 100
-                        },
-                        {
-                            xtype: 'label',
-                            text: 'A',
-                            padding: '5px 0 0 0',
-                            border: true,
-                            width: 15,
-                            height: 25,
-                            style: {
-                                background: '#6a4b5a',
-                                color: 'white',
-                                textAlign: 'center',
-                                fontWeight: 'bold',
-                                fontSize: '13px'
-                            }
-                        },
-                        {
-                            xtype: 'datefield',
-                            value: new Date(),
-                            reference: 'dfHastaCaja',
-                            itemId: 'dfHastaCaja',
-                            width: 100
-                        },
-                        {
-                            xtype: 'label',
-                            text: 'Local',
-                            padding: '5px 0 0 0',
-                            itemId : 'lblLocal',
-                            border: true,
-                            width: 50,
-                            height: 25,
-                            hidden : true,
-                            style: {
-                                background: '#6a4b5a',
-                                color: 'white',
-                                textAlign: 'center',
-                                fontWeight: 'bold',
-                                fontSize: '13px'
-                            }
-                        },
-                        {
-                          xtype:'combo',
-                          store:storeLocales,
-                          itemId : 'cboLocal',
-                          valueField :'idlocal',
-                          displayField:'direccion',
-                          queryMode :'local',
-                          hidden : true,
-                          width:250,
-                          editable :true,
-                          emptyText : '-- Seleccionar --'
-                        },
-                        {
-                            xtype: 'button',
-                            glyph: juegosmecanicos.util.Glyphs.getGlyph('buscar'),
-                            tooltip: 'Buscador por rangos de fechas : { Desde , Hasta }',
-                            handler: 'onClickBuscarPorFechas'
-                        },
 
-                    ]
-                }],
+                        ]
+                    }
+
+
+                ],
                 bbar: [
                     '->',
                     {
@@ -242,9 +264,9 @@ Ext.define('juegosmecanicos.view.admin.ListadoPagos',{
                     }
                 ],
             }, {
-                xtype:'panel',
+                xtype: 'panel',
                 layout: 'fit',
-                hidden:false,
+                hidden: false,
                 title: 'Detalle del Ticket',
                 flex: 1.2,
                 items: [{
@@ -285,12 +307,12 @@ Ext.define('juegosmecanicos.view.admin.ListadoPagos',{
                             align: 'right'
                         },
 
-                      /*  {
-                            text: 'Precio',
-                            dataIndex: 'precio',
-                            flex: 0.5,
-                            align: 'right'
-                        },*/
+                        /*  {
+                              text: 'Precio',
+                              dataIndex: 'precio',
+                              flex: 0.5,
+                              align: 'right'
+                          },*/
                         {
                             text: 'Total',
                             dataIndex: 'total',
@@ -306,26 +328,26 @@ Ext.define('juegosmecanicos.view.admin.ListadoPagos',{
             }]
         });
         this.callParent();
-        if(Ext.util.Cookies.get('sa')==1){
+        if (Ext.util.Cookies.get('sa') == 1) {
             Ext.ComponentQuery.query('#lblLocal')[0].setHidden(false);
             Ext.ComponentQuery.query('#cboLocal')[0].setHidden(false);
         }
         var _date = Ext.Date.format(new Date(), 'd/m/Y')
 
         Ext.Ajax.request({
-            url :juegosmecanicos.util.Rutas.totalVentaSumatoria,
-            params:{
-                desde   : _date,
-                hasta   : _date,
-                idlocal :   Ext.util.Cookies.get('idlocal')
+            url: juegosmecanicos.util.Rutas.totalVentaSumatoria,
+            params: {
+                desde: _date,
+                hasta: _date,
+                idlocal: Ext.util.Cookies.get('idlocal')
             },
-            success:function(response){
-               var data = juegosmecanicos.util.Json.decodeJSON(response.responseText);
-               Ext.each(data,function(row,i){
-                 if(row._total){
-                   Ext.ComponentQuery.query('#txtTotalGeneral')[0].setValue(row._total);
-                 }
-               });
+            success: function (response) {
+                var data = juegosmecanicos.util.Json.decodeJSON(response.responseText);
+                Ext.each(data, function (row, i) {
+                    if (row._total) {
+                        Ext.ComponentQuery.query('#txtTotalGeneral')[0].setValue(row._total);
+                    }
+                });
             }
         });
     }

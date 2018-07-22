@@ -30,7 +30,8 @@ Ext.define('juegosmecanicos.Application', {
         'main.Login',
         'pdv.ContenedorVenta',
         'pdv.MainVenta',
-        'producto.MantenimientoVenta'
+        'producto.MantenimientoVenta',
+        'calendario.Calendario'
 
     ],
      models: [

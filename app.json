@@ -42,7 +42,8 @@
      */
     "requires": [
         "sencha-charts",
-        "ext-locale"],
+        "ext-locale"
+    ],
 
     "locale": "es",
 

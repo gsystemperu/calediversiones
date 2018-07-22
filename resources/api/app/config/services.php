@@ -196,5 +196,8 @@ $di->set('router',function() {
     $router->add('/act_eliminar', array('controller'=>'configuracion','action'=>'actualizarclaveeliminar'));
     $router->add('/act_sadmin', array('controller'=>'configuracion','action'=>'actualizarclavesuperadmin'));
 
+    $router->add('/evento_guardar', array('controller'=>'evento','action'=>'guardar'));
+    $router->add('/evento_listar', array('controller'=>'evento','action'=>'listar'));
+
     return $router;
 });

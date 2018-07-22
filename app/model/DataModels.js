@@ -225,3 +225,23 @@ Ext.define('juegosmecanicos.model.Gasto', {
         { name: 'montogasto', type: 'float' }
       ]
 });
+
+
+
+// @Model : sub categoria
+Ext.define('juegosmecanicos.model.Evento', {
+    extend: 'Ext.data.Model',
+    fields: [
+        { name: 'id', type: 'int' },
+        { name: 'idclie', type: 'int' },
+        { name: 'cliente', type: 'string' },
+        { name: 'fecha', type: 'string' },
+        { name: 'dfecha', type: 'date' },
+        { name: 'horainicio', type: 'string' },
+        { name: 'horatermino', type: 'string' },
+        { name: 'nomevento', type: 'string' },
+        { name: 'adelantos', type: 'float' },
+        { name: 'total', type: 'float' }
+      ]
+});
+

@@ -95,11 +95,17 @@ Ext.define('juegosmecanicos.view.pdv.PopupApoderadoController', {
     accionSeleccionarApoderado:function(btn){
         me = this;
         var _idapo = me.lookupReference('txfIdApoderado').getValue();
-        Ext.ComponentQuery.query('#txtCodigoPersona')[0].setValue(_idapo);
-
-        var nom =Ext.ComponentQuery.query('#nombresapoderado')[0].getValue();
-        var ape = Ext.ComponentQuery.query('#apellidosapoderado')[0].getValue();
-        Ext.ComponentQuery.query('#txtNombrePersona')[0].setText('Apoderado: '+ nom + ' ' + ape);
+        if( Ext.ComponentQuery.query('#txtCodigoPersona')[0]){            
+            var nom =Ext.ComponentQuery.query('#nombresapoderado')[0].getValue();
+            var ape = Ext.ComponentQuery.query('#apellidosapoderado')[0].getValue();
+            Ext.ComponentQuery.query('#txtNombrePersona')[0].setText('Apoderado: '+ nom + ' ' + ape);
+            Ext.ComponentQuery.query('#txtCodigoPersona')[0].setValue(_idapo);
+        }else{
+            var nom =Ext.ComponentQuery.query('#nombresapoderado')[0].getValue();
+            var ape = Ext.ComponentQuery.query('#apellidosapoderado')[0].getValue();
+            Ext.ComponentQuery.query('[name=cliente]')[0].setValue(nom + ' '+ ape);
+            Ext.ComponentQuery.query('[name=idclie]')[0].setValue(_idapo);
+        }
 
         var view =  this.getView();
         view.close();

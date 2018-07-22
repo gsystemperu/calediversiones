@@ -102,3 +102,27 @@ Ext.define('juegosmecanicos.store.Gastos', {
         }
     }
 });
+
+
+
+/*
+@DataSet :
+Stores para los eventos
+==============================================================
+*/
+Ext.define('juegosmecanicos.store.Eventos', {
+    extend: 'Ext.data.Store',
+    storeId : 'storeEventos',
+    requiere:['juegosmecanicos.model.DataModels'],
+    model   :'juegosmecanicos.model.Evento',
+    autoLoad: true,
+    extraParams : {fecha : null },
+    proxy: {
+        type: 'ajax',
+        api: {read: 'resources/api/evento_listar'},
+        reader: {
+            type: 'json',
+            rootProperty: 'data',
+        }
+    }
+});

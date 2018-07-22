@@ -38,8 +38,8 @@ Ext.define('juegosmecanicos.view.main.Login',{
                 '<h3>Seleccionar la sede para cargar la información.</h3>'
             ]
         },
-        { xtype:'textfield',fieldLabel :'Usuario',value:'',reference:'usuario', name :'usuario',anchpr:'100%',allowBlank:false,labelAlign:'right',},
-        { xtype:'textfield',fieldLabel: 'Clave' ,value:'',reference :'clave',name :'clave',anchpr:'100%', inputType: 'password',allowBlank:false ,labelAlign:'right'},
+        { xtype:'textfield',fieldLabel :'Usuario',value:'root',reference:'usuario', name :'usuario',anchpr:'100%',allowBlank:false,labelAlign:'right',},
+        { xtype:'textfield',fieldLabel: 'Clave' ,value:'64y4.634##',reference :'clave',name :'clave',anchpr:'100%', inputType: 'password',allowBlank:false ,labelAlign:'right'},
         {
             xtype: 'combobox',
             reference: 'cboLocales',

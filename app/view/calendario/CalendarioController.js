@@ -22,6 +22,10 @@ Ext.define('juegosmecanicos.view.calendario.CalendarioController', {
 
 
     },
+    onClickEvento:function(obj, record, element, rowIndex, e, eOpts){
+        f = this.lookupReference('frmevento');
+        f.loadRecord(record);
+    },
     onSelectDia:function(obj, date, eOpts ){
         me.lookupReference('dgvevento').getStore().load({
             params:{
@@ -35,8 +39,9 @@ Ext.define('juegosmecanicos.view.calendario.CalendarioController', {
     },
     onClickNuevo:function(b){
         this.lookupReference('frmevento').reset();
+        Ext.ComponentQuery.query('[name=nomevento]')[0].focus(true);
     },
-    onClickEliminar:function(b){
+    onClickEliminarEvento:function(b){
         
     }
 });

@@ -134,9 +134,9 @@ Ext.define('juegosmecanicos.view.main.Main', {
                   },
                   {
                     flex : 1,
-                    text: 'Calentario',
+                    text: 'Eventos',
                     itemId: "wcalendario",
-                    titulo: "Calendarios de Fiestas",
+                    titulo: "Calendario de Eventos",
                     margin: '3 3 1 3',
                     handler: 'onClickOpcionBotonMenu',
                     textAlign : 'left',

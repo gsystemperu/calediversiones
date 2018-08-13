@@ -32,7 +32,7 @@ Ext.define('juegosmecanicos.view.calendario.Calendario',{
           
         var f = [
             {
-                xtype:'container',
+                xtype:'panel',
                 flex : 1,
                 layout:{
                     type:'hbox',
@@ -41,7 +41,7 @@ Ext.define('juegosmecanicos.view.calendario.Calendario',{
                 },
                 items:[
                     {
-                        xtype:'container',
+                        xtype:'panel',
                         layout:'fit',
                         flex : 1,
                         padding:20,
@@ -49,6 +49,7 @@ Ext.define('juegosmecanicos.view.calendario.Calendario',{
                             {
                                 xtype:'datepicker',
                                 name : 'fecha',
+                                flex: 1,
                                 value : new Date(),
                                 listeners:{
                                     select :'onSelectDia' 
@@ -68,8 +69,23 @@ Ext.define('juegosmecanicos.view.calendario.Calendario',{
                                 dataIndex: 'nomevento'
                             },
                             {text:'Hora Inicio',dataIndex:'horainicio', flex:1},
-                            {text:'Hora Termino',dataIndex:'horatermino',flex:1}
-                        ]
+                            {text:'Hora Termino',dataIndex:'horatermino',flex:1},
+                            
+                            {
+                                xtype: 'widgetcolumn',
+                                flex: 0.5,
+                                widget: {
+                                    xtype: 'button',
+                                    flex: 1,
+                                    glyph: 0xf014,
+                                    handler: ' onClickEliminarEvento'
+                                }
+                            }
+                        ],
+                        emptyText :'NO HAY EVENTOS REGISTRADOS',
+                        listeners : {
+                            rowclick :'onClickEvento'
+                        }
                     }
                 ]
             },
@@ -79,7 +95,7 @@ Ext.define('juegosmecanicos.view.calendario.Calendario',{
                 url : juegosmecanicos.util.Rutas.eventoGuardar,
                 reference : 'frmevento',
                 padding : 5,
-                flex : 1,
+                flex : 1.5,
                 title : 'Detalle del Evento',
                 layout:{
                     type:'vbox',
@@ -105,8 +121,7 @@ Ext.define('juegosmecanicos.view.calendario.Calendario',{
                         },
                         items:[
                             {xtype:'datefield' ,flex:1,name:'fecha',value:new Date(),fieldLabel:'Fecha',editable:false},
-                            {xtype:'textfield',fieldLabel:'Evento Nombre',flex:2,name:'nomevento',fieldStyle:'background-color:#FAF566',allowBlank:false}
-                         
+                            {xtype:'textfield',fieldLabel:'Evento Nombre',flex:2,name:'nomevento',fieldStyle:'font-size:20px;background-color:#818181,color:white',allowBlank:false}
                         ]
                     },
                     {

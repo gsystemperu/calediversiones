@@ -21,7 +21,4 @@ class Evento extends \Phalcon\Mvc\Model
         $sql     =  $obj->executar('public','sp_evento_actualizar',$param);
         return $sql;
     }
-
- 
-
 }

@@ -241,7 +241,16 @@ Ext.define('juegosmecanicos.model.Evento', {
         { name: 'horatermino', type: 'string' },
         { name: 'nomevento', type: 'string' },
         { name: 'adelantos', type: 'float' },
-        { name: 'total', type: 'float' }
+        { name: 'total', type: 'float' },
+        { name: 'idlocal', type: 'int' },
+        { name: 'fechaadelanto', type: 'string' },
+        { name: 'adelanto2', type: 'float' },
+        { name: 'fechaadelanto2', type: 'string' },
+        { name: 'adelanto3', type: 'string' },
+        { name: 'fechaadelanto3', type: 'string' },
+        { name: 'adelanto4', type: 'string' },
+        { name: 'fechaadelanto4', type: 'string' },
+        { name: 'direccion', type: 'string' }
       ]
 });
 

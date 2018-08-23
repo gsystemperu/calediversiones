@@ -115,7 +115,7 @@ Ext.define('juegosmecanicos.store.Eventos', {
     storeId : 'storeEventos',
     requiere:['juegosmecanicos.model.DataModels'],
     model   :'juegosmecanicos.model.Evento',
-    autoLoad: true,
+    autoLoad: false,
     extraParams : {fecha : null },
     proxy: {
         type: 'ajax',

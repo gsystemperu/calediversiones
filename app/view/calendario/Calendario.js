@@ -21,15 +21,26 @@ Ext.define('juegosmecanicos.view.calendario.Calendario',{
     initComponent: function () {   
         me = this;
         st = Ext.create('juegosmecanicos.store.Eventos');
+        l  = Ext.create('juegosmecanicos.store.Locales');
+        sp = Ext.create('juegosmecanicos.store.Pagos');
+        f = new Date();
+        st.load({
+            params:{
+                fecha : f.toLocaleDateString()
+            }
+        });
         Ext.apply(this, 
         {
-            items: me.getRenderForm(st)        
+            items: me.getRenderForm(st,l,sp)        
         });
         this.callParent();
       },
         
-      getRenderForm:function(st){
-          
+      getRenderForm:function(st,l,sp){
+        var rowEditing = Ext.create('Ext.grid.plugin.RowEditing', {
+            clicksToMoveEditor: 1,
+            autoCancel: false
+        });
         var f = [
             {
                 xtype:'panel',
@@ -66,7 +77,8 @@ Ext.define('juegosmecanicos.view.calendario.Calendario',{
                             {
                                 text:'Evento',
                                 flex:3,
-                                dataIndex: 'nomevento'
+                                dataIndex: 'nomevento',
+                               // tpl: '{direccion} - {nomevento} '
                             },
                             {text:'Hora Inicio',dataIndex:'horainicio', flex:1},
                             {text:'Hora Termino',dataIndex:'horatermino',flex:1},
@@ -78,7 +90,17 @@ Ext.define('juegosmecanicos.view.calendario.Calendario',{
                                     xtype: 'button',
                                     flex: 1,
                                     glyph: 0xf014,
-                                    handler: ' onClickEliminarEvento'
+                                    handler: 'onClickEliminarEvento'
+                                }
+                            },
+                            {
+                                xtype: 'widgetcolumn',
+                                flex: 0.5,
+                                widget: {
+                                    xtype: 'button',
+                                    flex: 1,
+                                    glyph: 0xf02f,
+                                    handler: 'onClickImprimirContrato'
                                 }
                             }
                         ],
@@ -111,6 +133,8 @@ Ext.define('juegosmecanicos.view.calendario.Calendario',{
                 items:[
                     {xtype:'hiddenfield',name:'id',value:0},
                     {xtype:'hiddenfield',name:'idclie',value:0},
+                    {xtype:'hiddenfield',name:'jsondata',value:''},
+                    {xtype:'hiddenfield',name:'pos',value:0},
                     {
                         xtype:'container',
                         padding :'0 0 5 0',
@@ -133,7 +157,10 @@ Ext.define('juegosmecanicos.view.calendario.Calendario',{
                             align: 'stretch'
                         },
                         items:[
-                            {xtype:'textfield',fieldLabel:'Cliente',name:'cliente',flex:2,allowBlank:false},
+                            {
+                                xtype:'textfield',fieldLabel:'Cliente',
+                                name:'cliente',
+                                flex:2,allowBlank:false},
                             {xtype:'button',text:'Buscar',flex:0.5,handler:'onClickCliente'}
                         ]
                     },
@@ -160,24 +187,158 @@ Ext.define('juegosmecanicos.view.calendario.Calendario',{
                                 maxValue: '9:00 PM',
                                 value : '9:00 AM'
                             },
+                            {
+                                xtype:'combo',
+                                fieldLabel: '<b style="color:red;">Local</b>',
+                                labelAlign :'right',
+                                flex: 1,
+                                name : 'idlocal',
+                                editable:false,
+                                store : l,
+                                queryMode: 'local',
+                                displayField : 'direccion',
+                                valueField : 'idlocal',
+                                value : Ext.util.Cookies.get('idlocal') 
+                            }
+                        ]
+                    },
+                    {
+                        xtype:'container',
+                        layout:'hbox',
+                        padding : '0 0 5 0',
+                        items:[
+                            {
+                                xtype:'numberfield',
+                                value : 0,
+                                name : 'total',
+                                fieldLabel:'<b>Total</b>',
+                                fieldStyle :'fontSize:15px;',
+                                minValue:1,
+                                flex :1
+                            },
+                            {
+                                xtype:'numberfield',
+                                value : 0,
+                                name : 'adelantos',
+                                fieldLabel:'<b>Total Adelantos</b>',
+                                fieldStyle :'fontSize:15px;',
+                                minValue:1,
+                                labelWidth:150,
+                                flex :1
+                            }
                         ]
                     },
                     
                     {
-                        xtype:'numberfield',
-                        value : 0,
-                        name : 'total',
-                        fieldLabel:'<b>Total</b>',
-                        fieldStyle :'fontSize:20px;',
-                        minValue:1
+                        xtype:'grid',
+                        title : 'Adelantos',
+                        store : sp,
+                        itemId :'dgvAdelantos',
+                        plugins: [rowEditing],
+                        selModel: 'cellmodel',
+                        plugins: {
+                            ptype: 'cellediting',
+                            clicksToEdit: 1
+                        },
+                        flex : 1,
+                        columns:[
+                            {
+                             xtype:'numbercolumn',
+                             text : 'Monto',flex:1,
+                             dataIndex:'monto',
+                             editor:{
+                                xtype:'numberfield',
+                                minValue: 0
+                             },
+                            },
+                            {
+                                xtype:'datecolumn',
+                                flex:1,
+                                align:'center',
+                                text:'Fecha',
+                                dataIndex:'fecha',
+                                format: 'd/m/Y',
+                                editor:{
+                                 xtype:'datefield',
+                                 value : new Date(),
+                                 format :'d/m/Y'
+                               }
+                             },
+                            {
+                                xtype: 'widgetcolumn',
+                                width: 50,
+                                widget: {
+                                    xtype: 'button',
+                                    width: 30,
+                                    glyph: 0xf014,
+                                    handler: 'onClickEliminarPago'
+    
+                                }
+    
+                            }
+                        ],
+                        itemPosition:0,
+                        tools: [ 
+                        {
+                            type: 'plus',
+                            callback: 'onClickAdelanto' 
+                        }],
+                        listeners: {
+                            edit: 'onEditorCalcularPagos'
+                        }
+                    }
+                   /* {
+                        xtype :'container',
+                        layout:'hbox',
+                        padding : '5 0 5 0',
+                        flex: 1,
+                        items:[
+                            {
+                                xtype:'numberfield',
+                                value : 0,
+                                name : 'adelantos',
+                                fieldLabel:'<b>Adelantos</b>',
+                                fieldStyle :'fontSize:15px;'
+                            },
+                            {xtype:'datefield' ,flex:1,name:'fechaadelanto',fieldLabel:'Fecha',editable:true},
+                            {
+                                xtype:'numberfield',
+                                value : 0,
+                                name : 'adelanto2',
+                                fieldLabel:'<b>Adelantos</b>',
+                                fieldStyle :'fontSize:15px;'
+                            },
+                            {xtype:'datefield' ,flex:1,name:'fechaadelanto2',fieldLabel:'Fecha',editable:true},
+                           
+        
+                        ]
                     },
                     {
-                        xtype:'numberfield',
-                        value : 0,
-                        name : 'adelantos',
-                        fieldLabel:'<b>Adelantos</b>',
-                        fieldStyle :'fontSize:20px;'
-                    }
+                        xtype :'container',
+                        layout:'hbox',
+                        padding : '5 0 5 0',
+                        flex: 1,
+                        items:[
+                            {
+                                xtype:'numberfield',
+                                value : 0,
+                                name : 'adelanto3',
+                                fieldLabel:'<b>Adelantos</b>',
+                                fieldStyle:'font-size:15px;',
+                            },
+                            {xtype:'datefield' ,flex:1,name:'fechaadelanto3',fieldLabel:'Fecha',editable:true},
+                            {
+                                xtype:'numberfield',
+                                value : 0,
+                                name : 'adelanto4',
+                                fieldLabel:'<b>Adelantos</b>',
+                                fieldStyle :'fontSize:15px;'
+                            },
+                            {xtype:'datefield' ,flex:1,name:'fechaadelanto4',fieldLabel:'Fecha',editable:true},
+                           
+                        ]
+                    }*/
+                    
                 ]
 
             }

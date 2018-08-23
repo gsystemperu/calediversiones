@@ -27,7 +27,11 @@ Ext.define('juegosmecanicos.util.Rutas',
             accesoSistema : 'resources/api/accesoalsistema',
             actCEliminar : 'resources/api/act_eliminar',
             actCSadmin   : 'resources/api/act_sadmin',
-            eventoGuardar   : 'resources/api/evento_guardar'
+            eventoGuardar   : 'resources/api/evento_guardar',
+            pagosBuscar   : 'resources/api/pagos_listar',
+            imprimirContrato   : 'resources/api/contrato?id='
+            
+            
 
             //@ Acciones => Listados
         }

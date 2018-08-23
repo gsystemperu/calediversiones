@@ -92,3 +92,14 @@ Ext.define('juegosmecanicos.store.tmpProductos', {
     proxy: { type: 'memory' }
 
 });
+
+Ext.define('juegosmecanicos.store.Pagos', {
+    extend: 'Ext.data.Store',
+    fields: [
+        { name :'id',type:'int'},
+        { name :'monto',type:'float'},
+        { name: "fecha",type:'date'}
+    ],
+    proxy: { type: 'memory' }
+});
+

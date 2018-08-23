@@ -9,7 +9,6 @@ class Evento extends \Phalcon\Mvc\Model
     {
         $obj     = new SQLHelpers();
         $param   = $data;
-    //    print_r($data);die();
         $sql     =  $obj->executarJson('public','sp_eventos_listar',$param);
         return $sql;
     }
@@ -21,4 +20,20 @@ class Evento extends \Phalcon\Mvc\Model
         $sql     =  $obj->executar('public','sp_evento_actualizar',$param);
         return $sql;
     }
+    public static function pagos($data)
+    {
+        $obj     = new SQLHelpers();
+        $param   = $data;
+        $sql     =  $obj->executarJson('public','sp_eventos_pagos_buscar',$param);
+        return $sql;
+    }
+    public static function buscar($data)
+    {
+        $obj     = new SQLHelpers();
+        $param   = $data;
+        $sql     =  $obj->executarJson('public','sp_eventos_buscar',$param);
+        return $sql;
+    }
+    
+    
 }

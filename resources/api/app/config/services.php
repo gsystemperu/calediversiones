@@ -198,6 +198,9 @@ $di->set('router',function() {
 
     $router->add('/evento_guardar', array('controller'=>'evento','action'=>'guardar'));
     $router->add('/evento_listar', array('controller'=>'evento','action'=>'listar'));
+    $router->add('/pagos_listar', array('controller'=>'evento','action'=>'buscarpagos'));
+    $router->add('/contrato', array('controller'=>'impresion','action'=>'imprimircontrato'));
+    
 
     return $router;
 });

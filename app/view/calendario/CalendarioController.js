@@ -106,11 +106,32 @@ Ext.define('juegosmecanicos.view.calendario.CalendarioController', {
         Ext.ComponentQuery.query('[name=nomevento]')[0].focus(true);
     },
     onClickEliminarEvento: function (b) {
-
+        r = b.getWidgetRecord();
+         Ext.Msg.prompt('Seguridad', 'Ingresar la clave del administrador general !!!', function (btnx, text) {
+             if (btnx == 'ok') {
+                 Ext.Ajax.request({
+                     url: juegosmecanicos.util.Rutas.validAdmin,
+                     params: {
+                         c: text.trim()
+                     },
+                     success: function (response) {
+                         r = juegosmecanicos.util.Json.decodeJSON(response.responseText);
+                         if (r.data[0].pasa == 0) {
+                             Ext.Msg.alert('Error', 'Datos incorrectos no te permiso para eliminar el evento'); return false;
+                         } else {
+                             /*s = Ext.ComponentQuery.query('#dgvAdelantos')[0].getStore();
+                             s.remove(r);
+                             this.sumarPagos(s);*/
+                     
+                         }
+                     }
+                 });
+             }
+         });
     },
     onClickEliminarPago:function(btn){
         r = btn.getWidgetRecord();
-       /* Ext.Msg.prompt('Seguridad', 'Ingresar la clave del administrador general !!!', function (btnx, text) {
+        Ext.Msg.prompt('Seguridad', 'Ingresar la clave del administrador general !!!', function (btnx, text) {
             if (btnx == 'ok') {
                 Ext.Ajax.request({
                     url: juegosmecanicos.util.Rutas.validAdmin,
@@ -120,17 +141,17 @@ Ext.define('juegosmecanicos.view.calendario.CalendarioController', {
                     success: function (response) {
                         r = juegosmecanicos.util.Json.decodeJSON(response.responseText);
                         if (r.data[0].pasa == 0) {
-                            Ext.Msg.alert('Error', 'Datos incorrectos no te permiso para anular una venta'); return false;
-                        } else {*/
+                            Ext.Msg.alert('Error', 'Datos incorrectos no te permiso para eliminar el pago'); return false;
+                        } else {
                             s = Ext.ComponentQuery.query('#dgvAdelantos')[0].getStore();
                             s.remove(r);
                             this.sumarPagos(s);
-                    /*
+                    
                         }
                     }
                 });
             }
-        });*/
+        });
 
     },
     sumarPagos:function(s){

@@ -1,8 +1,6 @@
 <?php
 
 use \Phalcon\Mvc\Controller as Controller;
-
-
 class ImpresionController extends Controller
 {
 
@@ -16,9 +14,9 @@ class ImpresionController extends Controller
       $DatosImpresora = Config::datosimpresora($dataC);
       $DetalleVenta   = Venta::detalleventaimpresion($dataV);
       $DatosCliente        = Venta::datoscliente($dataV);
-//    print_r($DatosCliente);die();
-     $DatosImpresora = $DatosImpresora[0];
-        $DatosCliente = $DatosCliente[0];
+
+      $DatosImpresora = $DatosImpresora[0];
+      $DatosCliente = $DatosCliente[0];
       $pdf = new fpdf('P');
       $borde = 0;
       $pdf->SetMargins(0, 0 , 0);
@@ -354,8 +352,97 @@ class ImpresionController extends Controller
       unlink($temp_file);
       return $response;
     }
+    public function enviarcorreoAction(){
+        $mailer = new SimpleMail();
+        $request     = new Phalcon\Http\Request();
+        $response    = new \Phalcon\Http\Response();
+        $id          =  9; //$request->get("id");
+        $dataEmpresa =  json_decode(Config::mostrar())->data[0];
+        $dataPagos   =  json_decode(Evento::pagos(array($id)));
+        $evento      =  json_decode(Evento::buscar(array($id)))->data[0];
+
+        //print_r($evento);die();
+        // ========== FPDF ==========  //
+        $pdf = new fpdf('P','mm','A4');
+        $wg = 100 ;//Ancho total
+        $in = 5; //Interlineado
+        $font = 'Arial';
+        $tam = 10.5;
+        $pagos = 0;
+        foreach ($dataPagos->data as $item) {
+            $pagos += $item->monto; 
+        }
+        $pdf->AddPage();
+        $pdf->SetFont($font,'',$tam);
+        $pdf->Ln(1);
+        $pdf->Image('../../images/empresa.jpeg', 0, 0, 210,50);
+        $pdf->setY(65);
+        $pdf->SetFont($font,'B',20);
+        $pdf->Cell(186,5,"CONTRATO ",0,0,'C');
+        $pdf->SetFont($font,'',$tam);
+        $pdf->Ln(10);
+        $pdf->Cell(130,5,utf8_decode("Señor   " . $evento->cliente ),0,0,'J');
+        $pdf->Cell(0,5,utf8_decode("identificado con el d.n.i. ". $evento->dni),0,1,'J');
+        $pdf->Cell(40,5,utf8_decode("Y ". $dataEmpresa->nombreimpresion),0,0,'J');
+        $pdf->Cell(45,5,utf8_decode(" con R.U.C.   " . $dataEmpresa->ruc),0,0,'J');
+        $pdf->Cell(0,5,utf8_decode("Dirección   " . $dataEmpresa->direccion),0,1,'J');
+        $pdf->Cell(0,5,utf8_decode("Acuerdan   celebrar    mediante   el    presente   contrato   de   servicio   conforme   a  las   siguientes   condiciones :"),0,1,'J');
+        $pdf->MultiCell(0,5,utf8_decode("Local del evento : " . $evento->direccion),0,'L');
+        $pdf->Cell(70,5,utf8_decode("Se realiza el dia  : " . $evento->fecha),0,0,'L');
+        $pdf->Cell(50,5,utf8_decode("Hora de inicio  : " . $evento->horainicio),0,0,'L');
+        $pdf->Cell(50,5,utf8_decode("Hora de termino : " . $evento->horatermino),0,1,'L');
+        $pdf->Ln();
+        $pdf->SetFont($font,'B',12);
+        $pdf->Cell(0,5,utf8_decode("MONTO TOTAL S/. : ". number_format( $evento->total,2,'.',' ')),0,1,'L');
+        $pdf->SetFont($font,'B',12);
+        $pdf->Ln();
+        $pdf->Cell(0,5,utf8_decode("ADELANTOS   S/. : ". number_format( $pagos,2,'.',' ')),0,1,'L');
+        $pdf->Ln(5);
+        $pdf->SetFont($font,'B',$tam);
+        $pdf->Cell(40,$in,utf8_decode("CONDICIONES DEL SERVICIO"),0,1,'L');
+        $pdf->Ln();
+        $pdf->SetFont($font,'',$tam);
+        $pdf->MultiCell(0,$in,utf8_decode("1.- 20 días antes se deberá adelantar el 50% del total del contrato el cual se cancelara al inicio del evento para la entrega del respectivo uso del local y entrega de la tarjeta virtual temática."),0,'J');
+        $pdf->MultiCell(0,$in,utf8_decode("2.- Es obligatorio el uso de zapatitos de doctor para los adultos y medias para los niños."),0,'J');
+        $pdf->MultiCell(0,$in,utf8_decode("3.- Contará con el apoyo de 2 Srtas. durante el desarrollo de su evento."),0,'J');
+        $pdf->MultiCell(0,$in,utf8_decode("4.- Horario: 1 hora y media antes para realizar decoraciones de su evento el cual se desarrollara en 4 horas teniendo como horario sugerido de 3:30 pm a 9:00 pm."),0,'J');
+        $pdf->MultiCell(0,$in,utf8_decode("5.- Pasado el tiempo establecido en el contrato el cliente pagara S/.100.00 por hora"),0,'J');
+        $pdf->MultiCell(0,$in,utf8_decode("6.- Está prohibido el uso de pica pica"),0,'J');
+        $pdf->MultiCell(0,$in,utf8_decode("7.- Esta prohibió el consumo de bebidas alcohólicas"),0,'J');
+        $pdf->MultiCell(0,$in,utf8_decode("8.- Las bebidas deberán ser servidas en un vaso descartable con sorbete y tapita"),0,'J');
+        $pdf->MultiCell(0,$in,utf8_decode("9.- La menaje ría, mesas y activos del local son entregados en excelente estado para su uso y si algunos de ellos se dañara durante el desarrollo del evento tendrá que ser cancelado en el momento para su reposición. "),0,'J');
+        $pdf->MultiCell(0,$in,utf8_decode("10.- Durante desarrollo de su evento la administración no será responsable del cuidado de artículos personales (celulares, dinero, joyas, carteras entre otros)"),0,'J');
+        $pdf->MultiCell(0,$in,utf8_decode("11.- De prescindir del contrato no se devolverá el dinero adelantado, se repondrá en servicios que prestamos por CALE DIVERSIONES"),0,'J');
+        $pdf->ln();
+        $fila = $pdf->getY();
+        $pdf->setXY(30,$fila + 20);
+        $pdf->MultiCell(60,5,'____________________________',0,'C');
+        $pdf->setXY(120,$fila + 20);
+        $pdf->MultiCell(60,5,'____________________________',0,'C');
+        $pdf->Ln();
+        $fila = $pdf->getY();
+        $pdf->setXY(30,$fila );
+        $pdf->MultiCell(60,5,'CLIENTE',0,'C');
+        $pdf->setXY(120,$fila );
+        $pdf->MultiCell(60,5,'CALE DIVERSIONES',0,'C');
+        $pdf->Output('temp/contratoevento.pdf','F');
+        $mailer = SimpleMail::make()
+        ->setTo($evento->correo, $evento->cliente) // para 
+        ->setFrom($dataEmpresa->correo, $dataEmpresa->nombreimpresion) // de
+        ->setSubject('Contrato de Servicio Cale Diversiones')
+        ->setMessage('Le adjunto información de requerimiento.')
+        ->setWrap(100)
+        ->addAttachment('temp/contratoevento.pdf')
+        ->send();
+          
+        $jsonData = array();
+        $jsonData["error"] = $mailer;
+        $response->setContentType('application/json', 'UTF-8');
+        $response->setContent( json_encode($jsonData));
+        return $response;
+    }
     public function imprimircontratoAction(){
-       
+        
         $request     =  new Phalcon\Http\Request();
         $id          =  $request->get("id");
         $dataEmpresa =  json_decode(Config::mostrar())->data[0];

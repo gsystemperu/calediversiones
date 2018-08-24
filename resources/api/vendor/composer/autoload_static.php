@@ -6,9 +6,14 @@ namespace Composer\Autoload;
 
 class ComposerStaticInitff26d7adb1918ad788d621f42629d63d
 {
+    public static $classMap = array (
+        'SimpleMail' => __DIR__ . '/..' . '/eoghanobrien/php-simple-mail/class.simple_mail.php',
+    );
+
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
+            $loader->classMap = ComposerStaticInitff26d7adb1918ad788d621f42629d63d::$classMap;
 
         }, null, ClassLoader::class);
     }

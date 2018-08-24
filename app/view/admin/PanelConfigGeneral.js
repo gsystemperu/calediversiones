@@ -64,6 +64,14 @@ Ext.define('juegosmecanicos.view.admin.PanelConfigGeneral', {
                                 itemId: 'ruc',
                                 readOnly: true
                             },
+                            {
+                                xtype: 'textfield',
+                                fieldLabel: '<b>Correo de envio de contratos</b>',
+                                flex: 1,
+                                name: 'correo',
+                                itemId: 'correo',
+                                readOnly: true
+                            },
 
 
                         ],

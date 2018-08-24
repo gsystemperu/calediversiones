@@ -55,11 +55,11 @@ Ext.define('juegosmecanicos.view.calendario.Calendario',{
                         xtype:'panel',
                         layout:'fit',
                         flex : 1,
-                        padding:20,
                         items:[
                             {
                                 xtype:'datepicker',
                                 name : 'fecha',
+                                bodyPadding : 50,
                                 flex: 1,
                                 value : new Date(),
                                 listeners:{
@@ -72,17 +72,17 @@ Ext.define('juegosmecanicos.view.calendario.Calendario',{
                         xtype:'grid',
                         reference:'dgvevento',
                         store : st,
-                        flex: 2,
+                        flex: 2.5,
                         columns:[
                             {
                                 text:'Evento',
-                                flex:3,
-                                dataIndex: 'nomevento',
-                               // tpl: '{direccion} - {nomevento} '
+                                flex:4,
+                                xtype: 'templatecolumn',
+                                tpl: '</br><b style="color:dimgrey;font-size:30px;padding-top:15px;">{nomevento}</b> ' +
+                                '<div style="color:dimgrey;padding-top:4px;"> Local :  {direccion} </div> ' + 
+                                '<div style="color:dimgrey;padding-top:4px;">Desde : {horainicio} ' +
+                                'Hasta :  {horatermino}</div>',
                             },
-                            {text:'Hora Inicio',dataIndex:'horainicio', flex:1},
-                            {text:'Hora Termino',dataIndex:'horatermino',flex:1},
-                            
                             {
                                 xtype: 'widgetcolumn',
                                 flex: 0.5,
@@ -90,7 +90,8 @@ Ext.define('juegosmecanicos.view.calendario.Calendario',{
                                     xtype: 'button',
                                     flex: 1,
                                     glyph: 0xf014,
-                                    handler: 'onClickEliminarEvento'
+                                    handler: 'onClickEliminarEvento',
+                                    tooltip : 'Eliminar el evento'
                                 }
                             },
                             {
@@ -100,7 +101,19 @@ Ext.define('juegosmecanicos.view.calendario.Calendario',{
                                     xtype: 'button',
                                     flex: 1,
                                     glyph: 0xf02f,
-                                    handler: 'onClickImprimirContrato'
+                                    handler: 'onClickImprimirContrato',
+                                    tooltip : 'Imprimir contrato del evento'
+                                }
+                            },
+                            {
+                                xtype: 'widgetcolumn',
+                                flex: 0.5,
+                                widget: {
+                                    xtype: 'button',
+                                    flex: 1,
+                                    glyph: 0xf003,
+                                    handler: 'onClickEMail',
+                                    tooltip : 'Enviar el contrato al cliente'
                                 }
                             }
                         ],
@@ -117,13 +130,17 @@ Ext.define('juegosmecanicos.view.calendario.Calendario',{
                 url : juegosmecanicos.util.Rutas.eventoGuardar,
                 reference : 'frmevento',
                 padding : 5,
-                flex : 1.5,
+                flex : 1.8,
                 title : 'Detalle del Evento',
                 layout:{
                     type:'vbox',
                     pack: 'start',
                     align: 'stretch'
                 },
+                tbar:[
+                    '->',
+                    {text:'Guardar los pagos e imprimir',handler:'onClickRegPag'}
+                ],
                 bbar :[
                     '->',
                     {text:'Nuevo',handler:'onClickNuevo'},
@@ -222,9 +239,10 @@ Ext.define('juegosmecanicos.view.calendario.Calendario',{
                                 name : 'adelantos',
                                 fieldLabel:'<b>Total Adelantos</b>',
                                 fieldStyle :'fontSize:15px;',
-                                minValue:1,
+                                minValue:0,
                                 labelWidth:150,
-                                flex :1
+                                flex :1,
+                                readOnly:true
                             }
                         ]
                     },

@@ -35,6 +35,7 @@ class EventoController extends Controller
              $total      = $request->getPost('total');
              $idlocal        = $request->getPost('idlocal');
              $jsondata       = $request->getPost('jsondata');
+             $idlocalreg     = $request->getPost('idlocalreg');
              
               $data = array(
                 $id  ,
@@ -45,9 +46,24 @@ class EventoController extends Controller
                 $hasta     ,
                 $total,
                 $idlocal,
-                $jsondata
+                $jsondata,
+                $idlocalreg
               );
               $jsonData = Evento::actualizar($data);
+              $response->setContentType('application/json', 'UTF-8');
+              $response->setContent(json_encode($jsonData[0], JSON_NUMERIC_CHECK));
+              return $response;
+         }
+    }
+    public function eliminarAction()
+    {
+         $request        = new Phalcon\Http\Request();
+         $response       = new \Phalcon\Http\Response();
+         if($request->isPost() ==true)
+         {
+              $id   = $request->getPost('id');
+              $data = array($id);
+              $jsonData = Evento::eliminar($data);
               $response->setContentType('application/json', 'UTF-8');
               $response->setContent(json_encode($jsonData[0], JSON_NUMERIC_CHECK));
               return $response;

@@ -201,6 +201,7 @@ $di->set('router',function() {
     $router->add('/pagos_listar', array('controller'=>'evento','action'=>'buscarpagos'));
     $router->add('/contrato', array('controller'=>'impresion','action'=>'imprimircontrato'));
     $router->add('/enviar_correo', array('controller'=>'impresion','action'=>'enviarcorreo'));
+    $router->add('/evento_eliminar', array('controller'=>'evento','action'=>'eliminar'));
     
 
     return $router;

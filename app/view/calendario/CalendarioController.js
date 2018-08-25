@@ -4,6 +4,7 @@ Ext.define('juegosmecanicos.view.calendario.CalendarioController', {
     onClickGuardar: function (btn) {
         f = this.lookupReference('frmevento');
         txt = f.down('[name=jsondata]');
+        lo  = f.down('[name=idlocalreg]');
         g = f.down('#dgvAdelantos').getStore();
         dd = [];
         g.each(function (re) {
@@ -16,19 +17,22 @@ Ext.define('juegosmecanicos.view.calendario.CalendarioController', {
             }
         });
         txt.setValue(JSON.stringify(dd));
+        lo.setValue(Ext.util.Cookies.get('idlocal'));
         me = this;
         if (f.isValid()) {
             f.submit({
                 waitMsg: 'Guardando información...',
                 success: function (form, action) {
-                    _dgv = me.lookupReference('dgvevento');
-                    _dgv.getStore().reload();
+                    if(action.result.error!=0){
+                        Ext.ComponentQuery.query('[name=id]')[0].setValue(action.result.error);
+                        dg = me.lookupReference('dgvevento');
+                        dg.getStore().reload();
+                    }
                 },
                 failure: function () {
                     Ext.Msg.alert("Aviso", action.result.msg);
                 }
             });
-
         } else {
             Ext.Msg.alert("Aviso", "Ingrese los datos para cargar la información");
         }
@@ -107,6 +111,7 @@ Ext.define('juegosmecanicos.view.calendario.CalendarioController', {
     },
     onClickEliminarEvento: function (b) {
         r = b.getWidgetRecord();
+        s = this.lookupReference('dgvevento');
          Ext.Msg.prompt('Seguridad', 'Ingresar la clave del administrador general !!!', function (btnx, text) {
              if (btnx == 'ok') {
                  Ext.Ajax.request({
@@ -119,10 +124,19 @@ Ext.define('juegosmecanicos.view.calendario.CalendarioController', {
                          if (r.data[0].pasa == 0) {
                              Ext.Msg.alert('Error', 'Datos incorrectos no te permiso para eliminar el evento'); return false;
                          } else {
-                             /*s = Ext.ComponentQuery.query('#dgvAdelantos')[0].getStore();
-                             s.remove(r);
-                             this.sumarPagos(s);*/
-                     
+                            Ext.Ajax.request({
+                                url: juegosmecanicos.util.Rutas.eventoEliminar,
+                                params: {
+                                    id: r.get('id')
+                                },
+                                success: function (response) {
+                                    r = juegosmecanicos.util.Json.decodeJSON(response.responseText);
+                                    if(r.error>0){
+                                         s.getStore().reload();
+                                    }
+                                }
+                            });
+                    
                          }
                      }
                  });
@@ -175,5 +189,23 @@ Ext.define('juegosmecanicos.view.calendario.CalendarioController', {
         my = window.open(ul, "mywindow",
             "location=1,status=1,scrollbars=1,  width=800,height=750");
         my.moveTo(xpos, ypos);
+    },
+    onClickEMail:function(b){
+        r =  b.getWidgetRecord();
+        Ext.Ajax.request({
+            url: juegosmecanicos.util.Rutas.enviarContrato,
+            params: {
+                id: r.get('id')
+            },
+            success: function (response) {
+                r = juegosmecanicos.util.Json.decodeJSON(response.responseText);
+                if (r.error) 
+                {Ext.Msg.alert('Error', 'Datos incorrectos no te permiso para eliminar el pago'); return false;
+                }else{Ext.Msg.alert('Calediversiones', 'Correo enviado'); return false;
+                }
+            }
+        });
+        
+       
     }
 });

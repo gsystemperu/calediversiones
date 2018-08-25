@@ -250,7 +250,8 @@ Ext.define('juegosmecanicos.model.Evento', {
         { name: 'fechaadelanto3', type: 'string' },
         { name: 'adelanto4', type: 'string' },
         { name: 'fechaadelanto4', type: 'string' },
-        { name: 'direccion', type: 'string' }
+        { name: 'direccion', type: 'string' },
+        { name: 'estado', type: 'string' }
       ]
 });
 

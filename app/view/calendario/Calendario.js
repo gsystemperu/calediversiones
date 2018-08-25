@@ -73,16 +73,23 @@ Ext.define('juegosmecanicos.view.calendario.Calendario',{
                         reference:'dgvevento',
                         store : st,
                         flex: 2.5,
+                        columnLines: true,
                         columns:[
                             {
                                 text:'Evento',
                                 flex:4,
                                 xtype: 'templatecolumn',
                                 tpl: '</br><b style="color:dimgrey;font-size:30px;padding-top:15px;">{nomevento}</b> ' +
+                                '<div style="color:dimgrey;padding-top:4px;"> Cliente :  {cliente} </div> ' + 
                                 '<div style="color:dimgrey;padding-top:4px;"> Local :  {direccion} </div> ' + 
                                 '<div style="color:dimgrey;padding-top:4px;">Desde : {horainicio} ' +
-                                'Hasta :  {horatermino}</div>',
+                                'Hasta :  {horatermino}</div>' + 
+                                '<div style="color:red;padding-top:4px;">{estado} </div>'
+                                
+                                
                             },
+                            
+                           
                             {
                                 xtype: 'widgetcolumn',
                                 flex: 0.5,
@@ -137,10 +144,6 @@ Ext.define('juegosmecanicos.view.calendario.Calendario',{
                     pack: 'start',
                     align: 'stretch'
                 },
-                tbar:[
-                    '->',
-                    {text:'Guardar los pagos e imprimir',handler:'onClickRegPag'}
-                ],
                 bbar :[
                     '->',
                     {text:'Nuevo',handler:'onClickNuevo'},
@@ -152,6 +155,7 @@ Ext.define('juegosmecanicos.view.calendario.Calendario',{
                     {xtype:'hiddenfield',name:'idclie',value:0},
                     {xtype:'hiddenfield',name:'jsondata',value:''},
                     {xtype:'hiddenfield',name:'pos',value:0},
+                    {xtype:'hiddenfield',name:'idlocalreg',value:0},
                     {
                         xtype:'container',
                         padding :'0 0 5 0',
@@ -305,57 +309,7 @@ Ext.define('juegosmecanicos.view.calendario.Calendario',{
                             edit: 'onEditorCalcularPagos'
                         }
                     }
-                   /* {
-                        xtype :'container',
-                        layout:'hbox',
-                        padding : '5 0 5 0',
-                        flex: 1,
-                        items:[
-                            {
-                                xtype:'numberfield',
-                                value : 0,
-                                name : 'adelantos',
-                                fieldLabel:'<b>Adelantos</b>',
-                                fieldStyle :'fontSize:15px;'
-                            },
-                            {xtype:'datefield' ,flex:1,name:'fechaadelanto',fieldLabel:'Fecha',editable:true},
-                            {
-                                xtype:'numberfield',
-                                value : 0,
-                                name : 'adelanto2',
-                                fieldLabel:'<b>Adelantos</b>',
-                                fieldStyle :'fontSize:15px;'
-                            },
-                            {xtype:'datefield' ,flex:1,name:'fechaadelanto2',fieldLabel:'Fecha',editable:true},
-                           
-        
-                        ]
-                    },
-                    {
-                        xtype :'container',
-                        layout:'hbox',
-                        padding : '5 0 5 0',
-                        flex: 1,
-                        items:[
-                            {
-                                xtype:'numberfield',
-                                value : 0,
-                                name : 'adelanto3',
-                                fieldLabel:'<b>Adelantos</b>',
-                                fieldStyle:'font-size:15px;',
-                            },
-                            {xtype:'datefield' ,flex:1,name:'fechaadelanto3',fieldLabel:'Fecha',editable:true},
-                            {
-                                xtype:'numberfield',
-                                value : 0,
-                                name : 'adelanto4',
-                                fieldLabel:'<b>Adelantos</b>',
-                                fieldStyle :'fontSize:15px;'
-                            },
-                            {xtype:'datefield' ,flex:1,name:'fechaadelanto4',fieldLabel:'Fecha',editable:true},
-                           
-                        ]
-                    }*/
+                  
                     
                 ]
 

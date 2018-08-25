@@ -29,7 +29,9 @@ Ext.define('juegosmecanicos.util.Rutas',
             actCSadmin   : 'resources/api/act_sadmin',
             eventoGuardar   : 'resources/api/evento_guardar',
             pagosBuscar   : 'resources/api/pagos_listar',
-            imprimirContrato   : 'resources/api/contrato?id='
+            imprimirContrato   : 'resources/api/contrato?id=',
+            enviarContrato   : 'resources/api/enviar_correo',
+            eventoEliminar   : 'resources/api/evento_eliminar'
             
             
 

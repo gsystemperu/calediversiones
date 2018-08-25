@@ -34,6 +34,12 @@ class Evento extends \Phalcon\Mvc\Model
         $sql     =  $obj->executarJson('public','sp_eventos_buscar',$param);
         return $sql;
     }
-    
+    public static function eliminar($data)
+    {   
+        $obj     = new SQLHelpers();
+        $param   = $data;
+        $sql     =  $obj->executar('public','sp_evento_eliminar',$param);
+        return $sql;
+    }
     
 }

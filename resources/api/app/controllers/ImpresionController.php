@@ -12,9 +12,10 @@ class ImpresionController extends Controller
       $dataC = array(1);
       $dataV = array($vidventa);
       $DatosImpresora = Config::datosimpresora($dataC);
+      
       $DetalleVenta   = Venta::detalleventaimpresion($dataV);
       $DatosCliente        = Venta::datoscliente($dataV);
-
+      
       $DatosImpresora = $DatosImpresora[0];
       $DatosCliente = $DatosCliente[0];
       $pdf = new fpdf('P');
@@ -356,7 +357,7 @@ class ImpresionController extends Controller
         $mailer = new SimpleMail();
         $request     = new Phalcon\Http\Request();
         $response    = new \Phalcon\Http\Response();
-        $id          =  9; //$request->get("id");
+        $id          =  $request->get("id");
         $dataEmpresa =  json_decode(Config::mostrar())->data[0];
         $dataPagos   =  json_decode(Evento::pagos(array($id)));
         $evento      =  json_decode(Evento::buscar(array($id)))->data[0];
@@ -434,7 +435,7 @@ class ImpresionController extends Controller
         ->setWrap(100)
         ->addAttachment('temp/contratoevento.pdf')
         ->send();
-          
+        unlink('temp/contratoevento.pdf');
         $jsonData = array();
         $jsonData["error"] = $mailer;
         $response->setContentType('application/json', 'UTF-8');

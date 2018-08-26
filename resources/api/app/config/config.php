@@ -5,9 +5,9 @@ defined('APP_PATH') || define('APP_PATH', realpath('.'));
 return new \Phalcon\Config(array(
     'database' => array(
         'adapter'     => 'PostgreSQL',
-        'host'        =>  '198.211.99.171',
+        'host'        =>  '127.0.0.1',
         'username'    => 'postgres',
-        'password'    => '64y4.634##$%',
+        'password'    => '64y4.634##',
         'dbname'      => 'calediversiones',
         'schema'      => 'public',
 	    'port'          => 5432

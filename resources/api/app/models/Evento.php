@@ -41,5 +41,12 @@ class Evento extends \Phalcon\Mvc\Model
         $sql     =  $obj->executar('public','sp_evento_eliminar',$param);
         return $sql;
     }
+    public static function anularPago($data)
+    {   
+        $obj     = new SQLHelpers();
+        $param   = $data;
+        $sql     =  $obj->executar('public','sp_anular_pago',$param);
+        return $sql;
+    }
     
 }

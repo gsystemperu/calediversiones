@@ -82,6 +82,20 @@ class EventoController extends Controller
               return $response;
          }
     }
+    public function anularpagoAction()
+    {
+         $request        = new Phalcon\Http\Request();
+         $response       = new \Phalcon\Http\Response();
+         if($request->isPost() ==true)
+         {
+              $id   = $request->getPost('idventa');
+              $data = array($id);
+              $jsonData = Evento::anularPago($data);
+              $response->setContentType('application/json', 'UTF-8');
+              $response->setContent(json_encode($jsonData[0], JSON_NUMERIC_CHECK));
+              return $response;
+         }
+    }
    
 
    

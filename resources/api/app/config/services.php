@@ -202,6 +202,7 @@ $di->set('router',function() {
     $router->add('/contrato', array('controller'=>'impresion','action'=>'imprimircontrato'));
     $router->add('/enviar_correo', array('controller'=>'impresion','action'=>'enviarcorreo'));
     $router->add('/evento_eliminar', array('controller'=>'evento','action'=>'eliminar'));
+    $router->add('/pago_anular', array('controller'=>'evento','action'=>'anularpago'));
     
 
     return $router;

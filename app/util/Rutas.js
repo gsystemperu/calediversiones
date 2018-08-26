@@ -31,10 +31,11 @@ Ext.define('juegosmecanicos.util.Rutas',
             pagosBuscar   : 'resources/api/pagos_listar',
             imprimirContrato   : 'resources/api/contrato?id=',
             enviarContrato   : 'resources/api/enviar_correo',
-            eventoEliminar   : 'resources/api/evento_eliminar'
+            eventoEliminar   : 'resources/api/evento_eliminar',
+            pagoAnular   : 'resources/api/pago_anular'
             
             
-
+        
             //@ Acciones => Listados
         }
 

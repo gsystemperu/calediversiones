@@ -6,16 +6,22 @@ Ext.define('juegosmecanicos.view.calendario.CalendarioController', {
         txt = f.down('[name=jsondata]');
         lo  = f.down('[name=idlocalreg]');
         g = f.down('#dgvAdelantos').getStore();
+        po = f.down('[name=pos]');
         dd = [];
+        x=0;
         g.each(function (re) {
             if (re.get("monto") > 0) {
                 r = {
                     "monto": re.get("monto"),
-                    "fecha": re.get("fecha").toLocaleDateString()
+                    "fecha": re.get("fecha").toLocaleDateString(),
+                    "idven": re.get("idven"),
+                    "item" : re.get("item")
                 };
                 dd.push(r);
             }
+            x++;
         });
+        po.setValue(x.toString());
         txt.setValue(JSON.stringify(dd));
         lo.setValue(Ext.util.Cookies.get('idlocal'));
         me = this;
@@ -43,13 +49,15 @@ Ext.define('juegosmecanicos.view.calendario.CalendarioController', {
         d = [];
         d = Ext.ComponentQuery.query('#dgvAdelantos')[0];
         t = Ext.ComponentQuery.query('[name=pos]')[0];
-        po = t.getValue();
+        po = parseInt(t.getValue());
         s = d.getStore();
+        po = po + 1;
         r = {
             monto: 0,
-            fecha: new Date()
+            fecha: new Date(),
+            idven :0,
+            item : po
         };
-        po = po + 1;
         s.insert(po, r);
         d.getView().refresh();
         t.setValue(po)
@@ -73,16 +81,20 @@ Ext.define('juegosmecanicos.view.calendario.CalendarioController', {
                 if (rs) {
                     x = 0;
                     Ext.each(rs.data, function (r, i) {
-                        ix = {
-                            monto: r.monto,
-                            fecha: r.fecha
-                        };
-                        s.insert(r.item, ix);
-                        to = to + r.monto;
-                        g.getView().refresh();
-                        x = r.item;
+                        if(r.estado!=0){
+                            ix = {
+                                monto: r.monto,
+                                fecha: juegosmecanicos.util.Fechas.formatFechaDB(r.fecha),    //Ext.Date.format(new Date(parseInt(fe[0]),parseInt(fe[1])-1,parseInt(fe[2])+1), 'Y-m-d') ,
+                                idven: r.idven,
+                                item : r.item
+                            };
+                            s.insert(r.item, ix);
+                            to = to + r.monto;
+                            g.getView().refresh();
+                        }
+                        x++; 
                     });
-                    t.setValue(x);
+                    t.setValue(x.toString());
                 }
                 f.down('[name=adelantos]').setValue(to);
                 f.unmask();
@@ -120,8 +132,8 @@ Ext.define('juegosmecanicos.view.calendario.CalendarioController', {
                          c: text.trim()
                      },
                      success: function (response) {
-                         r = juegosmecanicos.util.Json.decodeJSON(response.responseText);
-                         if (r.data[0].pasa == 0) {
+                         rs = juegosmecanicos.util.Json.decodeJSON(response.responseText);
+                         if (rs.data[0].pasa == 0) {
                              Ext.Msg.alert('Error', 'Datos incorrectos no te permiso para eliminar el evento'); return false;
                          } else {
                             Ext.Ajax.request({
@@ -130,8 +142,8 @@ Ext.define('juegosmecanicos.view.calendario.CalendarioController', {
                                     id: r.get('id')
                                 },
                                 success: function (response) {
-                                    r = juegosmecanicos.util.Json.decodeJSON(response.responseText);
-                                    if(r.error>0){
+                                    rx = juegosmecanicos.util.Json.decodeJSON(response.responseText);
+                                    if(rx.error>0){
                                          s.getStore().reload();
                                     }
                                 }
@@ -144,6 +156,7 @@ Ext.define('juegosmecanicos.view.calendario.CalendarioController', {
          });
     },
     onClickEliminarPago:function(btn){
+        me=this;
         r = btn.getWidgetRecord();
         Ext.Msg.prompt('Seguridad', 'Ingresar la clave del administrador general !!!', function (btnx, text) {
             if (btnx == 'ok') {
@@ -153,14 +166,21 @@ Ext.define('juegosmecanicos.view.calendario.CalendarioController', {
                         c: text.trim()
                     },
                     success: function (response) {
-                        r = juegosmecanicos.util.Json.decodeJSON(response.responseText);
-                        if (r.data[0].pasa == 0) {
+                        rs = juegosmecanicos.util.Json.decodeJSON(response.responseText);
+                        if (rs.data[0].pasa == 0) {
                             Ext.Msg.alert('Error', 'Datos incorrectos no te permiso para eliminar el pago'); return false;
                         } else {
-                            s = Ext.ComponentQuery.query('#dgvAdelantos')[0].getStore();
-                            s.remove(r);
-                            this.sumarPagos(s);
-                    
+                            Ext.Ajax.request({
+                                url: juegosmecanicos.util.Rutas.pagoAnular,
+                                params: {
+                                    idventa: r.get('idven')
+                                },
+                                success: function (response) {
+                                    s = Ext.ComponentQuery.query('#dgvAdelantos')[0].getStore();
+                                    s.remove(r);
+                                    me.sumarPagos(s);
+                                }
+                            });
                         }
                     }
                 });

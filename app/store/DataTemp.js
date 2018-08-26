@@ -98,7 +98,9 @@ Ext.define('juegosmecanicos.store.Pagos', {
     fields: [
         { name :'id',type:'int'},
         { name :'monto',type:'float'},
-        { name: "fecha",type:'date'}
+        { name: "fecha",type:'date',format:'d/m/Y'},
+        { name :'idven' , type:'int'},
+        { name :'item' , type:'int'}
     ],
     proxy: { type: 'memory' }
 });

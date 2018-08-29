@@ -22,7 +22,8 @@ Ext.define("juegosmecanicos.view.producto.Listado",{
                  params : {idlocal  : Ext.util.Cookies.get('idlocal'),idcategoria: me.tiposervicio }
          });
          Ext.apply(this,{
-             items:[{
+             items:[
+                {
                    xtype: 'dataview',
                    layout:'fit',
                    reference : 'dgvProducto',

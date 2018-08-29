@@ -29,6 +29,27 @@ Ext.define('juegosmecanicos.view.producto.ProductoController', {
        _grid.getStore().insert(0,_data);
        this.onCalcularTotalVenta(numeromesa);
     },
+    onClickServicio :function(dg, record, element, rowIndex, e, eOpts){
+          //lista      =  dg.itemId.toString();
+          numeromesa = '1'; // lista.substr(lista.length - 1,lista.length);
+          mem = 0;
+          if(record.get('esmembresia')){
+            mem = 1;
+          }
+          _data = {
+                idprod : record.get('idprod'),
+                descripcion :  record.get('nombre'),
+                cantidad : 1,
+                precio :  record.get('precioventa'),
+                total :    record.get('precioventa') * 1,
+                minutos : record.get('minutos'),
+                membresia : mem
+  
+         };
+          _grid = Ext.ComponentQuery.query('#dgvDetallePedidoMesa'+numeromesa.toString())[0];
+         _grid.getStore().insert(0,_data);
+         this.onCalcularTotalVenta(numeromesa);
+      },
     onClickEliminarProducto:function(btn){
         s = this.lookupReference('dgvProductos').getStore();
         r =  btn.getWidgetRecord().get('idprod');

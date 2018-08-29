@@ -176,6 +176,7 @@ Ext.define('juegosmecanicos.view.admin.ListadoPagos', {
                                     value: new Date(),
                                     reference: 'dfDesdeCaja',
                                     itemId: 'dfDesdeCaja',
+                                    readOnly :true,
                                     width: 100
                                 },
                                 {
@@ -198,7 +199,14 @@ Ext.define('juegosmecanicos.view.admin.ListadoPagos', {
                                     value: new Date(),
                                     reference: 'dfHastaCaja',
                                     itemId: 'dfHastaCaja',
+                                    readOnly :true,
                                     width: 100
+                                },
+                                {
+                                    xtype: 'button',
+                                    glyph: juegosmecanicos.util.Glyphs.getGlyph('buscar'),
+                                    tooltip: 'Buscador por rangos de fechas : { Desde , Hasta }',
+                                    handler: 'onClickBuscarPorFechas'
                                 }
                                 ]
                             },

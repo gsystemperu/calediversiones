@@ -222,7 +222,8 @@ Ext.define('juegosmecanicos.view.pdv.Main', {
                 layout: 'fit',
                 title: 'Lista de juegos',
                 items: [{
-                    xtype: 'wListadoProducto',
+                   // xtype: 'wListadoProducto',
+                   xtype:'wListServicio',
                     numeromesa: _numeromesa.toString(),
                     idlocal : 0 ,
                     codigobarra:true

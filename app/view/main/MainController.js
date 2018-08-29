@@ -83,6 +83,18 @@ Ext.define('juegosmecanicos.view.main.MainController', {
          }]
        });
      }
+     if(Ext.util.Cookies.get('sa')==0 && _tit=='..: Caja :..'){
+        Ext.ComponentQuery.query('#dfDesdeCaja')[0].setReadOnly(true);
+        Ext.ComponentQuery.query('#dfHastaCaja')[0].setReadOnly(true);
+     }else{
+        try{
+            Ext.ComponentQuery.query('#dfDesdeCaja')[0].setReadOnly(false);
+            Ext.ComponentQuery.query('#dfHastaCaja')[0].setReadOnly(false);
+        }catch(e){
+            return '';
+        }
+        
+     }
    } catch (err) {
      console.info(err);
    }
